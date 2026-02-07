@@ -5,6 +5,7 @@
  */
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+const INTERVIEW_SERVICE_URL = import.meta.env.VITE_INTERVIEW_SERVICE_URL || 'http://localhost:8001';
 
 export const API_ENDPOINTS = {
     // Authentication & Authorization
@@ -256,6 +257,14 @@ export const API_ENDPOINTS = {
             respond: (sessionId) => `/api/v1/ai/interview/simulate/${sessionId}/respond`, // POST
             getTranscript: (sessionId) => `/api/v1/ai/interview/simulate/${sessionId}/transcript`, // GET
             evaluate: (sessionId) => `/api/v1/ai/interview/simulate/${sessionId}/evaluate`, // POST
+
+            // Live Interview (Gemini Live API)
+            start: '/interview/start', // POST
+            end: (sessionId) => `/interview/${sessionId}/end`, // POST
+            status: (sessionId) => `/interview/${sessionId}/status`, // GET
+            evaluation: (sessionId) => `/interview/${sessionId}/evaluation`, // GET
+            live: (sessionId) => `/interview/${sessionId}/live`, // WS
+            video: (sessionId) => `/interview/${sessionId}/video`, // WS
         },
 
         // LLM Council
@@ -360,4 +369,14 @@ export function buildApiUrl(endpoint) {
     return `${API_BASE_URL}${endpoint}`;
 }
 
+/**
+ * Helper function to build WebSocket URL for interview service
+ */
+export function buildInterviewWsUrl(endpoint) {
+    const wsProtocol = INTERVIEW_SERVICE_URL.startsWith('https') ? 'wss' : 'ws';
+    const baseUrl = INTERVIEW_SERVICE_URL.replace(/^https?:\/\//, '');
+    return `${wsProtocol}://${baseUrl}${endpoint}`;
+}
+
+export { INTERVIEW_SERVICE_URL };
 export default API_ENDPOINTS;

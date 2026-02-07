@@ -426,19 +426,18 @@ export class AssessmentEngine {
         clearInterval(this.timerInterval);
 
         try {
-            // Ensure any final data is saved
-            // ...
+            // Save final state and submit to backend
+            await assessmentService.submitSession(this.session.id);
 
             // Notify User
             if ('Notification' in window && Notification.permission === 'granted') {
                 new Notification("Assessment Submitted", { body: "You are now transitioning to the AI Interview." });
-            } else {
-                alert("Assessment Submitted Successfully!");
             }
 
-            // Show Toast/Banner in UI (better than alert)
+            // Show Toast/Banner in UI
             this.showNotification("Assessment submitted successfully! Preparing AI Interview...", "success");
 
+            // Redirect to AI Interview Room
             this.startAIInterview();
         } catch (e) {
             console.error(e);
@@ -457,30 +456,17 @@ export class AssessmentEngine {
     }
 
     startAIInterview() {
-        // Hide assessment container, show AI interview container
-        document.getElementById(this.containers.assessmentWrapper).classList.add('hidden');
-        const aiContainer = document.getElementById(this.containers.aiWrapper);
-        aiContainer.classList.remove('hidden');
+        // Get candidate and job information from session
+        const candidateId = this.session.candidate_id || localStorage.getItem('candidate_id') || 'demo-candidate-1';
+        const jobId = this.session.job_id || localStorage.getItem('job_id') || 'demo-job-1';
+        const jobDescription = this.assessment?.job_description || localStorage.getItem('job_description') || 'Software Engineering Position';
 
-        // Render Interview
-        aiContainer.innerHTML = `
-            <div class="flex flex-col items-center justify-center h-full bg-slate-900 text-white p-8">
-                <div class="w-32 h-32 rounded-full bg-blue-600 animate-pulse flex items-center justify-center mb-8">
-                    <span class="material-symbols-outlined text-6xl">mic</span>
-                </div>
-                <h2 class="text-3xl font-bold mb-4">AI Interview Phase</h2>
-                <p class="text-slate-400 max-w-md text-center mb-8">
-                    "Hi there! I've reviewed your code. Let's discuss your approach to the Two Sum problem. Can you explain your time complexity?"
-                </p>
-                <div class="flex gap-4">
-                    <button class="w-16 h-16 rounded-full bg-red-600 hover:bg-red-700 flex items-center justify-center transition-colors" onclick="window.location.href='/candidate-assessments.html'">
-                        <span class="material-symbols-outlined text-2xl">call_end</span>
-                    </button>
-                    <button class="w-16 h-16 rounded-full bg-slate-700 hover:bg-slate-600 flex items-center justify-center transition-colors">
-                         <span class="material-symbols-outlined text-2xl">mic_off</span>
-                    </button>
-                </div>
-            </div>
-        `;
+        // Store in localStorage for interview page
+        localStorage.setItem('candidate_id', candidateId);
+        localStorage.setItem('job_id', jobId);
+        localStorage.setItem('job_description', jobDescription);
+
+        // Redirect to AI Interview Room
+        window.location.href = `/interview-room.html?candidate_id=${encodeURIComponent(candidateId)}&job_id=${encodeURIComponent(jobId)}&job_description=${encodeURIComponent(jobDescription)}`;
     }
 }
