@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Zenith - Job Detail &amp; Match Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 20px;
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #4b5563;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2563eb","background-light": "#f6f6f8",
+                        "background-dark": "#111621",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.375rem", "xl": "0.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#0e121b] dark:text-white min-h-screen flex flex-col overflow-hidden relative">
+<div aria-hidden="true" class="absolute inset-0 overflow-y-auto pointer-events-none filter blur-[2px] opacity-50 z-0 h-screen">
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-[#e7ebf3] dark:border-gray-800 bg-white dark:bg-[#1a202c] px-10 py-3 shadow-sm">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-[#0e121b] dark:text-white">
+<div class="size-8 text-primary">
+<svg fill="currentColor" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z"></path>
+</svg>
+</div>
+<h2 class="text-[#0e121b] dark:text-white text-xl font-bold leading-tight tracking-[-0.015em]">Zenith</h2>
+</div>
+</div>
+</header>
+<main class="flex-1 max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex gap-8 items-start">
+<aside class="w-72 bg-white dark:bg-[#1a202c] h-[800px] rounded-xl"></aside>
+<div class="flex-1 space-y-4">
+<div class="h-48 bg-white dark:bg-[#1a202c] rounded-xl"></div>
+<div class="h-48 bg-white dark:bg-[#1a202c] rounded-xl"></div>
+<div class="h-48 bg-white dark:bg-[#1a202c] rounded-xl"></div>
+</div>
+</main>
+</div>
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 lg:p-8">
+<div aria-hidden="true" class="absolute inset-0 bg-[#0e121b]/60 backdrop-blur-sm"></div>
+<div class="relative w-full max-w-[1280px] h-full max-h-[90vh] bg-white dark:bg-[#111621] rounded-2xl shadow-2xl flex flex-col md:flex-row overflow-hidden border border-[#e7ebf3] dark:border-gray-800">
+<button class="absolute top-4 right-4 z-20 p-2 text-gray-400 hover:text-gray-600 dark:hover:text-white bg-white/50 dark:bg-black/20 backdrop-blur rounded-full transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+<div class="w-full md:w-[60%] flex flex-col h-full bg-white dark:bg-[#111621]">
+<div class="flex-1 overflow-y-auto custom-scrollbar">
+<div class="h-32 w-full bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 relative">
+<div class="absolute -bottom-10 left-8">
+<div class="size-20 rounded-xl bg-white dark:bg-gray-800 shadow-md border border-gray-100 dark:border-gray-700 p-3 flex items-center justify-center">
+<img alt="Google Logo" class="size-12 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5rQmqqSE9IOUxTysRNPGmvb_VjxxumhnRZVnHwyLvHy0WIX3GVV4bz1-AHHkdSWXmptThkEElapgd-wWkC1ZaTTGy1Ymgl9CzRb5N6QuhbQ7EdAFFzA1n9mKTPtNsy5ywXj1KwYrgibhk-Gz_I31QFQwOnbw4m3KmAcMpATE684D65CjpNsiLYKCPjqo55Ug7e6g3xZDT2z7Bl5dmg6mMu8k0fWzaaarAucLAU7AMoMX_QO5e-GXCztZXye9qDTKEuDuhAw2TzgY"/>
+</div>
+</div>
+</div>
+<div class="px-8 pt-12 pb-8">
+<div class="flex items-start justify-between mb-6">
+<div>
+<h1 class="text-2xl font-bold text-[#0e121b] dark:text-white mb-2">Senior Product Designer</h1>
+<div class="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
+<span class="font-semibold text-[#0e121b] dark:text-gray-200">Google Inc.</span>
+<span class="size-1 bg-gray-300 rounded-full"></span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+                                        San Francisco, CA (Hybrid)
+                                    </div>
+<span class="size-1 bg-gray-300 rounded-full"></span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+                                        Posted 2 days ago
+                                    </div>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<div class="text-xl font-bold text-[#0e121b] dark:text-white">$160k - $220k</div>
+<div class="text-sm text-gray-500">per year</div>
+</div>
+</div>
+<div class="h-px w-full bg-gray-100 dark:bg-gray-800 my-6"></div>
+<div class="space-y-6 text-[#334155] dark:text-gray-300 leading-relaxed">
+<section>
+<h3 class="text-lg font-bold text-[#0e121b] dark:text-white mb-3">About the Role</h3>
+<p>We are looking for a Senior Product Designer to join our Core Experience team. In this role, you will be responsible for defining the user experience for millions of users worldwide. You will work closely with product management, engineering, and research to design simple, elegant, and powerful solutions to complex problems.</p>
+</section>
+<section>
+<h3 class="text-lg font-bold text-[#0e121b] dark:text-white mb-3">Responsibilities</h3>
+<ul class="list-disc pl-5 space-y-2 marker:text-primary">
+<li>Lead design projects across the entire product lifecycle and multiple product launches.</li>
+<li>Create high-quality design deliverables, from wireframes and user flows to high-fidelity mockups and prototypes.</li>
+<li>Partner with engineering to ensure high-quality implementation and user experience.</li>
+<li>Mentor junior designers and contribute to the design culture at Google.</li>
+</ul>
+</section>
+<section>
+<h3 class="text-lg font-bold text-[#0e121b] dark:text-white mb-3">Requirements</h3>
+<ul class="list-disc pl-5 space-y-2 marker:text-primary">
+<li>5+ years of experience in product design, UI/UX, or related field.</li>
+<li>Strong portfolio showcasing your design process and problem-solving skills.</li>
+<li>Proficiency in Figma, prototyping tools, and design systems.</li>
+<li>Excellent communication skills and ability to articulate design decisions.</li>
+</ul>
+</section>
+</div>
+</div>
+</div>
+<div class="p-6 border-t border-[#e7ebf3] dark:border-gray-800 bg-white dark:bg-[#111621] z-10 flex items-center justify-between gap-4">
+<button class="p-2.5 rounded-lg border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined">bookmark_border</span>
+</button>
+<button class="p-2.5 rounded-lg border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined">share</span>
+</button>
+<button class="flex-1 bg-primary hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-sm hover:shadow-md transition-all transform active:scale-[0.98]">
+                        Apply Now
+                    </button>
+</div>
+</div>
+<div class="w-full md:w-[40%] bg-[#f8fafc] dark:bg-[#161b26] border-l border-[#e7ebf3] dark:border-gray-800 flex flex-col overflow-hidden">
+<div class="flex-1 overflow-y-auto custom-scrollbar p-8">
+<div class="bg-white dark:bg-[#1a202c] rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-800 mb-6 flex flex-col items-center text-center">
+<h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-4">Match Analysis</h3>
+<div class="relative size-40 mb-4">
+<svg class="size-full -rotate-90" viewBox="0 0 100 100">
+<circle class="text-gray-100 dark:text-gray-700" cx="50" cy="50" fill="transparent" r="42" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-primary transition-all duration-1000 ease-out" cx="50" cy="50" fill="transparent" r="42" stroke="currentColor" stroke-dasharray="263.89" stroke-dashoffset="21.11" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-4xl font-bold text-[#0e121b] dark:text-white">92%</span>
+<span class="text-xs font-medium text-primary">Excellent</span>
+</div>
+</div>
+<p class="text-sm text-gray-600 dark:text-gray-400 px-4">
+                            Your profile is a strong match for this role based on skills and experience.
+                        </p>
+</div>
+<div class="space-y-6 mb-8">
+<div>
+<div class="flex items-center justify-between mb-3">
+<h4 class="font-semibold text-[#0e121b] dark:text-white">Matching Skills</h4>
+<span class="text-xs font-medium bg-green-100 text-green-700 px-2 py-0.5 rounded-full">5 Found</span>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 border border-green-200 dark:border-green-800 text-sm font-medium">
+<span class="material-symbols-outlined text-[16px] text-green-600">check_circle</span> Figma
+                                </span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 border border-green-200 dark:border-green-800 text-sm font-medium">
+<span class="material-symbols-outlined text-[16px] text-green-600">check_circle</span> UI Design
+                                </span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 border border-green-200 dark:border-green-800 text-sm font-medium">
+<span class="material-symbols-outlined text-[16px] text-green-600">check_circle</span> Prototyping
+                                </span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 border border-green-200 dark:border-green-800 text-sm font-medium">
+<span class="material-symbols-outlined text-[16px] text-green-600">check_circle</span> User Research
+                                </span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 border border-green-200 dark:border-green-800 text-sm font-medium">
+<span class="material-symbols-outlined text-[16px] text-green-600">check_circle</span> Design Systems
+                                </span>
+</div>
+</div>
+<div>
+<div class="flex items-center justify-between mb-3">
+<h4 class="font-semibold text-[#0e121b] dark:text-white">Missing Skills</h4>
+<span class="text-xs font-medium bg-red-100 text-red-700 px-2 py-0.5 rounded-full">2 Missing</span>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-800 text-sm font-medium opacity-80">
+<span class="material-symbols-outlined text-[16px] text-red-500">cancel</span> Principle
+                                </span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-800 text-sm font-medium opacity-80">
+<span class="material-symbols-outlined text-[16px] text-red-500">cancel</span> After Effects
+                                </span>
+</div>
+</div>
+</div>
+<hr class="border-gray-200 dark:border-gray-700 mb-6"/>
+<div>
+<h4 class="font-semibold text-[#0e121b] dark:text-white mb-4">Similar Jobs</h4>
+<div class="space-y-3">
+<div class="group flex items-start gap-3 p-3 bg-white dark:bg-[#1a202c] rounded-lg border border-gray-200 dark:border-gray-800 hover:border-primary/50 cursor-pointer transition-colors">
+<div class="size-10 rounded bg-gray-50 dark:bg-gray-800 flex items-center justify-center border border-gray-100 dark:border-gray-700 shrink-0">
+<div class="text-lg font-bold text-black" data-alt="Uber logo">U</div>
+</div>
+<div class="flex-1 min-w-0">
+<h5 class="text-sm font-bold text-[#0e121b] dark:text-white truncate group-hover:text-primary transition-colors">Product Designer</h5>
+<p class="text-xs text-gray-500">Uber • San Francisco</p>
+<div class="mt-2 flex items-center gap-2">
+<span class="text-[10px] font-bold text-green-600 bg-green-50 px-1.5 py-0.5 rounded border border-green-100">89% Match</span>
+</div>
+</div>
+<button class="text-gray-400 hover:text-primary"><span class="material-symbols-outlined text-[20px]">chevron_right</span></button>
+</div>
+<div class="group flex items-start gap-3 p-3 bg-white dark:bg-[#1a202c] rounded-lg border border-gray-200 dark:border-gray-800 hover:border-primary/50 cursor-pointer transition-colors">
+<div class="size-10 rounded bg-gray-50 dark:bg-gray-800 flex items-center justify-center border border-gray-100 dark:border-gray-700 shrink-0">
+<span class="material-symbols-outlined text-xl text-indigo-600">deployed_code</span>
+</div>
+<div class="flex-1 min-w-0">
+<h5 class="text-sm font-bold text-[#0e121b] dark:text-white truncate group-hover:text-primary transition-colors">Senior UX Designer</h5>
+<p class="text-xs text-gray-500">Linear • Remote</p>
+<div class="mt-2 flex items-center gap-2">
+<span class="text-[10px] font-bold text-green-600 bg-green-50 px-1.5 py-0.5 rounded border border-green-100">85% Match</span>
+</div>
+</div>
+<button class="text-gray-400 hover:text-primary"><span class="material-symbols-outlined text-[20px]">chevron_right</span></button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</body></html>

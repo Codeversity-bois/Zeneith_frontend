@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Zenith - Candidate Assessments</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2463eb",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111621",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.375rem", "xl": "0.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#0e121b] dark:text-white min-h-screen flex flex-col overflow-x-hidden">
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-[#e7ebf3] dark:border-gray-800 bg-white dark:bg-[#1a202c] px-10 py-3 shadow-sm">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-[#0e121b] dark:text-white">
+<div class="size-8 text-primary">
+<svg fill="currentColor" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z"></path>
+</svg>
+</div>
+<h2 class="text-[#0e121b] dark:text-white text-xl font-bold leading-tight tracking-[-0.015em]">Zenith</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8 text-sm font-medium text-[#4d6599] dark:text-gray-400">
+<a class="hover:text-primary transition-colors" href="#">Find Jobs</a>
+<a class="text-[#0e121b] dark:text-white font-semibold" href="#">Assessments</a>
+<a class="hover:text-primary transition-colors" href="#">Companies</a>
+<a class="hover:text-primary transition-colors" href="#">Salaries</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden lg:flex items-center mr-2">
+<div class="relative group">
+<span class="material-symbols-outlined text-[#4d6599] absolute left-3 top-1/2 -translate-y-1/2 text-[20px]">search</span>
+<input class="form-input rounded-full border-none bg-[#f1f5f9] dark:bg-gray-800 text-sm pl-10 pr-4 py-2 w-64 focus:ring-1 focus:ring-primary placeholder:text-gray-400" placeholder="Search assessments..." type="text"/>
+</div>
+</div>
+<button class="relative p-2 text-[#4d6599] hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border border-white dark:border-[#1a202c]"></span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-9 ring-2 ring-transparent hover:ring-primary/20 transition-all cursor-pointer" data-alt="User profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCGBysvRSeVF18epSr-Z9SkLM6O0rHhYSuxCfaC_yiUQ6ntWiPvRB5rcPdC3FPmtm4AHJdeHh5Wo5kLk0vNCue3UpCn1VlAJ6T7KBX5ltshkNQkpNN5vjbyuLfeZIxaF3IC4oPeQzt5d8bvM7mEOP_VMj2pFHs6Zd-5zVyL98jA9gzjZKSUWszSh4Jq8par0Z_i9S3ff3svCEhm6yagL14F2n2IuUsHYwAmszGHdvxfK06OQ8bVR5jcIA1ZCIlaK87SleamzcmSwMk");'></div>
+</div>
+</header>
+<main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+<div>
+<h1 class="text-3xl font-bold text-[#0e121b] dark:text-white tracking-tight">Assessments Dashboard</h1>
+<p class="text-[#4d6599] dark:text-gray-400 mt-2">Manage your technical skills evaluations and view results.</p>
+</div>
+<div class="flex gap-3">
+<button class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+<span class="material-symbols-outlined text-[18px]">history</span>
+                History
+            </button>
+<button class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-blue-600 transition-colors shadow-sm shadow-blue-200 dark:shadow-none">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+                Browse Library
+            </button>
+</div>
+</div>
+<div class="border-b border-gray-200 dark:border-gray-800 mb-8">
+<nav aria-label="Tabs" class="-mb-px flex space-x-8">
+<a class="border-primary text-primary whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center gap-2" href="#">
+                Pending
+                <span class="bg-blue-100 text-blue-600 py-0.5 px-2 rounded-full text-xs">2</span>
+</a>
+<a class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center gap-2" href="#">
+                In Progress
+                <span class="bg-gray-100 text-gray-600 py-0.5 px-2 rounded-full text-xs">1</span>
+</a>
+<a class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" href="#">
+                Completed
+            </a>
+<a class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" href="#">
+                Archived
+            </a>
+</nav>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<div class="bg-white dark:bg-[#1a202c] rounded-xl border border-[#e7ebf3] dark:border-gray-800 p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col relative group">
+<div class="absolute top-6 right-6">
+<span class="inline-flex items-center rounded-md bg-purple-50 dark:bg-purple-900/20 px-2 py-1 text-xs font-medium text-purple-700 dark:text-purple-400 ring-1 ring-inset ring-purple-700/10">Coding</span>
+</div>
+<div class="flex items-center gap-4 mb-5">
+<div class="size-12 rounded-lg bg-white dark:bg-gray-800 flex items-center justify-center shadow-sm border border-gray-100 dark:border-gray-700 p-2">
+<img alt="Microsoft Logo" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQvf6eaQszuxi3Yg1EDkEBCPc4HdbE2P8dVXtJbsr_9N0Dm5CY50sO3cdaedxgk0-SMRNznacjGh_KNHr3t3UoNmN2NspBZ72a0GXHw513wnXr2iR9wgSQpcn1leoZ3b-dgvhIUxuTBZYmTCIOQ47NYotFjmnOa3r8YRc-I5ipyaW3iFebEIaV8JDY_VmwB3ucG-AaxfnkDfoMdulocVBYaNltuQmaMx0-XJOZ-Ntu9WVgG2wVUaPPxtWnRo8-1IMg6PPe0e6zuZQ"/>
+</div>
+<div>
+<h3 class="text-base font-bold text-gray-900 dark:text-white">Microsoft</h3>
+<p class="text-xs text-gray-500">Invited 2 days ago</p>
+</div>
+</div>
+<div class="flex-1 mb-6">
+<h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">Frontend React Assessment</h4>
+<p class="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">Evaluate proficiency in React hooks, state management, and component lifecycle via a practical coding challenge.</p>
+<div class="mt-4 p-3 bg-amber-50 dark:bg-amber-900/10 rounded-lg border border-amber-100 dark:border-amber-900/30 flex items-center gap-3">
+<span class="material-symbols-outlined text-amber-600 dark:text-amber-500">timer</span>
+<div class="flex flex-col">
+<span class="text-xs font-medium text-amber-800 dark:text-amber-400 uppercase tracking-wide">Expires in</span>
+<span class="text-sm font-bold text-amber-900 dark:text-amber-300">23h 45m 12s</span>
+</div>
+</div>
+</div>
+<button class="w-full py-2.5 bg-primary hover:bg-blue-600 text-white font-semibold rounded-lg shadow-sm shadow-blue-200 dark:shadow-none transition-all flex items-center justify-center gap-2">
+                Start Assessment
+                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+<div class="bg-white dark:bg-[#1a202c] rounded-xl border border-[#e7ebf3] dark:border-gray-800 p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col relative group">
+<div class="absolute top-6 right-6">
+<span class="inline-flex items-center rounded-md bg-blue-50 dark:bg-blue-900/20 px-2 py-1 text-xs font-medium text-blue-700 dark:text-blue-400 ring-1 ring-inset ring-blue-700/10">MCQ</span>
+</div>
+<div class="flex items-center gap-4 mb-5">
+<div class="size-12 rounded-lg bg-black flex items-center justify-center shadow-sm border border-gray-100 dark:border-gray-700">
+<div class="text-xl font-medium text-white">U</div>
+</div>
+<div>
+<h3 class="text-base font-bold text-gray-900 dark:text-white">Uber</h3>
+<p class="text-xs text-gray-500">Invited 5 hours ago</p>
+</div>
+</div>
+<div class="flex-1 mb-6">
+<h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">System Design Fundamentals</h4>
+<p class="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">Multiple choice questions covering distributed systems, scalability patterns, and database sharding.</p>
+<div class="mt-4 p-3 bg-amber-50 dark:bg-amber-900/10 rounded-lg border border-amber-100 dark:border-amber-900/30 flex items-center gap-3">
+<span class="material-symbols-outlined text-amber-600 dark:text-amber-500">timer</span>
+<div class="flex flex-col">
+<span class="text-xs font-medium text-amber-800 dark:text-amber-400 uppercase tracking-wide">Expires in</span>
+<span class="text-sm font-bold text-amber-900 dark:text-amber-300">08h 15m 00s</span>
+</div>
+</div>
+</div>
+<button class="w-full py-2.5 bg-primary hover:bg-blue-600 text-white font-semibold rounded-lg shadow-sm shadow-blue-200 dark:shadow-none transition-all flex items-center justify-center gap-2">
+                Start Assessment
+                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+<div class="bg-white dark:bg-[#1a202c] rounded-xl border border-[#e7ebf3] dark:border-gray-800 p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col relative group">
+<div class="absolute top-6 right-6">
+<span class="inline-flex items-center rounded-md bg-yellow-50 dark:bg-yellow-900/20 px-2 py-1 text-xs font-medium text-yellow-700 dark:text-yellow-400 ring-1 ring-inset ring-yellow-600/20">In Progress</span>
+</div>
+<div class="flex items-center gap-4 mb-5">
+<div class="size-12 rounded-lg bg-white dark:bg-gray-800 flex items-center justify-center shadow-sm border border-gray-100 dark:border-gray-700">
+<span class="material-symbols-outlined text-3xl text-indigo-600">deployed_code</span>
+</div>
+<div>
+<h3 class="text-base font-bold text-gray-900 dark:text-white">Linear</h3>
+<p class="text-xs text-gray-500">Started 20 mins ago</p>
+</div>
+</div>
+<div class="flex-1 mb-6">
+<h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">Product Thinking</h4>
+<p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Written response on product prioritization.</p>
+<div class="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2 mb-2">
+<div class="bg-indigo-500 h-2 rounded-full" style="width: 45%"></div>
+</div>
+<div class="flex justify-between text-xs text-gray-500 font-medium">
+<span>45% Completed</span>
+<span>15m remaining</span>
+</div>
+</div>
+<button class="w-full py-2.5 bg-white dark:bg-gray-800 border-2 border-indigo-600 dark:border-indigo-500 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 font-semibold rounded-lg transition-all flex items-center justify-center gap-2">
+                Continue
+                <span class="material-symbols-outlined text-[18px]">resume</span>
+</button>
+</div>
+<div class="bg-white dark:bg-[#1a202c] rounded-xl border border-[#e7ebf3] dark:border-gray-800 p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col relative opacity-90 hover:opacity-100">
+<div class="absolute top-6 right-6">
+<span class="inline-flex items-center rounded-md bg-green-50 dark:bg-green-900/20 px-2 py-1 text-xs font-medium text-green-700 dark:text-green-400 ring-1 ring-inset ring-green-600/20">Completed</span>
+</div>
+<div class="flex items-center gap-4 mb-5">
+<div class="size-12 rounded-lg bg-white dark:bg-gray-800 flex items-center justify-center shadow-sm border border-gray-100 dark:border-gray-700 p-2">
+<img alt="Google Logo" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5rQmqqSE9IOUxTysRNPGmvb_VjxxumhnRZVnHwyLvHy0WIX3GVV4bz1-AHHkdSWXmptThkEElapgd-wWkC1ZaTTGy1Ymgl9CzRb5N6QuhbQ7EdAFFzA1n9mKTPtNsy5ywXj1KwYrgibhk-Gz_I31QFQwOnbw4m3KmAcMpATE684D65CjpNsiLYKCPjqo55Ug7e6g3xZDT2z7Bl5dmg6mMu8k0fWzaaarAucLAU7AMoMX_QO5e-GXCztZXye9qDTKEuDuhAw2TzgY"/>
+</div>
+<div>
+<h3 class="text-base font-bold text-gray-900 dark:text-white">Google</h3>
+<p class="text-xs text-gray-500">Finished Oct 12</p>
+</div>
+</div>
+<div class="flex-1 mb-6 flex flex-col items-center justify-center">
+<h4 class="text-lg font-bold text-gray-900 dark:text-white mb-6 text-center w-full">UX Design Challenge</h4>
+<div class="relative size-24 mb-2">
+<svg class="size-full -rotate-90" viewBox="0 0 36 36">
+<path class="text-gray-100 dark:text-gray-700" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
+<path class="text-green-500 drop-shadow-md" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="92, 100" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-2xl font-bold text-gray-900 dark:text-white">92</span>
+<span class="text-[10px] uppercase font-bold text-gray-400">Score</span>
+</div>
+</div>
+<p class="text-sm font-medium text-green-600 dark:text-green-400 mt-2">Excellent</p>
+</div>
+<button class="w-full py-2.5 bg-white dark:bg-transparent border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-white hover:border-primary hover:text-primary dark:hover:text-primary font-semibold rounded-lg transition-all flex items-center justify-center gap-2">
+                View Results
+                <span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</div>
+<div class="bg-white dark:bg-[#1a202c] rounded-xl border border-[#e7ebf3] dark:border-gray-800 p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col relative opacity-90 hover:opacity-100">
+<div class="absolute top-6 right-6">
+<span class="inline-flex items-center rounded-md bg-green-50 dark:bg-green-900/20 px-2 py-1 text-xs font-medium text-green-700 dark:text-green-400 ring-1 ring-inset ring-green-600/20">Completed</span>
+</div>
+<div class="flex items-center gap-4 mb-5">
+<div class="size-12 rounded-lg bg-white dark:bg-gray-800 flex items-center justify-center shadow-sm border border-gray-100 dark:border-gray-700 p-2">
+<img alt="Netflix Logo" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzurSD3U3Tq7AEI5J0lmvR6mu12rxCaB_TTdpM3UO1BPdsgT181UoX4hYJrq2gVl5pU_9r6U5LQgfSqn0AUc5zIxqVuPwDOHmpbIjJJMuQCnHi1eFEPJcVHPmeAxnmDJDDe5wyZreLINsN7nC0oqNwxiAj_ot13VWO9zqA1NJrnSzntmfGGMqA5pP1Pr88Qr3kYoiY8w2Kg-DiUPGz_H9DPdD3lkI92gx2JlsEAPITzlLgB5eyTR5wHgwb-VZVK2vWJ2BHiC2yEfk"/>
+</div>
+<div>
+<h3 class="text-base font-bold text-gray-900 dark:text-white">Netflix</h3>
+<p class="text-xs text-gray-500">Finished Sep 28</p>
+</div>
+</div>
+<div class="flex-1 mb-6 flex flex-col items-center justify-center">
+<h4 class="text-lg font-bold text-gray-900 dark:text-white mb-6 text-center w-full">Java Concurrency</h4>
+<div class="relative size-24 mb-2">
+<svg class="size-full -rotate-90" viewBox="0 0 36 36">
+<path class="text-gray-100 dark:text-gray-700" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
+<path class="text-blue-500 drop-shadow-md" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="78, 100" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-2xl font-bold text-gray-900 dark:text-white">78</span>
+<span class="text-[10px] uppercase font-bold text-gray-400">Score</span>
+</div>
+</div>
+<p class="text-sm font-medium text-blue-600 dark:text-blue-400 mt-2">Good</p>
+</div>
+<button class="w-full py-2.5 bg-white dark:bg-transparent border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-white hover:border-primary hover:text-primary dark:hover:text-primary font-semibold rounded-lg transition-all flex items-center justify-center gap-2">
+                View Results
+                <span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</div>
+</div>
+</main>
+
+</body></html>

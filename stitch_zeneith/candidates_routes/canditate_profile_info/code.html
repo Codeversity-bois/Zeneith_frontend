@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Zenith - Edit Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2463eb",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111621",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1a202c",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.375rem", "xl": "0.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#0e121b] dark:text-white min-h-screen flex flex-col overflow-x-hidden">
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-[#e7ebf3] dark:border-gray-800 bg-white dark:bg-[#1a202c] px-10 py-3 shadow-sm">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-[#0e121b] dark:text-white">
+<div class="size-8 text-primary">
+<svg fill="currentColor" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z"></path>
+</svg>
+</div>
+<h2 class="text-[#0e121b] dark:text-white text-xl font-bold leading-tight tracking-[-0.015em]">Zenith</h2>
+</div>
+<nav class="hidden md:flex items-center gap-6 text-sm font-medium text-[#4d6599] dark:text-gray-400">
+<a class="hover:text-primary transition-colors" href="#">Find Jobs</a>
+<a class="hover:text-primary transition-colors" href="#">Companies</a>
+<a class="text-[#0e121b] dark:text-white font-semibold" href="#">My Profile</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="relative p-2 text-[#4d6599] hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border border-white dark:border-[#1a202c]"></span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-9 ring-2 ring-primary/20 cursor-pointer" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCGBysvRSeVF18epSr-Z9SkLM6O0rHhYSuxCfaC_yiUQ6ntWiPvRB5rcPdC3FPmtm4AHJdeHh5Wo5kLk0vNCue3UpCn1VlAJ6T7KBX5ltshkNQkpNN5vjbyuLfeZIxaF3IC4oPeQzt5d8bvM7mEOP_VMj2pFHs6Zd-5zVyL98jA9gzjZKSUWszSh4Jq8par0Z_i9S3ff3svCEhm6yagL14F2n2IuUsHYwAmszGHdvxfK06OQ8bVR5jcIA1ZCIlaK87SleamzcmSwMk");'></div>
+</div>
+</header>
+<main class="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col gap-6">
+<div class="bg-white dark:bg-surface-dark rounded-xl p-6 shadow-sm border border-[#e7ebf3] dark:border-gray-800">
+<div class="flex justify-between items-center mb-2">
+<h3 class="text-sm font-semibold text-[#0e121b] dark:text-white">Profile Completeness</h3>
+<span class="text-sm font-bold text-primary">78%</span>
+</div>
+<div class="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2.5 overflow-hidden">
+<div class="bg-primary h-2.5 rounded-full transition-all duration-500" style="width: 78%"></div>
+</div>
+<p class="text-xs text-[#4d6599] dark:text-gray-400 mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-yellow-500">lightbulb</span>
+                Tip: Add 2 more skills to reach 85% visibility.
+            </p>
+</div>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div>
+<h1 class="text-2xl font-bold text-[#0e121b] dark:text-white">Edit Profile</h1>
+<p class="text-sm text-[#4d6599] dark:text-gray-400">Update your experience and skills to get better matches.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-4 py-2 bg-white dark:bg-transparent border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 font-medium text-sm rounded transition-colors">
+                    Cancel
+                </button>
+<button class="px-6 py-2 bg-primary hover:bg-blue-700 text-white font-semibold text-sm rounded shadow-sm transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">save</span>
+                    Save Changes
+                </button>
+</div>
+</div>
+<div class="space-y-6">
+<section class="bg-white dark:bg-surface-dark rounded-xl shadow-sm border border-[#e7ebf3] dark:border-gray-800 overflow-hidden">
+<div class="p-6 border-b border-[#e7ebf3] dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/30">
+<h2 class="text-lg font-bold text-[#0e121b] dark:text-white">Basic Information</h2>
+</div>
+<div class="p-6 grid grid-cols-1 md:grid-cols-12 gap-6">
+<div class="md:col-span-3 flex flex-col items-center">
+<div class="relative group">
+<div class="size-32 rounded-full bg-cover bg-center border-4 border-white dark:border-gray-700 shadow-md" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCGBysvRSeVF18epSr-Z9SkLM6O0rHhYSuxCfaC_yiUQ6ntWiPvRB5rcPdC3FPmtm4AHJdeHh5Wo5kLk0vNCue3UpCn1VlAJ6T7KBX5ltshkNQkpNN5vjbyuLfeZIxaF3IC4oPeQzt5d8bvM7mEOP_VMj2pFHs6Zd-5zVyL98jA9gzjZKSUWszSh4Jq8par0Z_i9S3ff3svCEhm6yagL14F2n2IuUsHYwAmszGHdvxfK06OQ8bVR5jcIA1ZCIlaK87SleamzcmSwMk");'></div>
+<button class="absolute bottom-0 right-0 bg-primary text-white p-2 rounded-full shadow-lg hover:bg-blue-600 transition-colors border-2 border-white dark:border-gray-800">
+<span class="material-symbols-outlined text-[18px] block">edit</span>
+</button>
+</div>
+</div>
+<div class="md:col-span-9 space-y-4">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">First Name</label>
+<div class="relative">
+<input class="w-full rounded border-green-500 focus:ring-green-500 focus:border-green-500 dark:bg-gray-900 dark:text-white text-sm pr-10" type="text" value="Alex"/>
+<span class="material-symbols-outlined text-green-500 absolute right-3 top-1/2 -translate-y-1/2 text-[20px]">check_circle</span>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Last Name</label>
+<div class="relative">
+<input class="w-full rounded border-green-500 focus:ring-green-500 focus:border-green-500 dark:bg-gray-900 dark:text-white text-sm pr-10" type="text" value="Morgan"/>
+<span class="material-symbols-outlined text-green-500 absolute right-3 top-1/2 -translate-y-1/2 text-[20px]">check_circle</span>
+</div>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Professional Headline</label>
+<input class="w-full rounded border-gray-300 dark:border-gray-700 focus:ring-primary focus:border-primary dark:bg-gray-900 dark:text-white text-sm" type="text" value="Senior Product Designer | UI/UX Specialist"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Location</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-[18px]">location_on</span>
+<input class="w-full pl-10 rounded border-gray-300 dark:border-gray-700 focus:ring-primary focus:border-primary dark:bg-gray-900 dark:text-white text-sm" type="text" value="San Francisco, CA"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-white dark:bg-surface-dark rounded-xl shadow-sm border border-[#e7ebf3] dark:border-gray-800 overflow-hidden">
+<div class="p-6 border-b border-[#e7ebf3] dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/30 flex justify-between items-center">
+<h2 class="text-lg font-bold text-[#0e121b] dark:text-white">Experience</h2>
+<button class="text-primary text-sm font-medium hover:underline flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">add</span> Add Position
+                    </button>
+</div>
+<div class="p-6 space-y-8">
+<div class="relative pl-6 border-l-2 border-gray-200 dark:border-gray-700 group">
+<button class="absolute -left-[21px] top-0 size-10 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-400 hover:text-red-500 hover:border-red-200 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">business_center</span>
+</button>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+<div>
+<label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Job Title</label>
+<div class="relative">
+<input class="w-full rounded border-green-500 focus:ring-primary dark:bg-gray-900 dark:text-white text-sm font-medium pr-10" type="text" value="Senior Product Designer"/>
+<span class="material-symbols-outlined text-green-500 absolute right-3 top-1/2 -translate-y-1/2 text-[18px]">check_circle</span>
+</div>
+</div>
+<div>
+<label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Company</label>
+<div class="relative">
+<input class="w-full rounded border-gray-300 dark:border-gray-700 focus:ring-primary dark:bg-gray-900 dark:text-white text-sm" type="text" value="Google Inc."/>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+<div class="flex gap-2">
+<div class="flex-1">
+<label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Start Date</label>
+<input class="w-full rounded border-gray-300 dark:border-gray-700 focus:ring-primary dark:bg-gray-900 dark:text-white text-sm" type="month" value="2020-03"/>
+</div>
+<div class="flex-1">
+<label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">End Date</label>
+<input class="w-full rounded bg-gray-100 border-gray-300 dark:border-gray-700 dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-sm cursor-not-allowed" disabled="" type="text" value="Present"/>
+</div>
+</div>
+<div class="flex items-end">
+<label class="flex items-center gap-2 cursor-pointer mb-2.5">
+<input checked="" class="rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm text-gray-600 dark:text-gray-300">I currently work here</span>
+</label>
+</div>
+</div>
+<div class="mb-2">
+<label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Description</label>
+<textarea class="w-full rounded border-gray-300 dark:border-gray-700 focus:ring-primary dark:bg-gray-900 dark:text-white text-sm resize-y" rows="3">Led the redesign of the core product interface, improving user engagement by 40%. Managed a team of 3 junior designers and established the new design system.</textarea>
+</div>
+<div class="flex justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-red-500 text-xs font-medium hover:underline flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">delete</span> Remove Position
+                            </button>
+</div>
+</div>
+<div class="relative pl-6 border-l-2 border-gray-200 dark:border-gray-700 group">
+<button class="absolute -left-[21px] top-0 size-10 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-400 shadow-sm">
+<span class="material-symbols-outlined text-[20px]">business_center</span>
+</button>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+<div>
+<label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Job Title</label>
+<div class="relative">
+<input class="w-full rounded border-red-500 focus:ring-red-500 focus:border-red-500 dark:bg-gray-900 dark:text-white text-sm font-medium pr-10" placeholder="e.g. Product Designer" type="text" value=""/>
+<span class="material-symbols-outlined text-red-500 absolute right-3 top-1/2 -translate-y-1/2 text-[18px]">error</span>
+</div>
+<span class="text-xs text-red-500 mt-1 block">Title is required</span>
+</div>
+<div>
+<label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Company</label>
+<div class="relative">
+<input class="w-full rounded border-gray-300 dark:border-gray-700 focus:ring-primary dark:bg-gray-900 dark:text-white text-sm" type="text" value="Freelance"/>
+</div>
+</div>
+</div>
+<div class="flex justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-red-500 text-xs font-medium hover:underline flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">delete</span> Remove Position
+                            </button>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-white dark:bg-surface-dark rounded-xl shadow-sm border border-[#e7ebf3] dark:border-gray-800 overflow-hidden">
+<div class="p-6 border-b border-[#e7ebf3] dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/30">
+<h2 class="text-lg font-bold text-[#0e121b] dark:text-white">Skills</h2>
+</div>
+<div class="p-6">
+<div class="mb-4">
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Add new skill</label>
+<div class="flex gap-2">
+<input class="flex-1 rounded border-gray-300 dark:border-gray-700 focus:ring-primary dark:bg-gray-900 dark:text-white text-sm" placeholder="e.g. Figma, React, Team Leadership" type="text"/>
+<button class="bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-white px-4 py-2 rounded text-sm font-medium transition-colors">
+                                Add Skill
+                            </button>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 mt-4">
+<div class="group relative inline-flex items-center bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 px-3 py-1.5 rounded-full text-sm font-medium border border-blue-100 dark:border-blue-800 transition-all hover:pr-8">
+<span>UI Design</span>
+<button class="absolute right-1 opacity-0 group-hover:opacity-100 transition-opacity p-0.5 rounded-full hover:bg-blue-200 dark:hover:bg-blue-800 text-blue-800 dark:text-blue-200">
+<span class="material-symbols-outlined text-[16px] block">close</span>
+</button>
+</div>
+<div class="group relative inline-flex items-center bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 px-3 py-1.5 rounded-full text-sm font-medium border border-blue-100 dark:border-blue-800 transition-all hover:pr-8">
+<span>Design Systems</span>
+<button class="absolute right-1 opacity-0 group-hover:opacity-100 transition-opacity p-0.5 rounded-full hover:bg-blue-200 dark:hover:bg-blue-800 text-blue-800 dark:text-blue-200">
+<span class="material-symbols-outlined text-[16px] block">close</span>
+</button>
+</div>
+<div class="group relative inline-flex items-center bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 px-3 py-1.5 rounded-full text-sm font-medium border border-blue-100 dark:border-blue-800 transition-all hover:pr-8">
+<span>Figma</span>
+<button class="absolute right-1 opacity-0 group-hover:opacity-100 transition-opacity p-0.5 rounded-full hover:bg-blue-200 dark:hover:bg-blue-800 text-blue-800 dark:text-blue-200">
+<span class="material-symbols-outlined text-[16px] block">close</span>
+</button>
+</div>
+<div class="group relative inline-flex items-center bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 px-3 py-1.5 rounded-full text-sm font-medium border border-blue-100 dark:border-blue-800 transition-all hover:pr-8">
+<span>Prototyping</span>
+<button class="absolute right-1 opacity-0 group-hover:opacity-100 transition-opacity p-0.5 rounded-full hover:bg-blue-200 dark:hover:bg-blue-800 text-blue-800 dark:text-blue-200">
+<span class="material-symbols-outlined text-[16px] block">close</span>
+</button>
+</div>
+<div class="group relative inline-flex items-center bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 px-3 py-1.5 rounded-full text-sm font-medium border border-blue-100 dark:border-blue-800 transition-all hover:pr-8">
+<span>Adobe Creative Suite</span>
+<button class="absolute right-1 opacity-0 group-hover:opacity-100 transition-opacity p-0.5 rounded-full hover:bg-blue-200 dark:hover:bg-blue-800 text-blue-800 dark:text-blue-200">
+<span class="material-symbols-outlined text-[16px] block">close</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<div class="flex items-center justify-end border-t border-[#e7ebf3] dark:border-gray-800 pt-6 mt-2 pb-8">
+<div class="flex items-center gap-2 text-[#4d6599] dark:text-gray-400 text-sm animate-pulse">
+<span class="material-symbols-outlined text-[18px]">cloud_done</span>
+<span>Auto-saved draft</span>
+<span class="text-xs opacity-70">2 minutes ago</span>
+</div>
+</div>
+</main>
+
+</body></html>

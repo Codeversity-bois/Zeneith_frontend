@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zenith - AI-Powered Recruitment Platform</title>
+    <link rel="icon" type="image/png" href="/logo_zeneith.png">
+    <script src="/src/js/state-manager.js" type="module"></script>
+</head>
+
+<body>
+    <script>
+        // Wait for StateManager to initialize before redirecting
+        window.addEventListener('load', function () {
+            console.log('🔐 Checking authentication on index page...');
+            console.log('✓ StateManager available:', !!window.StateManager);
+            console.log('✓ Authenticated:', window.StateManager?.isAuthenticated());
+
+            // Redirect to appropriate page based on authentication status
+            if (window.StateManager && window.StateManager.isAuthenticated()) {
+                const role = window.StateManager.getUserRole();
+                console.log('✓ User role:', role);
+                if (role === 'candidate') {
+                    window.location.href = '/candidate-dashboard.html';
+                } else if (role === 'recruiter') {
+                    window.location.href = '/recruiter-dashboard.html';
+                } else {
+                    window.location.href = '/login.html';
+                }
+            } else {
+                console.log('❌ Not authenticated, redirecting to login...');
+                window.location.href = '/login.html';
+            }
+        });
+    </script>
+    <div
+        style="display: flex; align-items: center; justify-content: center; height: 100vh; font-family: 'Inter', sans-serif;">
+        <p>Redirecting...</p>
+    </div>
+</body>
+
+</html>

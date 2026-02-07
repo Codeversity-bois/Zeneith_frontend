@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Zenith - Job Search</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2463eb",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111621",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.375rem", "xl": "0.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#0e121b] dark:text-white min-h-screen flex flex-col overflow-x-hidden">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-[#e7ebf3] dark:border-gray-800 bg-white dark:bg-[#1a202c] px-10 py-3 shadow-sm">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-[#0e121b] dark:text-white">
+<div class="size-8 text-primary">
+<svg fill="currentColor" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z"></path>
+</svg>
+</div>
+<h2 class="text-[#0e121b] dark:text-white text-xl font-bold leading-tight tracking-[-0.015em]">Zenith</h2>
+</div>
+<label class="flex flex-col min-w-40 !h-10 max-w-96 w-80">
+<div class="flex w-full flex-1 items-stretch rounded h-full relative group">
+<div class="text-[#4d6599] absolute left-3 top-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-none">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded text-[#0e121b] dark:text-white focus:outline-0 focus:ring-1 focus:ring-primary border border-transparent bg-[#e7ebf3] dark:bg-gray-800 focus:bg-white dark:focus:bg-gray-900 placeholder:text-[#4d6599] px-4 pl-10 text-sm font-normal leading-normal transition-all" placeholder="Search by job title, skill, or company" value=""/>
+</div>
+</label>
+<nav class="hidden md:flex items-center gap-6 text-sm font-medium text-[#4d6599] dark:text-gray-400">
+<a class="text-[#0e121b] dark:text-white" href="#">Find Jobs</a>
+<a class="hover:text-primary transition-colors" href="#">Companies</a>
+<a class="hover:text-primary transition-colors" href="#">Salaries</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="relative p-2 text-[#4d6599] hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border border-white dark:border-[#1a202c]"></span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-9 ring-2 ring-transparent hover:ring-primary/20 transition-all cursor-pointer" data-alt="User profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCGBysvRSeVF18epSr-Z9SkLM6O0rHhYSuxCfaC_yiUQ6ntWiPvRB5rcPdC3FPmtm4AHJdeHh5Wo5kLk0vNCue3UpCn1VlAJ6T7KBX5ltshkNQkpNN5vjbyuLfeZIxaF3IC4oPeQzt5d8bvM7mEOP_VMj2pFHs6Zd-5zVyL98jA9gzjZKSUWszSh4Jq8par0Z_i9S3ff3svCEhm6yagL14F2n2IuUsHYwAmszGHdvxfK06OQ8bVR5jcIA1ZCIlaK87SleamzcmSwMk");'></div>
+</div>
+</header>
+<main class="flex-1 max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex gap-8 items-start">
+<!-- Left Sidebar: Filters -->
+<aside class="w-72 flex-shrink-0 sticky top-24 hidden lg:block bg-white dark:bg-[#1a202c] rounded-xl shadow-sm border border-[#e7ebf3] dark:border-gray-800 p-5 h-[calc(100vh-120px)] overflow-y-auto custom-scrollbar">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-lg font-bold text-[#0e121b] dark:text-white">Filters</h3>
+<button class="text-sm text-primary font-medium hover:underline">Reset all</button>
+</div>
+<!-- Location Filter -->
+<div class="mb-6">
+<p class="text-sm font-semibold text-[#0e121b] dark:text-white mb-3">Location</p>
+<div class="relative mb-3">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 material-symbols-outlined text-[18px]">location_on</span>
+<input class="w-full h-10 pl-9 pr-3 rounded border border-[#d0d7e7] dark:border-gray-700 bg-white dark:bg-gray-900 text-sm focus:ring-primary focus:border-primary" placeholder="City, state, or zip" type="text"/>
+</div>
+<label class="flex items-center justify-between cursor-pointer group">
+<span class="text-sm text-gray-600 dark:text-gray-300">Remote only</span>
+<div class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/30 dark:peer-focus:ring-primary/80 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+</div>
+</label>
+</div>
+<hr class="border-[#e7ebf3] dark:border-gray-800 my-4"/>
+<!-- Job Type Filter -->
+<div class="mb-6">
+<p class="text-sm font-semibold text-[#0e121b] dark:text-white mb-3">Job Type</p>
+<div class="space-y-2">
+<label class="flex items-center gap-3 cursor-pointer">
+<input checked="" class="rounded border-gray-300 text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="text-sm text-gray-600 dark:text-gray-300">Full-time</span>
+<span class="ml-auto text-xs text-gray-400">120</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="rounded border-gray-300 text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="text-sm text-gray-600 dark:text-gray-300">Contract</span>
+<span class="ml-auto text-xs text-gray-400">45</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="rounded border-gray-300 text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="text-sm text-gray-600 dark:text-gray-300">Freelance</span>
+<span class="ml-auto text-xs text-gray-400">12</span>
+</label>
+</div>
+</div>
+<hr class="border-[#e7ebf3] dark:border-gray-800 my-4"/>
+<!-- Salary Range -->
+<div class="mb-6">
+<p class="text-sm font-semibold text-[#0e121b] dark:text-white mb-3">Salary Range</p>
+<div class="flex items-center justify-between gap-2 mb-3">
+<div class="relative w-1/2">
+<span class="absolute left-2 top-1/2 -translate-y-1/2 text-gray-400 text-xs">$</span>
+<input class="w-full h-8 pl-5 pr-1 rounded border border-[#d0d7e7] dark:border-gray-700 bg-white dark:bg-gray-900 text-xs focus:ring-primary focus:border-primary" type="number" value="60000"/>
+</div>
+<span class="text-gray-400">-</span>
+<div class="relative w-1/2">
+<span class="absolute left-2 top-1/2 -translate-y-1/2 text-gray-400 text-xs">$</span>
+<input class="w-full h-8 pl-5 pr-1 rounded border border-[#d0d7e7] dark:border-gray-700 bg-white dark:bg-gray-900 text-xs focus:ring-primary focus:border-primary" type="number" value="200000"/>
+</div>
+</div>
+<!-- Mock Slider -->
+<div class="relative h-1.5 w-full bg-gray-200 dark:bg-gray-700 rounded-full mt-2">
+<div class="absolute left-[20%] right-[10%] h-full bg-primary rounded-full"></div>
+<div class="absolute left-[20%] top-1/2 -translate-y-1/2 size-3 bg-white border-2 border-primary rounded-full shadow cursor-pointer"></div>
+<div class="absolute right-[10%] top-1/2 -translate-y-1/2 size-3 bg-white border-2 border-primary rounded-full shadow cursor-pointer"></div>
+</div>
+<div class="flex justify-between mt-2 text-xs text-gray-400">
+<span>$60k</span>
+<span>$200k+</span>
+</div>
+</div>
+<hr class="border-[#e7ebf3] dark:border-gray-800 my-4"/>
+<!-- Experience Level -->
+<div class="mb-6">
+<p class="text-sm font-semibold text-[#0e121b] dark:text-white mb-3">Experience Level</p>
+<div class="flex flex-wrap gap-2">
+<label class="cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<span class="px-3 py-1.5 rounded-full text-xs font-medium border border-[#d0d7e7] dark:border-gray-700 text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-900 peer-checked:bg-primary/10 peer-checked:text-primary peer-checked:border-primary/50 transition-all">Entry</span>
+</label>
+<label class="cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<span class="px-3 py-1.5 rounded-full text-xs font-medium border border-[#d0d7e7] dark:border-gray-700 text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-900 peer-checked:bg-primary/10 peer-checked:text-primary peer-checked:border-primary/50 transition-all">Mid-Level</span>
+</label>
+<label class="cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<span class="px-3 py-1.5 rounded-full text-xs font-medium border border-[#d0d7e7] dark:border-gray-700 text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-900 peer-checked:bg-primary/10 peer-checked:text-primary peer-checked:border-primary/50 transition-all">Senior</span>
+</label>
+<label class="cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<span class="px-3 py-1.5 rounded-full text-xs font-medium border border-[#d0d7e7] dark:border-gray-700 text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-900 peer-checked:bg-primary/10 peer-checked:text-primary peer-checked:border-primary/50 transition-all">Director</span>
+</label>
+</div>
+</div>
+</aside>
+<!-- Main Feed -->
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between mb-6">
+<div>
+<h1 class="text-2xl font-bold text-[#0e121b] dark:text-white">Recommended for you</h1>
+<p class="text-sm text-[#4d6599] dark:text-gray-400 mt-1">Based on your profile and search history</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-sm text-[#4d6599] dark:text-gray-400">Sort by:</span>
+<select class="form-select text-sm font-medium bg-transparent border-none text-[#0e121b] dark:text-white focus:ring-0 cursor-pointer pr-8 pl-0 py-0">
+<option>Most Relevant</option>
+<option>Date Posted</option>
+<option>Salary (High to Low)</option>
+</select>
+</div>
+</div>
+<!-- Job Cards Container -->
+<div class="space-y-4">
+<!-- Job Card 1 -->
+<div class="group relative bg-white dark:bg-[#1a202c] rounded-xl p-5 border border-[#e7ebf3] dark:border-gray-800 hover:shadow-md hover:border-primary/30 transition-all duration-200">
+<div class="flex items-start gap-4">
+<div class="size-12 rounded bg-white dark:bg-gray-800 flex items-center justify-center shadow-sm border border-gray-100 dark:border-gray-700 shrink-0">
+<img alt="Google Logo" class="size-8 object-contain" data-alt="Google company logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5rQmqqSE9IOUxTysRNPGmvb_VjxxumhnRZVnHwyLvHy0WIX3GVV4bz1-AHHkdSWXmptThkEElapgd-wWkC1ZaTTGy1Ymgl9CzRb5N6QuhbQ7EdAFFzA1n9mKTPtNsy5ywXj1KwYrgibhk-Gz_I31QFQwOnbw4m3KmAcMpATE684D65CjpNsiLYKCPjqo55Ug7e6g3xZDT2z7Bl5dmg6mMu8k0fWzaaarAucLAU7AMoMX_QO5e-GXCztZXye9qDTKEuDuhAw2TzgY"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-start justify-between gap-2">
+<div>
+<h3 class="text-lg font-bold text-[#0e121b] dark:text-white group-hover:text-primary transition-colors truncate">Senior Product Designer</h3>
+<p class="text-sm font-medium text-[#4d6599] dark:text-gray-400">Google Inc.</p>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-gradient-to-r from-primary/10 to-blue-500/10 text-primary text-xs font-bold border border-primary/20">
+<span class="material-symbols-outlined text-[14px]">bolt</span> 98% Match
+                                    </span>
+<button class="text-gray-400 hover:text-primary transition-colors p-1">
+<span class="material-symbols-outlined">bookmark</span>
+</button>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-x-6 gap-y-2 mt-3 text-sm text-gray-600 dark:text-gray-400">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-gray-400">location_on</span>
+<span>San Francisco, CA (Hybrid)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-gray-400">payments</span>
+<span>$160k - $220k</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-gray-400">schedule</span>
+<span>Posted 2h ago</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-5 gap-4">
+<div class="flex items-center gap-2 overflow-hidden">
+<span class="px-2.5 py-1 rounded bg-[#f1f5f9] dark:bg-gray-800 text-xs font-medium text-slate-600 dark:text-slate-300 truncate">UI Design</span>
+<span class="px-2.5 py-1 rounded bg-[#f1f5f9] dark:bg-gray-800 text-xs font-medium text-slate-600 dark:text-slate-300 truncate">Design Systems</span>
+<span class="px-2.5 py-1 rounded bg-[#f1f5f9] dark:bg-gray-800 text-xs font-medium text-slate-600 dark:text-slate-300 truncate">Figma</span>
+</div>
+<button class="px-4 py-2 bg-primary hover:bg-blue-700 text-white text-sm font-semibold rounded shadow-sm transition-colors whitespace-nowrap">
+                                    Quick Apply
+                                </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Job Card 2 -->
+<div class="group relative bg-white dark:bg-[#1a202c] rounded-xl p-5 border border-[#e7ebf3] dark:border-gray-800 hover:shadow-md hover:border-primary/30 transition-all duration-200">
+<div class="flex items-start gap-4">
+<div class="size-12 rounded bg-white dark:bg-gray-800 flex items-center justify-center shadow-sm border border-gray-100 dark:border-gray-700 shrink-0">
+<img alt="Microsoft Logo" class="size-6 object-contain" data-alt="Microsoft company logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQvf6eaQszuxi3Yg1EDkEBCPc4HdbE2P8dVXtJbsr_9N0Dm5CY50sO3cdaedxgk0-SMRNznacjGh_KNHr3t3UoNmN2NspBZ72a0GXHw513wnXr2iR9wgSQpcn1leoZ3b-dgvhIUxuTBZYmTCIOQ47NYotFjmnOa3r8YRc-I5ipyaW3iFebEIaV8JDY_VmwB3ucG-AaxfnkDfoMdulocVBYaNltuQmaMx0-XJOZ-Ntu9WVgG2wVUaPPxtWnRo8-1IMg6PPe0e6zuZQ"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-start justify-between gap-2">
+<div>
+<h3 class="text-lg font-bold text-[#0e121b] dark:text-white group-hover:text-primary transition-colors truncate">Frontend Engineer (React)</h3>
+<p class="text-sm font-medium text-[#4d6599] dark:text-gray-400">Microsoft</p>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary/5 text-primary text-xs font-bold border border-primary/20">
+                                        94% Match
+                                    </span>
+<button class="text-gray-400 hover:text-primary transition-colors p-1">
+<span class="material-symbols-outlined">bookmark</span>
+</button>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-x-6 gap-y-2 mt-3 text-sm text-gray-600 dark:text-gray-400">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-gray-400">location_on</span>
+<span>Remote (US)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-gray-400">payments</span>
+<span>$140k - $190k</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-gray-400">schedule</span>
+<span>Posted 5h ago</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-5 gap-4">
+<div class="flex items-center gap-2 overflow-hidden">
+<span class="px-2.5 py-1 rounded bg-[#f1f5f9] dark:bg-gray-800 text-xs font-medium text-slate-600 dark:text-slate-300 truncate">React.js</span>
+<span class="px-2.5 py-1 rounded bg-[#f1f5f9] dark:bg-gray-800 text-xs font-medium text-slate-600 dark:text-slate-300 truncate">TypeScript</span>
+<span class="px-2.5 py-1 rounded bg-[#f1f5f9] dark:bg-gray-800 text-xs font-medium text-slate-600 dark:text-slate-300 truncate">Redux</span>
+<span class="px-2.5 py-1 rounded bg-[#f1f5f9] dark:bg-gray-800 text-xs font-medium text-slate-600 dark:text-slate-300 truncate">+2</span>
+</div>
+<button class="px-4 py-2 bg-primary hover:bg-blue-700 text-white text-sm font-semibold rounded shadow-sm transition-colors whitespace-nowrap">
+                                    Quick Apply
+                                </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Job Card 3 -->
+<div class="group relative bg-white dark:bg-[#1a202c] rounded-xl p-5 border border-[#e7ebf3] dark:border-gray-800 hover:shadow-md hover:border-primary/30 transition-all duration-200">
+<div class="flex items-start gap-4">
+<div class="size-12 rounded bg-white dark:bg-gray-800 flex items-center justify-center shadow-sm border border-gray-100 dark:border-gray-700 shrink-0">
+<div class="text-2xl font-bold text-black" data-alt="Uber company logo letter U">U</div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-start justify-between gap-2">
+<div>
+<h3 class="text-lg font-bold text-[#0e121b] dark:text-white group-hover:text-primary transition-colors truncate">Product Manager, Growth</h3>
+<p class="text-sm font-medium text-[#4d6599] dark:text-gray-400">Uber</p>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 text-xs font-bold border border-gray-200 dark:border-gray-700">
+                                        85% Match
+                                    </span>
+<button class="text-gray-400 hover:text-primary transition-colors p-1">
+<span class="material-symbols-outlined">bookmark</span>
+</button>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-x-6 gap-y-2 mt-3 text-sm text-gray-600 dark:text-gray-400">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-gray-400">location_on</span>
+<span>New York, NY</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-gray-400">payments</span>
+<span>$180k - $240k</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-gray-400">schedule</span>
+<span>Posted 1d ago</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-5 gap-4">
+<div class="flex items-center gap-2 overflow-hidden">
+<span class="px-2.5 py-1 rounded bg-[#f1f5f9] dark:bg-gray-800 text-xs font-medium text-slate-600 dark:text-slate-300 truncate">Product Strategy</span>
+<span class="px-2.5 py-1 rounded bg-[#f1f5f9] dark:bg-gray-800 text-xs font-medium text-slate-600 dark:text-slate-300 truncate">Data Analysis</span>
+</div>
+<button class="px-4 py-2 bg-white dark:bg-transparent border border-gray-300 dark:border-gray-600 hover:border-primary text-gray-700 dark:text-white hover:text-primary text-sm font-semibold rounded shadow-sm transition-colors whitespace-nowrap">
+                                    Details
+                                </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Job Card 4 -->
+<div class="group relative bg-white dark:bg-[#1a202c] rounded-xl p-5 border border-[#e7ebf3] dark:border-gray-800 hover:shadow-md hover:border-primary/30 transition-all duration-200">
+<div class="flex items-start gap-4">
+<div class="size-12 rounded bg-white dark:bg-gray-800 flex items-center justify-center shadow-sm border border-gray-100 dark:border-gray-700 shrink-0">
+<span class="material-symbols-outlined text-3xl text-indigo-600" data-alt="Abstract company logo icon">deployed_code</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-start justify-between gap-2">
+<div>
+<h3 class="text-lg font-bold text-[#0e121b] dark:text-white group-hover:text-primary transition-colors truncate">UX Researcher</h3>
+<p class="text-sm font-medium text-[#4d6599] dark:text-gray-400">Linear</p>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary/5 text-primary text-xs font-bold border border-primary/20">
+                                        92% Match
+                                    </span>
+<button class="text-gray-400 hover:text-primary transition-colors p-1">
+<span class="material-symbols-outlined">bookmark</span>
+</button>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-x-6 gap-y-2 mt-3 text-sm text-gray-600 dark:text-gray-400">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-gray-400">location_on</span>
+<span>Remote (EU/US)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-gray-400">payments</span>
+<span>$110k - $150k</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-gray-400">schedule</span>
+<span>Posted 3h ago</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-5 gap-4">
+<div class="flex items-center gap-2 overflow-hidden">
+<span class="px-2.5 py-1 rounded bg-[#f1f5f9] dark:bg-gray-800 text-xs font-medium text-slate-600 dark:text-slate-300 truncate">User Testing</span>
+<span class="px-2.5 py-1 rounded bg-[#f1f5f9] dark:bg-gray-800 text-xs font-medium text-slate-600 dark:text-slate-300 truncate">Interviews</span>
+<span class="px-2.5 py-1 rounded bg-[#f1f5f9] dark:bg-gray-800 text-xs font-medium text-slate-600 dark:text-slate-300 truncate">Analytics</span>
+</div>
+<button class="px-4 py-2 bg-primary hover:bg-blue-700 text-white text-sm font-semibold rounded shadow-sm transition-colors whitespace-nowrap">
+                                    Quick Apply
+                                </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Job Card 5 -->
+<div class="group relative bg-white dark:bg-[#1a202c] rounded-xl p-5 border border-[#e7ebf3] dark:border-gray-800 hover:shadow-md hover:border-primary/30 transition-all duration-200 opacity-60">
+<div class="flex items-start gap-4">
+<div class="size-12 rounded bg-white dark:bg-gray-800 flex items-center justify-center shadow-sm border border-gray-100 dark:border-gray-700 shrink-0">
+<img alt="Netflix Logo" class="size-6 object-contain opacity-50 grayscale" data-alt="Netflix company logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzurSD3U3Tq7AEI5J0lmvR6mu12rxCaB_TTdpM3UO1BPdsgT181UoX4hYJrq2gVl5pU_9r6U5LQgfSqn0AUc5zIxqVuPwDOHmpbIjJJMuQCnHi1eFEPJcVHPmeAxnmDJDDe5wyZreLINsN7nC0oqNwxiAj_ot13VWO9zqA1NJrnSzntmfGGMqA5pP1Pr88Qr3kYoiY8w2Kg-DiUPGz_H9DPdD3lkI92gx2JlsEAPITzlLgB5eyTR5wHgwb-VZVK2vWJ2BHiC2yEfk"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-start justify-between gap-2">
+<div>
+<h3 class="text-lg font-bold text-[#0e121b] dark:text-white group-hover:text-primary transition-colors truncate">Full Stack Developer</h3>
+<p class="text-sm font-medium text-[#4d6599] dark:text-gray-400">Netflix</p>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-xs font-bold border border-gray-200 dark:border-gray-700">
+                                        72% Match
+                                    </span>
+<button class="text-gray-400 hover:text-primary transition-colors p-1">
+<span class="material-symbols-outlined">bookmark</span>
+</button>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-x-6 gap-y-2 mt-3 text-sm text-gray-600 dark:text-gray-400">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-gray-400">location_on</span>
+<span>Los Gatos, CA</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-gray-400">payments</span>
+<span>$200k - $350k</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-gray-400">schedule</span>
+<span>Posted 2d ago</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-5 gap-4">
+<div class="flex items-center gap-2 overflow-hidden">
+<span class="px-2.5 py-1 rounded bg-[#f1f5f9] dark:bg-gray-800 text-xs font-medium text-slate-600 dark:text-slate-300 truncate">Java</span>
+<span class="px-2.5 py-1 rounded bg-[#f1f5f9] dark:bg-gray-800 text-xs font-medium text-slate-600 dark:text-slate-300 truncate">AWS</span>
+</div>
+<button class="px-4 py-2 bg-white dark:bg-transparent border border-gray-300 dark:border-gray-600 hover:border-primary text-gray-700 dark:text-white hover:text-primary text-sm font-semibold rounded shadow-sm transition-colors whitespace-nowrap">
+                                    Details
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-8 flex justify-center">
+<nav class="flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+<button class="size-8 flex items-center justify-center rounded hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-50">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+</button>
+<button class="size-8 flex items-center justify-center rounded bg-primary text-white">1</button>
+<button class="size-8 flex items-center justify-center rounded hover:bg-gray-100 dark:hover:bg-gray-800">2</button>
+<button class="size-8 flex items-center justify-center rounded hover:bg-gray-100 dark:hover:bg-gray-800">3</button>
+<span class="px-1">...</span>
+<button class="size-8 flex items-center justify-center rounded hover:bg-gray-100 dark:hover:bg-gray-800">8</button>
+<button class="size-8 flex items-center justify-center rounded hover:bg-gray-100 dark:hover:bg-gray-800">
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</nav>
+</div>
+</div>
+</main>
+<script>
+        // Simple script to toggle checkbox appearance for the mock slider interaction or similar needs if required
+        // Not adding complex logic as per instructions.
+    </script>
+</body></html>

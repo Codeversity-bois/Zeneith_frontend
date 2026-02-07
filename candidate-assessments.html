@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>My Assessments - Zenith</title>
+    <link rel="icon" type="image/png" href="/logo_zeneith.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="stylesheet" href="/src/styles/main.css">
+</head>
+
+<body class="bg-background-light font-display h-screen flex overflow-hidden">
+    <div id="app-container" class="w-full h-full flex">
+        <div id="sidebar-container"></div>
+        <div class="flex-1 flex flex-col min-w-0">
+            <div id="header-container"></div>
+            <main class="flex-1 overflow-y-auto p-6 lg:p-8">
+                <div class="max-w-6xl mx-auto space-y-6">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-900">Assessments</h2>
+                        <p class="text-slate-500 mt-1">Track and complete your assessments</p>
+                    </div>
+
+                    <!-- Pending Assessments -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-slate-900 mb-4">Pending</h3>
+                        <div class="grid gap-4">
+                            <div
+                                class="bg-white border border-slate-200 rounded-xl p-6 hover:shadow-md transition-shadow">
+                                <div class="flex items-start justify-between">
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-3 mb-2">
+                                            <h4 class="text-lg font-bold text-slate-900">Frontend Developer Assessment
+                                            </h4>
+                                            <span
+                                                class="px-2 py-1 bg-amber-100 text-amber-700 rounded text-xs font-medium">Pending</span>
+                                        </div>
+                                        <p class="text-sm text-slate-600 mb-3">Stripe · Product Design Team</p>
+                                        <div class="flex items-center gap-4 text-sm text-slate-500">
+                                            <span class="flex items-center gap-1">
+                                                <span class="material-symbols-outlined text-[18px]">schedule</span>
+                                                60 minutes
+                                            </span>
+                                            <span class="flex items-center gap-1">
+                                                <span class="material-symbols-outlined text-[18px]">quiz</span>
+                                                25 questions
+                                            </span>
+                                            <span class="flex items-center gap-1">
+                                                <span
+                                                    class="material-symbols-outlined text-[18px]">calendar_today</span>
+                                                Due: Nov 5, 2023
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <a href="/assessment-interface.html" class="btn-primary ml-4">Start Assessment</a>
+                                </div>
+                            </div>
+
+                            <div
+                                class="bg-white border border-slate-200 rounded-xl p-6 hover:shadow-md transition-shadow">
+                                <div class="flex items-start justify-between">
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-3 mb-2">
+                                            <h4 class="text-lg font-bold text-slate-900">Coding Challenge</h4>
+                                            <span
+                                                class="px-2 py-1 bg-amber-100 text-amber-700 rounded text-xs font-medium">Pending</span>
+                                        </div>
+                                        <p class="text-sm text-slate-600 mb-3">Netflix · Engineering</p>
+                                        <div class="flex items-center gap-4 text-sm text-slate-500">
+                                            <span class="flex items-center gap-1">
+                                                <span class="material-symbols-outlined text-[18px]">schedule</span>
+                                                90 minutes
+                                            </span>
+                                            <span class="flex items-center gap-1">
+                                                <span class="material-symbols-outlined text-[18px]">code</span>
+                                                3 problems
+                                            </span>
+                                            <span class="flex items-center gap-1">
+                                                <span
+                                                    class="material-symbols-outlined text-[18px]">calendar_today</span>
+                                                Due: Nov 8, 2023
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <a href="/assessment-interface.html" class="btn-primary ml-4">Start Assessment</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Completed Assessments -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-slate-900 mb-4">Completed</h3>
+                        <div class="grid gap-4">
+                            <div class="bg-white border border-slate-200 rounded-xl p-6">
+                                <div class="flex items-start justify-between">
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-3 mb-2">
+                                            <h4 class="text-lg font-bold text-slate-900">UX Research Assessment</h4>
+                                            <span
+                                                class="px-2 py-1 bg-emerald-100 text-emerald-700 rounded text-xs font-medium">Completed</span>
+                                        </div>
+                                        <p class="text-sm text-slate-600 mb-3">Spotify · UX Team</p>
+                                        <div class="flex items-center gap-4 text-sm text-slate-500">
+                                            <span class="flex items-center gap-1">
+                                                <span class="material-symbols-outlined text-[18px]">check_circle</span>
+                                                Completed on Oct 25, 2023
+                                            </span>
+                                            <span class="flex items-center gap-1 text-emerald-600 font-semibold">
+                                                <span class="material-symbols-outlined text-[18px]">trending_up</span>
+                                                Score: 87/100
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <button
+                                        class="px-4 py-2 border border-slate-300 rounded-lg text-slate-700 hover:bg-slate-50">View
+                                        Results</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="/src/js/state-manager.js" type="module"></script>
+    <script src="/src/js/components.js" type="module"></script>
+    <script>
+        if (!window.StateManager.isAuthenticated() || window.StateManager.getUserRole() !== 'candidate') {
+            window.location.href = '/login.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('sidebar-container').innerHTML = window.Components.createSidebar('candidate', 'assessments');
+            document.getElementById('header-container').innerHTML = window.Components.createHeader('My Assessments', true);
+            window.Components.populateUserProfile();
+        });
+    </script>
+</body>
+
+</html>

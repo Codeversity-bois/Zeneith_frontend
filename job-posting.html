@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Post a Job - Zenith</title>
+    <link rel="icon" type="image/png" href="/logo_zeneith.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/src/styles/main.css">
+</head>
+
+<body class="bg-background-light font-display h-screen flex overflow-hidden">
+    <div id="app-container" class="w-full h-full flex">
+        <div id="sidebar-container"></div>
+        <div class="flex-1 flex flex-col min-w-0">
+            <div id="header-container"></div>
+            <main class="flex-1 overflow-y-auto p-6 md:p-8">
+                <div class="max-w-4xl mx-auto space-y-6">
+                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+                        <h2 class="text-lg font-bold text-slate-900 mb-6">Job Details</h2>
+                        <form id="post-job-form" class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-1">Job Title</label>
+                                    <input type="text" name="title" required
+                                        class="w-full rounded-lg border-slate-300 focus:border-primary focus:ring-primary"
+                                        placeholder="e.g. Senior Backend Engineer">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-1">Department</label>
+                                    <select name="department" required
+                                        class="w-full rounded-lg border-slate-300 focus:border-primary focus:ring-primary">
+                                        <option value="">Select Department</option>
+                                        <option value="Engineering">Engineering</option>
+                                        <option value="Design">Design</option>
+                                        <option value="Product">Product</option>
+                                        <option value="Marketing">Marketing</option>
+                                        <option value="Sales">Sales</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-1">Location</label>
+                                    <input type="text" name="location" required
+                                        class="w-full rounded-lg border-slate-300 focus:border-primary focus:ring-primary"
+                                        placeholder="e.g. Remote, New York, NY">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-1">Employment Type</label>
+                                    <select name="type" required
+                                        class="w-full rounded-lg border-slate-300 focus:border-primary focus:ring-primary">
+                                        <option value="full-time">Full-time</option>
+                                        <option value="part-time">Part-time</option>
+                                        <option value="contract">Contract</option>
+                                        <option value="internship">Internship</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-1">Salary Range
+                                        (Min)</label>
+                                    <input type="number" name="salary_min"
+                                        class="w-full rounded-lg border-slate-300 focus:border-primary focus:ring-primary"
+                                        placeholder="e.g. 100000">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-1">Salary Range
+                                        (Max)</label>
+                                    <input type="number" name="salary_max"
+                                        class="w-full rounded-lg border-slate-300 focus:border-primary focus:ring-primary"
+                                        placeholder="e.g. 150000">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Job Description</label>
+                                <textarea name="description" required rows="6"
+                                    class="w-full rounded-lg border-slate-300 focus:border-primary focus:ring-primary"
+                                    placeholder="Describe the role responsibilities and expectations..."></textarea>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Requirements (comma
+                                    separated)</label>
+                                <textarea name="requirements" required rows="4"
+                                    class="w-full rounded-lg border-slate-300 focus:border-primary focus:ring-primary"
+                                    placeholder="e.g. 5+ years React experience, TypeScript, Node.js"></textarea>
+                            </div>
+
+                            <div class="flex justify-end gap-3 pt-4 border-t border-slate-200">
+                                <button type="button" onclick="history.back()"
+                                    class="px-4 py-2 text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 font-medium transition-colors">Cancel</button>
+                                <button type="submit"
+                                    class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 font-medium transition-colors">Post
+                                    Job</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="/src/js/state-manager.js" type="module"></script>
+    <script src="/src/js/components.js" type="module"></script>
+    <script src="/src/js/api-client.js" type="module"></script>
+    <script type="module">
+        import apiClient from '/src/js/api-client.js';
+
+        document.addEventListener('DOMContentLoaded', function () {
+            if (!window.StateManager.isAuthenticated() || window.StateManager.getUserRole() !== 'recruiter') {
+                window.location.href = '/login.html';
+                return;
+            }
+
+            document.getElementById('sidebar-container').innerHTML = window.Components.createSidebar('recruiter', 'post-job');
+            document.getElementById('header-container').innerHTML = window.Components.createHeader('Create New Job', false);
+            window.Components.populateUserProfile();
+            window.Components.updateNotificationBadge();
+
+            document.getElementById('post-job-form').addEventListener('submit', async function (e) {
+                e.preventDefault();
+                const formData = new FormData(e.target);
+                const data = Object.fromEntries(formData.entries());
+
+                // Convert requirements to array
+                data.requirements = data.requirements.split(',').map(r => r.trim()).filter(r => r);
+                // Convert numbers
+                data.salary_min = Number(data.salary_min) || 0;
+                data.salary_max = Number(data.salary_max) || 0;
+
+                try {
+                    // In a real app we would call: await apiClient.post('/api/v1/jobs', data);
+                    console.log('Submitting job:', data);
+
+                    // Simulate API delay
+                    const btn = e.target.querySelector('button[type="submit"]');
+                    const originalText = btn.textContent;
+                    btn.disabled = true;
+                    btn.textContent = 'Posting...';
+
+                    await new Promise(r => setTimeout(r, 1000));
+
+                    window.Components.showToast('Job posted successfully!', 'success');
+
+                    setTimeout(() => {
+                        window.location.href = '/recruiter-dashboard.html';
+                    }, 1000);
+                } catch (error) {
+                    console.error('Error:', error);
+                    window.Components.showToast('Failed to post job. Please try again.', 'error');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

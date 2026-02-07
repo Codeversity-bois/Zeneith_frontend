@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Zenith Leaderboard &amp; Council Evaluation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2463eb",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111621",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1e2433",
+                        "border-light": "#e7ebf3",
+                        "border-dark": "#2d3748",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display h-screen flex overflow-hidden selection:bg-primary/20">
+<aside class="w-64 flex-shrink-0 border-r border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark flex flex-col justify-between transition-colors duration-200">
+<div class="flex flex-col h-full">
+<div class="h-16 flex items-center gap-3 px-6 border-b border-border-light dark:border-border-dark">
+<div class="bg-primary/10 text-primary p-1.5 rounded-lg">
+<span class="material-symbols-outlined text-[24px]">all_inclusive</span>
+</div>
+<div>
+<h1 class="text-slate-900 dark:text-white text-base font-bold leading-none">Zenith</h1>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium mt-0.5">Recruiter Platform</p>
+</div>
+</div>
+<nav class="flex-1 overflow-y-auto py-6 px-3 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white font-medium group transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white font-medium group transition-colors" href="#">
+<span class="material-symbols-outlined">work</span>
+<span>Job Postings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white font-medium group transition-colors" href="#">
+<span class="material-symbols-outlined">view_kanban</span>
+<span>Pipeline</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary font-medium group transition-colors" href="#">
+<span class="material-symbols-outlined fill-1">group</span>
+<span>Candidates</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white font-medium group transition-colors" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span>Analytics</span>
+</a>
+<div class="pt-4 mt-4 border-t border-border-light dark:border-border-dark">
+<p class="px-3 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Team</p>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white font-medium group transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span>Schedule</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white font-medium group transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</div>
+</nav>
+<div class="p-4 border-t border-border-light dark:border-border-dark">
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer transition-colors">
+<div class="w-10 h-10 rounded-full bg-cover bg-center" data-alt="Portrait of a smiling man with short brown hair" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuChn9_oFqf90ani2bWb7pk3FyW2VC8ImrnNe5D24whAThv7GZ1hjOWuecwGUE80aSAuZLl6a6O21FoXIda-95sbFVs3JYhzg-TxivyC5nT6rupqh1jhOQofeoHdLeWIVcVFZvXJXlWfpyCcrwTfmM43TG5yjy3uECayqIOcV0OjunH3svwFxKohgErC3vbYxR27buycq6o9B9tJWGf-EMfU34TjOLe2b7_7JBTnzTZruLMDwNgyZZJOaEXNMumy6SClhoSuFDPKrBA');"></div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-medium text-slate-900 dark:text-white truncate">Alex Morgan</p>
+<p class="text-xs text-slate-500 dark:text-slate-400 truncate">alex@zenith.co</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col min-w-0 overflow-hidden relative">
+<header class="h-16 flex items-center justify-between px-6 bg-surface-light dark:bg-surface-dark border-b border-border-light dark:border-border-dark flex-shrink-0 z-10">
+<div class="flex items-center gap-4">
+<h2 class="text-xl font-bold text-slate-900 dark:text-white hidden md:block">Leaderboard &amp; Council Evaluation</h2>
+<div class="h-6 w-px bg-slate-200 dark:bg-slate-700 hidden md:block"></div>
+<div class="relative">
+<select class="appearance-none bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white pl-3 pr-10 py-1.5 rounded-lg text-sm font-medium border-none focus:ring-2 focus:ring-primary/50 cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<option>Senior Product Designer</option>
+<option>Backend Engineer (Go)</option>
+<option>Marketing Lead</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-500">
+<span class="material-symbols-outlined text-[18px]">expand_more</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4 flex-1 md:flex-none justify-end">
+<div class="flex items-center gap-2">
+<span class="text-xs text-slate-500 font-medium">Auto-save on</span>
+<span class="material-symbols-outlined text-green-500 text-[16px]">cloud_done</span>
+</div>
+<button class="ml-2 p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-700 dark:hover:text-slate-300 transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+</button>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark p-6 md:p-8 space-y-8">
+<section class="space-y-4">
+<div class="flex justify-between items-end">
+<div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">leaderboard</span>
+                            Candidate Leaderboard
+                        </h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Ranked by AI-aggregated scoring across 5 dimensions.</p>
+</div>
+<button class="text-sm font-medium text-primary hover:text-blue-700 dark:hover:text-blue-400 flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                        Export Report
+                    </button>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark shadow-sm overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm whitespace-nowrap">
+<thead class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400">
+<tr>
+<th class="px-6 py-4 font-semibold w-16">Rank</th>
+<th class="px-6 py-4 font-semibold">Candidate</th>
+<th class="px-6 py-4 font-semibold">Match Score</th>
+<th class="px-6 py-4 font-semibold">Total Score</th>
+<th class="px-6 py-4 font-semibold">Fraud Risk</th>
+<th class="px-6 py-4 font-semibold text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-light dark:divide-border-dark">
+<tr class="hover:bg-blue-50/50 dark:hover:bg-blue-900/10 transition-colors bg-blue-50/30 dark:bg-blue-900/5">
+<td class="px-6 py-4">
+<div class="flex items-center justify-center w-8 h-8 rounded-full bg-yellow-100 text-yellow-700 font-bold dark:bg-yellow-900/30 dark:text-yellow-400 border border-yellow-200 dark:border-yellow-800">1</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img alt="Applicant Avatar" class="w-10 h-10 rounded-full object-cover border-2 border-white dark:border-slate-700 shadow-sm" data-alt="Avatar of a woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3K9qOH6qXbDgS5cRGKWHj85rGC8rcOPhpPlNSui-UjrAKvZscxrkFXIPgrbFxf9VWkZpfNT8hyHStxs0li4R0YM5mC2Y01slxzd8GcmAcF_duVs-ixYpeKqkKdhkDIbJkkH6MrFtgGr5yUpVG9aaBU_GUZvuVWJQsd2BO2NMakACG9VbjLnI8fldQgs3va71ER77JbRJ2WdERA7rcngmXbJqqV7KwPkhAgEYr_pdqdrcH23Cv3Nu-ZAr_a-S2xz374eNmbVuwklk"/>
+<div>
+<div class="font-bold text-slate-900 dark:text-white">Sarah Connor</div>
+<div class="text-xs text-slate-500">Applied 2 days ago</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-24 h-2 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-green-500 w-[96%]"></div>
+</div>
+<span class="font-bold text-green-600 dark:text-green-400">96%</span>
+</div>
+</td>
+<td class="px-6 py-4 font-bold text-slate-900 dark:text-white">92.5 / 100</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 border border-green-200 dark:border-green-800/50">
+<span class="material-symbols-outlined text-[14px]">gpp_good</span>
+                                            Low Risk
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="bg-primary hover:bg-blue-600 text-white px-3 py-1.5 rounded-lg text-xs font-medium transition-colors shadow-sm">View Profile</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center justify-center w-8 h-8 rounded-full bg-slate-100 text-slate-600 font-bold dark:bg-slate-800 dark:text-slate-400">2</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img alt="Applicant Avatar" class="w-10 h-10 rounded-full object-cover border-2 border-white dark:border-slate-700 shadow-sm" data-alt="Avatar of a man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCm12_aHxcIy-2F3fos15kPEHDufwTRPwU18yj7CviToqVb4kDzulpnrbMvHIHDKyElvrv3c2qqIv343wgZmw1inmNKDDr9Ky-2VY8ec7L-sUjuF4jyQMauxrxsWC6KyUenePATEMy_zuhXsxajjfW6xjw78jDsipCXQzI5FFUnE2kYOJydLNb8tCbOFH_o3nXQ6hgNY9Ilo7nRsk5BkYmen5HSI1yyxFYZkN4bHu7jGM97UPo_3vfJyDx6eCZuDtLzwpTxs-srLn8"/>
+<div>
+<div class="font-bold text-slate-900 dark:text-white">Michael Chen</div>
+<div class="text-xs text-slate-500">Applied 1 week ago</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-24 h-2 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[88%]"></div>
+</div>
+<span class="font-bold text-primary">88%</span>
+</div>
+</td>
+<td class="px-6 py-4 font-bold text-slate-900 dark:text-white">85.2 / 100</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 border border-green-200 dark:border-green-800/50">
+<span class="material-symbols-outlined text-[14px]">gpp_good</span>
+                                            Low Risk
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-500 hover:text-primary px-3 py-1.5 rounded-lg text-xs font-medium transition-colors border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">View Profile</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center justify-center w-8 h-8 rounded-full bg-slate-100 text-slate-600 font-bold dark:bg-slate-800 dark:text-slate-400">3</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img alt="Applicant Avatar" class="w-10 h-10 rounded-full object-cover border-2 border-white dark:border-slate-700 shadow-sm" data-alt="Avatar of a woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSSZPxxdyV_GnIdbUKw78JUijmIx-TVG2LvUJbbTPK7WCCycXQGiQFAyFXWmHWH-3gyx8j_VOtGYQcbSF60tq9sBH63KcFZGKGPxXkJZ_OgBCndA3YDZZb9bVSWofPe6eytEESMDNXL7BuD9xTMttMClr4P3CTWMz7hu6fuO58RrpCJQZok6qj8eAxNq1CkMmUg5JyFsssftY14FieY-KFCeTSDaPTczkb6IYo48GV0KYeFYPI2FZjmJcWOxhUQu1mp_nJK533jF4"/>
+<div>
+<div class="font-bold text-slate-900 dark:text-white">Emily Davis</div>
+<div class="text-xs text-slate-500">Applied 3 days ago</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-24 h-2 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-yellow-400 w-[72%]"></div>
+</div>
+<span class="font-bold text-yellow-600 dark:text-yellow-400">72%</span>
+</div>
+</td>
+<td class="px-6 py-4 font-bold text-slate-900 dark:text-white">70.1 / 100</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400 border border-red-200 dark:border-red-800/50">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+                                            High Risk
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-500 hover:text-primary px-3 py-1.5 rounded-lg text-xs font-medium transition-colors border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">View Profile</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section class="space-y-4">
+<div class="flex justify-between items-center">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-purple-600">psychology</span>
+                        Council Evaluation View
+                        <span class="text-xs font-normal text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-full ml-2">Focus: Sarah Connor</span>
+</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+<div class="bg-surface-light dark:bg-surface-dark p-5 rounded-xl border border-border-light dark:border-border-dark shadow-sm flex flex-col h-full hover:border-primary/30 transition-colors">
+<div class="flex justify-between items-start mb-3">
+<div class="bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 p-2 rounded-lg">
+<span class="material-symbols-outlined">code</span>
+</div>
+<span class="font-bold text-xl text-slate-900 dark:text-white">9.5</span>
+</div>
+<h4 class="font-semibold text-slate-900 dark:text-white mb-2">Technical</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed flex-1">
+                            Exceptional mastery of React and TypeScript. Portfolio demonstrates complex state management patterns suitable for our scale.
+                        </p>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-5 rounded-xl border border-border-light dark:border-border-dark shadow-sm flex flex-col h-full hover:border-primary/30 transition-colors">
+<div class="flex justify-between items-start mb-3">
+<div class="bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 p-2 rounded-lg">
+<span class="material-symbols-outlined">chat</span>
+</div>
+<span class="font-bold text-xl text-slate-900 dark:text-white">8.8</span>
+</div>
+<h4 class="font-semibold text-slate-900 dark:text-white mb-2">Communication</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed flex-1">
+                            Articulates design decisions clearly. Response structure in written assessment was concise and persuasive.
+                        </p>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-5 rounded-xl border border-border-light dark:border-border-dark shadow-sm flex flex-col h-full hover:border-primary/30 transition-colors">
+<div class="flex justify-between items-start mb-3">
+<div class="bg-pink-50 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400 p-2 rounded-lg">
+<span class="material-symbols-outlined">diversity_3</span>
+</div>
+<span class="font-bold text-xl text-slate-900 dark:text-white">9.2</span>
+</div>
+<h4 class="font-semibold text-slate-900 dark:text-white mb-2">Culture Fit</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed flex-1">
+                            High alignment with our core value of "Customer Obsession". Shows strong collaborative tendencies.
+                        </p>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-5 rounded-xl border border-border-light dark:border-border-dark shadow-sm flex flex-col h-full hover:border-primary/30 transition-colors">
+<div class="flex justify-between items-start mb-3">
+<div class="bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 p-2 rounded-lg">
+<span class="material-symbols-outlined">trending_up</span>
+</div>
+<span class="font-bold text-xl text-slate-900 dark:text-white">8.5</span>
+</div>
+<h4 class="font-semibold text-slate-900 dark:text-white mb-2">Growth</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed flex-1">
+                            Shows aptitude for leadership, though current experience in mentorship is limited. Quick learner.
+                        </p>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-5 rounded-xl border border-border-light dark:border-border-dark shadow-sm flex flex-col h-full hover:border-primary/30 transition-colors">
+<div class="flex justify-between items-start mb-3">
+<div class="bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 p-2 rounded-lg">
+<span class="material-symbols-outlined">security</span>
+</div>
+<span class="font-bold text-xl text-green-600 dark:text-green-400">Low</span>
+</div>
+<h4 class="font-semibold text-slate-900 dark:text-white mb-2">Risk Analysis</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed flex-1">
+                            No resume discrepancies found. Timeline consistency check passed. Originality score 99%.
+                        </p>
+</div>
+</div>
+</section>
+<section class="space-y-4">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-orange-500">compare_arrows</span>
+                    Smart Comparison Tool
+                </h3>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark shadow-sm overflow-hidden">
+<div class="grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-border-light dark:divide-border-dark relative">
+<div class="hidden lg:flex absolute left-1/2 top-8 -ml-5 z-10">
+<div class="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark text-slate-400 font-bold rounded-full w-10 h-10 flex items-center justify-center shadow-sm text-xs">
+                                VS
+                            </div>
+</div>
+<div class="p-6">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-3">
+<div class="relative">
+<img alt="Applicant Avatar" class="w-12 h-12 rounded-full object-cover border-2 border-primary" data-alt="Avatar of a woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3K9qOH6qXbDgS5cRGKWHj85rGC8rcOPhpPlNSui-UjrAKvZscxrkFXIPgrbFxf9VWkZpfNT8hyHStxs0li4R0YM5mC2Y01slxzd8GcmAcF_duVs-ixYpeKqkKdhkDIbJkkH6MrFtgGr5yUpVG9aaBU_GUZvuVWJQsd2BO2NMakACG9VbjLnI8fldQgs3va71ER77JbRJ2WdERA7rcngmXbJqqV7KwPkhAgEYr_pdqdrcH23Cv3Nu-ZAr_a-S2xz374eNmbVuwklk"/>
+<div class="absolute -bottom-1 -right-1 bg-primary text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">#1</div>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white">Sarah Connor</h4>
+<p class="text-xs text-slate-500">Senior Product Designer</p>
+</div>
+</div>
+<div class="text-right">
+<div class="text-2xl font-bold text-primary">92.5</div>
+<div class="text-xs text-slate-500">Total Score</div>
+</div>
+</div>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
+<span>Experience Match</span>
+<span>98%</span>
+</div>
+<div class="h-2 w-full bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[98%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
+<span>Skill Coverage</span>
+<span>94%</span>
+</div>
+<div class="h-2 w-full bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[94%]"></div>
+</div>
+</div>
+<div class="bg-blue-50 dark:bg-blue-900/10 p-4 rounded-lg mt-4">
+<h5 class="text-xs font-bold text-blue-700 dark:text-blue-400 mb-2 uppercase tracking-wide">AI Summary</h5>
+<p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                                        Sarah represents the safer, more experienced choice. Her technical scores are in the top 1% of applicants. Ideal for immediate impact on complex projects.
+                                    </p>
+</div>
+</div>
+</div>
+<div class="p-6 bg-slate-50/50 dark:bg-slate-800/20">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-3">
+<div class="relative">
+<img alt="Applicant Avatar" class="w-12 h-12 rounded-full object-cover border-2 border-transparent grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" data-alt="Avatar of a man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCm12_aHxcIy-2F3fos15kPEHDufwTRPwU18yj7CviToqVb4kDzulpnrbMvHIHDKyElvrv3c2qqIv343wgZmw1inmNKDDr9Ky-2VY8ec7L-sUjuF4jyQMauxrxsWC6KyUenePATEMy_zuhXsxajjfW6xjw78jDsipCXQzI5FFUnE2kYOJydLNb8tCbOFH_o3nXQ6hgNY9Ilo7nRsk5BkYmen5HSI1yyxFYZkN4bHu7jGM97UPo_3vfJyDx6eCZuDtLzwpTxs-srLn8"/>
+<div class="absolute -bottom-1 -right-1 bg-slate-400 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">#2</div>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h4 class="font-bold text-slate-900 dark:text-white">Michael Chen</h4>
+<span class="material-symbols-outlined text-[16px] text-slate-400 cursor-pointer">expand_more</span>
+</div>
+<p class="text-xs text-slate-500">Senior Product Designer</p>
+</div>
+</div>
+<div class="text-right">
+<div class="text-2xl font-bold text-slate-700 dark:text-slate-300">85.2</div>
+<div class="text-xs text-slate-500">Total Score</div>
+</div>
+</div>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
+<span>Experience Match</span>
+<span>85%</span>
+</div>
+<div class="h-2 w-full bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-slate-400 dark:bg-slate-500 w-[85%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
+<span>Skill Coverage</span>
+<span>90%</span>
+</div>
+<div class="h-2 w-full bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-slate-400 dark:bg-slate-500 w-[90%]"></div>
+</div>
+</div>
+<div class="bg-slate-100 dark:bg-slate-800 p-4 rounded-lg mt-4">
+<h5 class="text-xs font-bold text-slate-700 dark:text-slate-400 mb-2 uppercase tracking-wide">AI Summary</h5>
+<p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                                        Michael shows immense growth potential but lacks specific domain experience in Fintech. He would require a longer onboarding period compared to Sarah.
+                                    </p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/50 p-4 text-center border-t border-border-light dark:border-border-dark">
+<button class="text-sm font-medium text-primary hover:text-blue-700 dark:hover:text-blue-400">View Full Detailed Comparison Report</button>
+</div>
+</div>
+</section>
+</div>
+</main>
+
+</body></html>

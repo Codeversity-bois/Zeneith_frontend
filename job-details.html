@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Job Details - Zenith</title>
+    <link rel="icon" type="image/png" href="/logo_zeneith.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/src/styles/main.css">
+</head>
+
+<body class="bg-background-light font-display h-screen flex overflow-hidden">
+    <div id="app-container" class="w-full h-full flex">
+        <div id="sidebar-container"></div>
+        <div class="flex-1 flex flex-col min-w-0">
+            <div id="header-container"></div>
+            <main class="flex-1 overflow-y-auto p-6 md:p-8">
+                <div class="max-w-4xl mx-auto">
+                    <button onclick="history.back()"
+                        class="flex items-center gap-2 text-slate-500 hover:text-slate-800 mb-6 font-medium transition-colors">
+                        <span class="material-symbols-outlined text-sm">arrow_back</span> Back to Jobs
+                    </button>
+
+                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                        <!-- Hero Header -->
+                        <div class="relative bg-slate-900 h-48">
+                            <div class="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-purple-900/80"></div>
+                            <div class="absolute bottom-0 left-0 p-8 w-full flex items-end justify-between">
+                                <div class="flex items-center gap-6">
+                                    <div
+                                        class="w-20 h-20 bg-white rounded-xl flex items-center justify-center text-3xl font-bold text-slate-900 shadow-lg">
+                                        <span id="job-logo">L</span>
+                                    </div>
+                                    <div class="text-white">
+                                        <h1 class="text-2xl font-bold" id="job-title">Job Title</h1>
+                                        <p class="text-slate-200 text-lg" id="job-company">Company Name</p>
+                                    </div>
+                                </div>
+                                <button id="apply-btn"
+                                    class="bg-primary hover:bg-blue-600 text-white px-8 py-3 rounded-lg font-bold shadow-lg shadow-blue-500/30 transition-all transform hover:-translate-y-1">
+                                    Apply Now
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="p-8">
+                            <div class="grid grid-cols-3 gap-6 mb-8">
+                                <div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
+                                    <p class="text-xs text-slate-500 uppercase font-semibold mb-1">Department</p>
+                                    <p class="font-medium text-slate-900" id="job-dept">Engineering</p>
+                                </div>
+                                <div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
+                                    <p class="text-xs text-slate-500 uppercase font-semibold mb-1">Location</p>
+                                    <p class="font-medium text-slate-900" id="job-location">Remote</p>
+                                </div>
+                                <div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
+                                    <p class="text-xs text-slate-500 uppercase font-semibold mb-1">Employment Type</p>
+                                    <p class="font-medium text-slate-900" id="job-type">Full-time</p>
+                                </div>
+                            </div>
+
+                            <div class="prose max-w-none text-slate-600">
+                                <h3 class="text-lg font-bold text-slate-900 mb-3">About the Role</h3>
+                                <p class="mb-6" id="job-description">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                </p>
+
+                                <h3 class="text-lg font-bold text-slate-900 mb-3">Requirements</h3>
+                                <ul class="list-disc pl-5 space-y-2 mb-6" id="job-requirements">
+                                    <li>5+ years of experience in software development</li>
+                                    <li>Strong proficiency in JavaScript and Python</li>
+                                    <li>Experience with cloud platforms (AWS, GCP)</li>
+                                    <li>Excellent communication skills</li>
+                                </ul>
+
+                                <h3 class="text-lg font-bold text-slate-900 mb-3">Benefits</h3>
+                                <ul class="list-disc pl-5 space-y-2">
+                                    <li>Competitive salary and equity package</li>
+                                    <li>Comprehensive health, dental, and vision insurance</li>
+                                    <li>Unlimited PTO and flexible work hours</li>
+                                    <li>Remote-first culture</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="/src/js/state-manager.js" type="module"></script>
+    <script src="/src/js/components.js" type="module"></script>
+    <script type="module">
+        document.addEventListener('DOMContentLoaded', function () {
+            // Basic auth check
+            if (!window.StateManager) {
+                window.location.href = '/login.html';
+                return;
+            }
+
+            const role = window.StateManager.getUserRole();
+            document.getElementById('sidebar-container').innerHTML = window.Components.createSidebar(role || 'candidate', 'jobs'); // Default active item
+            document.getElementById('header-container').innerHTML = window.Components.createHeader('Job Details', false);
+            window.Components.populateUserProfile();
+            window.Components.updateNotificationBadge();
+
+            // Get Job ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const jobId = urlParams.get('id');
+
+            // Mock fetch job details - In real app use: await apiClient.get(`/api/v1/jobs/${jobId}`);
+            if (jobId) {
+                // Determine mock data based on ID for demo purposes
+                const mockJobs = {
+                    '1': { title: 'Product Designer', company: 'Stripe', dept: 'Design', type: 'Full-time', location: 'Remote', description: 'Design things.', requirements: ['Figma', 'UI/UX'] },
+                    '2': { title: 'UX Researcher', company: 'Spotify', dept: 'Research', type: 'Contract', location: 'New York', description: 'Research things.', requirements: ['User Testing', 'Data Analysis'] }
+                };
+
+                const job = mockJobs[jobId] || mockJobs['1']; // Fallback
+
+                document.getElementById('job-title').textContent = job.title;
+                document.getElementById('job-company').textContent = job.company;
+                document.getElementById('job-logo').textContent = job.company[0];
+                document.getElementById('job-dept').textContent = job.dept;
+                document.getElementById('job-location').textContent = job.location;
+                document.getElementById('job-type').textContent = job.type;
+
+                // Update Apply Button state
+                const applyBtn = document.getElementById('apply-btn');
+                applyBtn.onclick = () => {
+                    applyBtn.textContent = 'Applying...';
+                    applyBtn.disabled = true;
+                    setTimeout(() => {
+                        applyBtn.textContent = 'Applied';
+                        applyBtn.classList.remove('bg-primary', 'hover:bg-blue-600');
+                        applyBtn.classList.add('bg-green-600', 'cursor-default');
+                        window.Components.showToast('Application submitted successfully!', 'success');
+                    }, 1500);
+                };
+            }
+        });
+    </script>
+</body>
+
+</html>

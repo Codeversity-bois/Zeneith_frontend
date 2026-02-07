@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Candidate Pipeline - Zenith</title>
+    <link rel="icon" type="image/png" href="/logo_zeneith.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/src/styles/main.css">
+    <style>
+        .pipeline-column {
+            min-height: calc(100vh - 200px);
+        }
+    </style>
+</head>
+
+<body class="bg-background-light font-display h-screen flex overflow-hidden">
+    <div id="app-container" class="w-full h-full flex">
+        <div id="sidebar-container"></div>
+        <div class="flex-1 flex flex-col min-w-0">
+            <div id="header-container"></div>
+            <main class="flex-1 overflow-x-auto p-6 md:p-8">
+                <div class="flex gap-6 min-w-max pb-4">
+                    <!-- Setup columns based on API stages: Applied, Screening, Assessment, Interview, Offer, Rejected -->
+
+                    <div class="w-80 flex flex-col bg-slate-50 rounded-xl border border-slate-200 h-full">
+                        <div
+                            class="p-4 border-b border-slate-200 flex justify-between items-center bg-white rounded-t-xl sticky top-0 z-10">
+                            <h3 class="font-bold text-slate-700">Applied</h3>
+                            <span class="bg-slate-100 text-slate-600 text-xs font-semibold px-2 py-0.5 rounded-full"
+                                id="count-applied">0</span>
+                        </div>
+                        <div class="p-3 space-y-3 overflow-y-auto pipeline-column" id="col-Applied">
+                            <!-- Cards go here -->
+                        </div>
+                    </div>
+
+                    <div class="w-80 flex flex-col bg-slate-50 rounded-xl border border-slate-200 h-full">
+                        <div
+                            class="p-4 border-b border-slate-200 flex justify-between items-center bg-white rounded-t-xl sticky top-0 z-10">
+                            <h3 class="font-bold text-indigo-700">Screening</h3>
+                            <span class="bg-indigo-50 text-indigo-700 text-xs font-semibold px-2 py-0.5 rounded-full"
+                                id="count-screening">0</span>
+                        </div>
+                        <div class="p-3 space-y-3 overflow-y-auto pipeline-column" id="col-Screening"></div>
+                    </div>
+
+                    <div class="w-80 flex flex-col bg-slate-50 rounded-xl border border-slate-200 h-full">
+                        <div
+                            class="p-4 border-b border-slate-200 flex justify-between items-center bg-white rounded-t-xl sticky top-0 z-10">
+                            <h3 class="font-bold text-purple-700">Assessment</h3>
+                            <span class="bg-purple-50 text-purple-700 text-xs font-semibold px-2 py-0.5 rounded-full"
+                                id="count-assessment">0</span>
+                        </div>
+                        <div class="p-3 space-y-3 overflow-y-auto pipeline-column" id="col-Assessment"></div>
+                    </div>
+
+                    <div class="w-80 flex flex-col bg-slate-50 rounded-xl border border-slate-200 h-full">
+                        <div
+                            class="p-4 border-b border-slate-200 flex justify-between items-center bg-white rounded-t-xl sticky top-0 z-10">
+                            <h3 class="font-bold text-orange-700">Interview</h3>
+                            <span class="bg-orange-50 text-orange-700 text-xs font-semibold px-2 py-0.5 rounded-full"
+                                id="count-interview">0</span>
+                        </div>
+                        <div class="p-3 space-y-3 overflow-y-auto pipeline-column" id="col-Interview"></div>
+                    </div>
+
+                    <div class="w-80 flex flex-col bg-slate-50 rounded-xl border border-slate-200 h-full">
+                        <div
+                            class="p-4 border-b border-slate-200 flex justify-between items-center bg-white rounded-t-xl sticky top-0 z-10">
+                            <h3 class="font-bold text-green-700">Offer</h3>
+                            <span class="bg-green-50 text-green-700 text-xs font-semibold px-2 py-0.5 rounded-full"
+                                id="count-offer">0</span>
+                        </div>
+                        <div class="p-3 space-y-3 overflow-y-auto pipeline-column" id="col-Offer"></div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="/src/js/state-manager.js" type="module"></script>
+    <script src="/src/js/components.js" type="module"></script>
+    <script type="module">
+        document.addEventListener('DOMContentLoaded', function () {
+            if (!window.StateManager.isAuthenticated() || window.StateManager.getUserRole() !== 'recruiter') {
+                window.location.href = '/login.html';
+                return;
+            }
+
+            document.getElementById('sidebar-container').innerHTML = window.Components.createSidebar('recruiter', 'candidates');
+            document.getElementById('header-container').innerHTML = window.Components.createHeader('Candidate Pipeline', true);
+            window.Components.populateUserProfile();
+            window.Components.updateNotificationBadge();
+
+            // Mock Data - In real app, fetch from /api/v1/hiring/candidates
+            const candidates = [
+                { id: 1, name: 'Alice Smith', role: 'Frontend Dev', stage: 'Applied', score: 85 },
+                { id: 2, name: 'Bob Jones', role: 'Backend Dev', stage: 'Screening', score: 92 },
+                { id: 3, name: 'Charlie Day', role: 'Product Manager', stage: 'Interview', score: 78 },
+                { id: 4, name: 'Diana Prince', role: 'Security Engineer', stage: 'Offer', score: 98 },
+                { id: 5, name: 'Evan Wright', role: 'Frontend Dev', stage: 'Assessment', score: 88 },
+            ];
+
+            function renderCandidateCard(candidate) {
+                return `
+                    <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm hover:shadow-md transition-shadow cursor-pointer group">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="font-bold text-slate-900 group-hover:text-primary transition-colors">${candidate.name}</h4>
+                            <span class="text-xs font-bold text-slate-500">${candidate.score}%</span>
+                        </div>
+                        <p class="text-xs text-slate-500 mb-3">${candidate.role}</p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex -space-x-2">
+                                <div class="w-6 h-6 rounded-full bg-slate-200 border-2 border-white flex items-center justify-center text-[10px] text-slate-600 font-bold">${candidate.name[0]}</div>
+                            </div>
+                            <span class="material-symbols-outlined text-slate-400 text-sm hover:text-slate-600">more_horiz</span>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Distribute candidates
+            const counts = { Applied: 0, Screening: 0, Assessment: 0, Interview: 0, Offer: 0 };
+
+            candidates.forEach(c => {
+                const col = document.getElementById(`col-${c.stage}`);
+                if (col) {
+                    col.innerHTML += renderCandidateCard(c);
+                    counts[c.stage]++;
+                }
+            });
+
+            // Update counts
+            Object.keys(counts).forEach(stage => {
+                const el = document.getElementById(`count-${stage.toLowerCase()}`);
+                if (el) el.textContent = counts[stage];
+            });
+        });
+    </script>
+</body>
+
+</html>

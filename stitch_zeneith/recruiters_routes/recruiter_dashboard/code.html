@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Zenith Recruiter Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2463eb",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111621",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1e2433",
+                        "border-light": "#e7ebf3",
+                        "border-dark": "#2d3748",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display h-screen flex overflow-hidden selection:bg-primary/20">
+<aside class="w-64 flex-shrink-0 border-r border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark flex flex-col justify-between transition-colors duration-200">
+<div class="flex flex-col h-full">
+<div class="h-16 flex items-center gap-3 px-6 border-b border-border-light dark:border-border-dark">
+<div class="bg-primary/10 text-primary p-1.5 rounded-lg">
+<span class="material-symbols-outlined text-[24px]">all_inclusive</span>
+</div>
+<div>
+<h1 class="text-slate-900 dark:text-white text-base font-bold leading-none">Zenith</h1>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium mt-0.5">Recruiter Platform</p>
+</div>
+</div>
+<nav class="flex-1 overflow-y-auto py-6 px-3 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary font-medium group transition-colors" href="#">
+<span class="material-symbols-outlined fill-1">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white font-medium group transition-colors" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span>Leaderboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white font-medium group transition-colors" href="#">
+<span class="material-symbols-outlined">work</span>
+<span>Job Postings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white font-medium group transition-colors" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span>Assessments</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white font-medium group transition-colors" href="#">
+<span class="material-symbols-outlined">video_camera_front</span>
+<span>Interviews</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white font-medium group transition-colors" href="#">
+<span class="material-symbols-outlined">view_kanban</span>
+<span>Pipeline</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white font-medium group transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span>Schedule</span>
+</a>
+<div class="pt-4 mt-4 border-t border-border-light dark:border-border-dark">
+<p class="px-3 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Team</p>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white font-medium group transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span>Candidates</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white font-medium group transition-colors" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span>Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white font-medium group transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</div>
+</nav>
+<div class="p-4 border-t border-border-light dark:border-border-dark">
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer transition-colors">
+<div class="w-10 h-10 rounded-full bg-cover bg-center" data-alt="Portrait of a smiling man with short brown hair" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuChn9_oFqf90ani2bWb7pk3FyW2VC8ImrnNe5D24whAThv7GZ1hjOWuecwGUE80aSAuZLl6a6O21FoXIda-95sbFVs3JYhzg-TxivyC5nT6rupqh1jhOQofeoHdLeWIVcVFZvXJXlWfpyCcrwTfmM43TG5yjy3uECayqIOcV0OjunH3svwFxKohgErC3vbYxR27buycq6o9B9tJWGf-EMfU34TjOLe2b7_7JBTnzTZruLMDwNgyZZJOaEXNMumy6SClhoSuFDPKrBA');"></div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-medium text-slate-900 dark:text-white truncate">Alex Morgan</p>
+<p class="text-xs text-slate-500 dark:text-slate-400 truncate">alex@zenith.co</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col min-w-0 overflow-hidden relative">
+<header class="h-16 flex items-center justify-between px-6 bg-surface-light dark:bg-surface-dark border-b border-border-light dark:border-border-dark flex-shrink-0 z-10">
+<h2 class="text-xl font-bold text-slate-900 dark:text-white hidden md:block">Dashboard Overview</h2>
+<div class="flex items-center gap-4 flex-1 md:flex-none justify-end">
+<div class="relative w-full max-w-xs md:max-w-md hidden sm:block">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</span>
+<input class="block w-full pl-10 pr-3 py-2 border-none rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/50 sm:text-sm h-10" placeholder="Search jobs, candidates..." type="text"/>
+</div>
+<button class="p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-700 dark:hover:text-slate-300 transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+</button>
+<button class="hidden sm:flex items-center gap-2 bg-primary hover:bg-blue-700 text-white px-4 h-10 rounded-lg text-sm font-bold transition-colors shadow-sm shadow-blue-500/30">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                Create Job
+            </button>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark">
+<div class="flex flex-col xl:flex-row min-h-full">
+<div class="flex-1 p-6 md:p-8 space-y-6">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+<div class="bg-surface-light dark:bg-surface-dark p-4 xl:p-5 rounded-xl border border-border-light dark:border-border-dark shadow-sm">
+<div class="flex justify-between items-start mb-3">
+<div class="bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 p-2 rounded-lg">
+<span class="material-symbols-outlined">briefcase_meal</span>
+</div>
+<span class="flex items-center text-xs font-medium text-green-600 bg-green-50 dark:bg-green-900/30 px-2 py-1 rounded">
+                                +2
+                            </span>
+</div>
+<h3 class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wider">Active Jobs</h3>
+<p class="text-2xl font-bold text-slate-900 dark:text-white mt-1">12</p>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-4 xl:p-5 rounded-xl border border-border-light dark:border-border-dark shadow-sm">
+<div class="flex justify-between items-start mb-3">
+<div class="bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 p-2 rounded-lg">
+<span class="material-symbols-outlined">description</span>
+</div>
+<span class="flex items-center text-xs font-medium text-green-600 bg-green-50 dark:bg-green-900/30 px-2 py-1 rounded">
+                                +124
+                            </span>
+</div>
+<h3 class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wider">Total Applications</h3>
+<p class="text-2xl font-bold text-slate-900 dark:text-white mt-1">845</p>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-4 xl:p-5 rounded-xl border border-border-light dark:border-border-dark shadow-sm">
+<div class="flex justify-between items-start mb-3">
+<div class="bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 p-2 rounded-lg">
+<span class="material-symbols-outlined">stars</span>
+</div>
+<span class="flex items-center text-xs font-medium text-green-600 bg-green-50 dark:bg-green-900/30 px-2 py-1 rounded">
+                                +15%
+                            </span>
+</div>
+<h3 class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wider">Shortlisted</h3>
+<p class="text-2xl font-bold text-slate-900 dark:text-white mt-1">45</p>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-4 xl:p-5 rounded-xl border border-border-light dark:border-border-dark shadow-sm">
+<div class="flex justify-between items-start mb-3">
+<div class="bg-orange-50 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 p-2 rounded-lg">
+<span class="material-symbols-outlined">video_chat</span>
+</div>
+<span class="flex items-center text-xs font-medium text-slate-500 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">
+                                0%
+                            </span>
+</div>
+<h3 class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wider">Interviews this Week</h3>
+<p class="text-2xl font-bold text-slate-900 dark:text-white mt-1">28</p>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-4 xl:p-5 rounded-xl border border-border-light dark:border-border-dark shadow-sm">
+<div class="flex justify-between items-start mb-3">
+<div class="bg-pink-50 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400 p-2 rounded-lg">
+<span class="material-symbols-outlined">handshake</span>
+</div>
+<span class="flex items-center text-xs font-medium text-green-600 bg-green-50 dark:bg-green-900/30 px-2 py-1 rounded">
+                                +2
+                            </span>
+</div>
+<h3 class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wider">Offers Extended</h3>
+<p class="text-2xl font-bold text-slate-900 dark:text-white mt-1">6</p>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark shadow-sm p-6">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Pipeline Overview</h3>
+<button class="text-sm font-medium text-primary hover:text-blue-700 dark:hover:text-blue-400 flex items-center gap-1">
+                            Full Report <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="relative pt-2 pb-4">
+<div class="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-0 relative">
+<div class="relative z-10 flex flex-col items-center md:items-start group">
+<div class="w-full flex items-center mb-2">
+<span class="w-3 h-3 rounded-full bg-blue-500 mr-2"></span>
+<span class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Applied</span>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/50 w-full p-4 rounded-lg border border-border-light dark:border-border-dark relative overflow-hidden group-hover:border-blue-200 dark:group-hover:border-blue-900 transition-colors">
+<div class="flex justify-between items-end">
+<span class="text-2xl font-bold text-slate-900 dark:text-white">845</span>
+<span class="text-xs font-medium text-slate-400 mb-1">100%</span>
+</div>
+<div class="absolute bottom-0 left-0 h-1 bg-blue-500 w-full"></div>
+</div>
+<div class="hidden md:block absolute top-1/2 -right-3 z-20 text-slate-300 dark:text-slate-600 transform translate-y-2">
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+<div class="relative z-10 flex flex-col items-center md:items-start md:pl-4 group">
+<div class="w-full flex items-center mb-2">
+<span class="w-3 h-3 rounded-full bg-indigo-500 mr-2"></span>
+<span class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Screening</span>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/50 w-full p-4 rounded-lg border border-border-light dark:border-border-dark relative overflow-hidden group-hover:border-indigo-200 dark:group-hover:border-indigo-900 transition-colors">
+<div class="flex justify-between items-end">
+<span class="text-2xl font-bold text-slate-900 dark:text-white">320</span>
+<span class="text-xs font-medium text-slate-400 mb-1">38%</span>
+</div>
+<div class="absolute bottom-0 left-0 h-1 bg-indigo-500 w-[38%]"></div>
+</div>
+<div class="hidden md:block absolute top-1/2 -right-3 z-20 text-slate-300 dark:text-slate-600 transform translate-y-2">
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+<div class="relative z-10 flex flex-col items-center md:items-start md:pl-4 group">
+<div class="w-full flex items-center mb-2">
+<span class="w-3 h-3 rounded-full bg-purple-500 mr-2"></span>
+<span class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Assessment</span>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/50 w-full p-4 rounded-lg border border-border-light dark:border-border-dark relative overflow-hidden group-hover:border-purple-200 dark:group-hover:border-purple-900 transition-colors">
+<div class="flex justify-between items-end">
+<span class="text-2xl font-bold text-slate-900 dark:text-white">150</span>
+<span class="text-xs font-medium text-slate-400 mb-1">18%</span>
+</div>
+<div class="absolute bottom-0 left-0 h-1 bg-purple-500 w-[18%]"></div>
+</div>
+<div class="hidden md:block absolute top-1/2 -right-3 z-20 text-slate-300 dark:text-slate-600 transform translate-y-2">
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+<div class="relative z-10 flex flex-col items-center md:items-start md:pl-4 group">
+<div class="w-full flex items-center mb-2">
+<span class="w-3 h-3 rounded-full bg-orange-500 mr-2"></span>
+<span class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Interview</span>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/50 w-full p-4 rounded-lg border border-border-light dark:border-border-dark relative overflow-hidden group-hover:border-orange-200 dark:group-hover:border-orange-900 transition-colors">
+<div class="flex justify-between items-end">
+<span class="text-2xl font-bold text-slate-900 dark:text-white">45</span>
+<span class="text-xs font-medium text-slate-400 mb-1">5%</span>
+</div>
+<div class="absolute bottom-0 left-0 h-1 bg-orange-500 w-[5%]"></div>
+</div>
+<div class="hidden md:block absolute top-1/2 -right-3 z-20 text-slate-300 dark:text-slate-600 transform translate-y-2">
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+<div class="relative z-10 flex flex-col items-center md:items-start md:pl-4 group">
+<div class="w-full flex items-center mb-2">
+<span class="w-3 h-3 rounded-full bg-green-500 mr-2"></span>
+<span class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Offer</span>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/50 w-full p-4 rounded-lg border border-border-light dark:border-border-dark relative overflow-hidden group-hover:border-green-200 dark:group-hover:border-green-900 transition-colors">
+<div class="flex justify-between items-end">
+<span class="text-2xl font-bold text-slate-900 dark:text-white">6</span>
+<span class="text-xs font-medium text-slate-400 mb-1">0.7%</span>
+</div>
+<div class="absolute bottom-0 left-0 h-1 bg-green-500 w-[100%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark shadow-sm overflow-hidden">
+<div class="px-6 py-5 border-b border-border-light dark:border-border-dark flex justify-between items-center flex-wrap gap-4">
+<div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Active Jobs</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Manage your ongoing recruitment processes.</p>
+</div>
+<button class="text-sm font-medium text-primary hover:text-blue-700 dark:hover:text-blue-400">View All Jobs</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm whitespace-nowrap">
+<thead class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400">
+<tr>
+<th class="px-6 py-4 font-semibold">Job Title</th>
+<th class="px-6 py-4 font-semibold">Department</th>
+<th class="px-6 py-4 font-semibold">Posted Date</th>
+<th class="px-6 py-4 font-semibold">Applicants</th>
+<th class="px-6 py-4 font-semibold">Stage</th>
+<th class="px-6 py-4 font-semibold">Status</th>
+<th class="px-6 py-4 font-semibold text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-light dark:divide-border-dark">
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 font-medium text-slate-900 dark:text-white">Senior Product Designer</td>
+<td class="px-6 py-4 text-slate-500 dark:text-slate-400">Design</td>
+<td class="px-6 py-4 text-slate-500 dark:text-slate-400">Oct 24, 2023</td>
+<td class="px-6 py-4">
+<div class="flex -space-x-2">
+<img alt="Applicant Avatar" class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800" data-alt="Avatar of a woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3K9qOH6qXbDgS5cRGKWHj85rGC8rcOPhpPlNSui-UjrAKvZscxrkFXIPgrbFxf9VWkZpfNT8hyHStxs0li4R0YM5mC2Y01slxzd8GcmAcF_duVs-ixYpeKqkKdhkDIbJkkH6MrFtgGr5yUpVG9aaBU_GUZvuVWJQsd2BO2NMakACG9VbjLnI8fldQgs3va71ER77JbRJ2WdERA7rcngmXbJqqV7KwPkhAgEYr_pdqdrcH23Cv3Nu-ZAr_a-S2xz374eNmbVuwklk"/>
+<img alt="Applicant Avatar" class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800" data-alt="Avatar of a man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCm12_aHxcIy-2F3fos15kPEHDufwTRPwU18yj7CviToqVb4kDzulpnrbMvHIHDKyElvrv3c2qqIv343wgZmw1inmNKDDr9Ky-2VY8ec7L-sUjuF4jyQMauxrxsWC6KyUenePATEMy_zuhXsxajjfW6xjw78jDsipCXQzI5FFUnE2kYOJydLNb8tCbOFH_o3nXQ6hgNY9Ilo7nRsk5BkYmen5HSI1yyxFYZkN4bHu7jGM97UPo_3vfJyDx6eCZuDtLzwpTxs-srLn8"/>
+<img alt="Applicant Avatar" class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800" data-alt="Avatar of a man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaIJqjbi8DVtGDNfTuSgbm3jF7uF5FcG97JPW2EUbFjzFPqEcBVAo2LVAtgyjFghUQqTiTPN0n8QN70WlPPH9DcElE-Qa_iOiBdLVEvX2LDnBn10qf6NpIk63KOEeji90VjuChfgzWCcJ9qkXBdv0AJ5hcWEMufA0Gg2gnrEE1soM-J7fCE5_N-RTfAgHm4PdBOZYXQNDqVsyRjkbzHD3DvQLNCLeaW62BxfTSxJWkUSbQgXQBokkXeFC24W0S2PDOx6xIiBtP990"/>
+<div class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800 bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-xs font-medium text-slate-600 dark:text-slate-300">+12</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-400">
+                                            Interviewing
+                                        </span>
+</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1.5 text-xs font-medium text-green-600 dark:text-green-400">
+<span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                            Active
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 font-medium text-slate-900 dark:text-white">Backend Engineer (Go)</td>
+<td class="px-6 py-4 text-slate-500 dark:text-slate-400">Engineering</td>
+<td class="px-6 py-4 text-slate-500 dark:text-slate-400">Oct 20, 2023</td>
+<td class="px-6 py-4">
+<div class="flex -space-x-2">
+<img alt="Applicant Avatar" class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800" data-alt="Avatar of a man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwGrIPmKhuh8zPCIYJtAIY_RGddLl97cOIoCMqndO-vW4pyOPep-Mp-beaa9omuVE50FHkyUYU0mHpGBRcMc24m6MKN4VAMNWAkXFhUczthOPAP-XqTlIvP08xrdff8QGRMh1nZSiRoKU7u3loHkSTIDvM0guzaSRcSqVaaVkq-Kfe8sgrlz6tdL21f5QcQSFGU-b4D0SiA3itXAOCs9rKvY51Im_2c43Lmy3gje8d3Hg9JZmkulJwPFXDymLyoh33bf9n3RnzM1w"/>
+<div class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800 bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-xs font-medium text-slate-600 dark:text-slate-300">+4</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400">
+                                            Screening
+                                        </span>
+</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1.5 text-xs font-medium text-green-600 dark:text-green-400">
+<span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                            Active
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 font-medium text-slate-900 dark:text-white">Marketing Lead</td>
+<td class="px-6 py-4 text-slate-500 dark:text-slate-400">Marketing</td>
+<td class="px-6 py-4 text-slate-500 dark:text-slate-400">Oct 18, 2023</td>
+<td class="px-6 py-4">
+<div class="flex -space-x-2">
+<img alt="Applicant Avatar" class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800" data-alt="Avatar of a woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSSZPxxdyV_GnIdbUKw78JUijmIx-TVG2LvUJbbTPK7WCCycXQGiQFAyFXWmHWH-3gyx8j_VOtGYQcbSF60tq9sBH63KcFZGKGPxXkJZ_OgBCndA3YDZZb9bVSWofPe6eytEESMDNXL7BuD9xTMttMClr4P3CTWMz7hu6fuO58RrpCJQZok6qj8eAxNq1CkMmUg5JyFsssftY14FieY-KFCeTSDaPTczkb6IYo48GV0KYeFYPI2FZjmJcWOxhUQu1mp_nJK533jF4"/>
+<img alt="Applicant Avatar" class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800" data-alt="Avatar of a woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBa5Keql9q-lwytvB5ia8GWWNfgN2bNcbHlHZE5WwIsNuJ8qCAPjmVNh5Iguj8fAVzFxE1Bs7PdTb5z70aqeo6OZpMENcDPR8N6H5dopUf_ImdXq-sEJQ6k-excXsTYW-_-jwifC6hzP7XCDSKjYz2GjlsPNFHy2tRwId11q_d_qOO-xOzwxaZ5PN5PRqVrl7BVAkow9eoSqIzqha8U3oCO4Afjf2a8NYNwJHZLT14BvfNVRj5aD_LmXO97tKGoDjuHav9bWWtZhL8"/>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400">
+                                            Offer
+                                        </span>
+</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1.5 text-xs font-medium text-green-600 dark:text-green-400">
+<span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                            Active
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 font-medium text-slate-900 dark:text-white">HR Coordinator</td>
+<td class="px-6 py-4 text-slate-500 dark:text-slate-400">People</td>
+<td class="px-6 py-4 text-slate-500 dark:text-slate-400">Oct 15, 2023</td>
+<td class="px-6 py-4">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800 bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-xs font-medium text-slate-600 dark:text-slate-300">0</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800 dark:bg-slate-700 dark:text-slate-400">
+                                            Draft
+                                        </span>
+</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1.5 text-xs font-medium text-yellow-600 dark:text-yellow-500">
+<span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span>
+                                            Paused
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<aside class="w-full xl:w-96 bg-surface-light dark:bg-surface-dark border-t xl:border-t-0 xl:border-l border-border-light dark:border-border-dark flex-shrink-0">
+<div class="p-6 h-full flex flex-col">
+<div class="flex items-center justify-between mb-8">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Recent Activity</h3>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto pr-2 relative">
+<div class="absolute left-[19px] top-2 bottom-0 w-0.5 bg-slate-100 dark:bg-slate-800 z-0"></div>
+<div class="space-y-8">
+<div class="relative pl-14 group">
+<div class="absolute left-0 top-0 z-10">
+<div class="relative">
+<img alt="User avatar" class="w-10 h-10 rounded-full object-cover border-4 border-surface-light dark:border-surface-dark" data-alt="Avatar of a woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDNzToLM057DCNGzLrqbfZ5Vk-5AzX4E3KHbmzKvtitbURLuCHB78D4_9sfnzQOUlNHw1Uc-dpSacqotYgW8IU2iTDFp9x8jXK9dq-98vL8Hztx_7rKG5etpS1vPoRzPB2uqgsR-31wSig9fXUyc5-LgBvP66bLp86exX0HJXrp3lSfB8qGihPAZWrC1M3amiEGDYfSjDgMyyasPLCsAiKEm_V3C4vGD0rBVjOpB5vXqD_eh2R_PTLEnQNBPTMsguWIQCNZ5cmYG4"/>
+<div class="absolute -bottom-1 -right-1 bg-white dark:bg-slate-900 rounded-full p-0.5">
+<div class="bg-blue-500 rounded-full w-4 h-4 flex items-center justify-center border-2 border-white dark:border-slate-900">
+<span class="material-symbols-outlined text-white text-[8px]">edit</span>
+</div>
+</div>
+</div>
+</div>
+<div>
+<p class="text-sm text-slate-900 dark:text-white leading-relaxed">
+<span class="font-semibold hover:text-primary cursor-pointer transition-colors">Jane Doe</span> applied for <span class="font-medium text-primary cursor-pointer hover:underline">UX Designer</span> role.
+                                    </p>
+<p class="text-xs text-slate-500 mt-1">5 minutes ago</p>
+</div>
+</div>
+<div class="relative pl-14 group">
+<div class="absolute left-0 top-0 z-10">
+<div class="relative">
+<img alt="User avatar" class="w-10 h-10 rounded-full object-cover border-4 border-surface-light dark:border-surface-dark" data-alt="Avatar of a man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOQk6_6EacB5WLgO9PzOf6mM95DRFBXEP07dQ3ZApEKa-BngTEK6nIPBeObJMWUS5e4UsQ38WrIfe80j2dAJXkMhQoIr30hoUqwcBJGVSjjW_jRr4QPPEbG_8RiQKxqHnv4G0a-4H7tJ9nWICCuAFA3O04YhQpRP7IgsQyLNUWeLpQBn3klF-lz1hhyAOSuNG2IvJozv4ZA1CVk8YZFKgGaKcNGZDPwTJKX14g7_EEhfVN3gWjIPiy5utLN-UnzP8sN9DncTG0XeI"/>
+<div class="absolute -bottom-1 -right-1 bg-white dark:bg-slate-900 rounded-full p-0.5">
+<div class="bg-purple-500 rounded-full w-4 h-4 flex items-center justify-center border-2 border-white dark:border-slate-900">
+<span class="material-symbols-outlined text-white text-[8px]">chat</span>
+</div>
+</div>
+</div>
+</div>
+<div>
+<p class="text-sm text-slate-900 dark:text-white leading-relaxed">
+<span class="font-semibold hover:text-primary cursor-pointer transition-colors">Mark S.</span> commented on <span class="font-medium text-primary cursor-pointer hover:underline">Candidate #42</span>.
+                                    </p>
+<div class="mt-2 bg-slate-50 dark:bg-slate-800 p-3 rounded-lg text-xs text-slate-600 dark:text-slate-300 italic border border-slate-100 dark:border-slate-700">
+                                        "Strong portfolio, but let's double check the React experience."
+                                    </div>
+<p class="text-xs text-slate-500 mt-2">1 hour ago</p>
+</div>
+</div>
+<div class="relative pl-14 group">
+<div class="absolute left-0 top-0 z-10">
+<div class="relative">
+<div class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-indigo-900/50 flex items-center justify-center text-indigo-600 dark:text-indigo-400 font-bold border-4 border-surface-light dark:border-surface-dark text-xs">
+                                            SYS
+                                        </div>
+<div class="absolute -bottom-1 -right-1 bg-white dark:bg-slate-900 rounded-full p-0.5">
+<div class="bg-green-500 rounded-full w-4 h-4 flex items-center justify-center border-2 border-white dark:border-slate-900">
+<span class="material-symbols-outlined text-white text-[8px]">check</span>
+</div>
+</div>
+</div>
+</div>
+<div>
+<p class="text-sm text-slate-900 dark:text-white leading-relaxed">
+<span class="font-semibold">System</span> moved <span class="font-medium text-primary cursor-pointer hover:underline">Sarah Connor</span> to Interview stage.
+                                    </p>
+<p class="text-xs text-slate-500 mt-1">3 hours ago</p>
+</div>
+</div>
+<div class="relative pl-14 group">
+<div class="absolute left-0 top-0 z-10">
+<div class="relative">
+<img alt="User avatar" class="w-10 h-10 rounded-full object-cover border-4 border-surface-light dark:border-surface-dark" data-alt="Avatar of a man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcrJ6e50yKlOMz9hKiZCIQZ1lAdIMIIAGXTF-rteZjy7pRNUM9OAQbVwRmLv-Fe4PwRAIRQdVm2IAwJkdmdHWj2e6JBIAF6V9BsGV0_LS1kd4bCeJNswwQo607l279HIHLBMzREuZW3VWmjKZ_LZzV-FHf4zplTsBfK1Jrf7ZN9YAUEiE3JqvbkG-2-R79O7gEpjE_NJGyzlqEcDbGa7blcZ4sRkdiCeaKEPfj_nxWOWH94y9ClrZ5i07ElHnZMfru8hr08E7772Q"/>
+<div class="absolute -bottom-1 -right-1 bg-white dark:bg-slate-900 rounded-full p-0.5">
+<div class="bg-yellow-500 rounded-full w-4 h-4 flex items-center justify-center border-2 border-white dark:border-slate-900">
+<span class="material-symbols-outlined text-white text-[8px]">schedule</span>
+</div>
+</div>
+</div>
+</div>
+<div>
+<p class="text-sm text-slate-900 dark:text-white leading-relaxed">
+<span class="font-semibold hover:text-primary cursor-pointer transition-colors">David K.</span> scheduled an interview with <span class="font-medium text-primary cursor-pointer hover:underline">Design Team</span>.
+                                    </p>
+<p class="text-xs text-slate-500 mt-1">Yesterday</p>
+</div>
+</div>
+<div class="relative pl-14 group opacity-75">
+<div class="absolute left-0 top-0 z-10">
+<div class="relative">
+<img alt="User avatar" class="w-10 h-10 rounded-full object-cover border-4 border-surface-light dark:border-surface-dark grayscale" data-alt="Avatar of a woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcgXLlMkt4kNqLeOCNTwr5SuRsVLa008yXZDvWcrzwQ0_H1CVI6UBoCW5aIxoAAWaVmN19NUuG0-1Wjqx04Pya13owwFfW3_DkTt_eP9lwk9bf3UaSyYpvbQ16d2Ad8R0gQRhhFUO5rrHxAYPmWpkZQuMnTJdJKiuN6DSK96OI9IQrKczzsnBeZNIy54sWeynkTXbWlvCzew1-Hh2Qj_ALQt5IPEwPzsmFWfSXoH3QtgxVXDZi8l1L9_PWF6afBM7N1ZvomDTIgek"/>
+<div class="absolute -bottom-1 -right-1 bg-white dark:bg-slate-900 rounded-full p-0.5">
+<div class="bg-red-500 rounded-full w-4 h-4 flex items-center justify-center border-2 border-white dark:border-slate-900">
+<span class="material-symbols-outlined text-white text-[8px]">close</span>
+</div>
+</div>
+</div>
+</div>
+<div>
+<p class="text-sm text-slate-900 dark:text-white leading-relaxed">
+<span class="font-semibold hover:text-primary cursor-pointer transition-colors">Emily R.</span> rejected application for <span class="font-medium text-primary cursor-pointer hover:underline">Junior Dev</span>.
+                                    </p>
+<p class="text-xs text-slate-500 mt-1">Yesterday</p>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-4 mt-auto">
+<button class="w-full py-2.5 text-sm text-primary font-medium hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors flex items-center justify-center gap-2">
+                            View all activity
+                            <span class="material-symbols-outlined text-base">arrow_forward</span>
+</button>
+</div>
+</div>
+</aside>
+</div>
+</div>
+</main>
+
+</body></html>

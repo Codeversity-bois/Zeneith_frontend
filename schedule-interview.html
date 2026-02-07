@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Schedule Interview - Zenith</title>
+    <link rel="icon" type="image/png" href="/logo_zeneith.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/src/styles/main.css">
+</head>
+
+<body class="bg-background-light font-display h-screen flex overflow-hidden">
+    <div id="app-container" class="w-full h-full flex">
+        <div id="sidebar-container"></div>
+        <div class="flex-1 flex flex-col min-w-0">
+            <div id="header-container"></div>
+            <main class="flex-1 overflow-y-auto p-6 md:p-8">
+                <div class="max-w-3xl mx-auto">
+                    <button onclick="history.back()"
+                        class="flex items-center gap-2 text-slate-500 hover:text-slate-800 mb-6 font-medium transition-colors">
+                        <span class="material-symbols-outlined text-sm">arrow_back</span> Back to Dashboard
+                    </button>
+
+                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 md:p-8">
+                        <div class="flex items-center gap-4 mb-8 pb-8 border-b border-slate-200">
+                            <div class="bg-blue-50 text-primary p-3 rounded-full">
+                                <span class="material-symbols-outlined text-2xl">calendar_add_on</span>
+                            </div>
+                            <div>
+                                <h1 class="text-xl font-bold text-slate-900">Schedule Interview</h1>
+                                <p class="text-slate-500 text-sm">Set up a new interview with a candidate.</p>
+                            </div>
+                        </div>
+
+                        <form id="schedule-form" class="space-y-6">
+                            <!-- Candidate Selection -->
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Select Candidate</label>
+                                <div class="relative">
+                                    <span
+                                        class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                                        <span class="material-symbols-outlined text-[20px]">person_search</span>
+                                    </span>
+                                    <input type="text" placeholder="Search candidate by name..."
+                                        class="block w-full pl-10 pr-3 py-2.5 border-slate-300 rounded-lg focus:ring-primary focus:border-primary">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Date & Time -->
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-1">Date</label>
+                                    <input type="date" required
+                                        class="block w-full border-slate-300 rounded-lg focus:ring-primary focus:border-primary">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-1">Time</label>
+                                    <input type="time" required
+                                        class="block w-full border-slate-300 rounded-lg focus:ring-primary focus:border-primary">
+                                </div>
+                            </div>
+
+                            <!-- Interview Type -->
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Interview Type</label>
+                                <div class="grid grid-cols-3 gap-4">
+                                    <label
+                                        class="relative flex flex-col items-center p-4 border rounded-xl cursor-pointer hover:bg-slate-50 peer-checked:border-primary peer-checked:bg-blue-50">
+                                        <input type="radio" name="type" value="video" class="peer sr-only" checked>
+                                        <div
+                                            class="absolute inset-0 rounded-xl border-2 border-transparent peer-checked:border-primary transition-colors pointer-events-none">
+                                        </div>
+                                        <span
+                                            class="material-symbols-outlined text-2xl mb-1 text-slate-600 peer-checked:text-primary">videocam</span>
+                                        <span class="text-sm font-medium text-slate-900 peer-checked:text-primary">Video
+                                            Call</span>
+                                    </label>
+                                    <label
+                                        class="relative flex flex-col items-center p-4 border rounded-xl cursor-pointer hover:bg-slate-50">
+                                        <input type="radio" name="type" value="phone" class="peer sr-only">
+                                        <div
+                                            class="absolute inset-0 rounded-xl border-2 border-transparent peer-checked:border-primary transition-colors pointer-events-none">
+                                        </div>
+                                        <span
+                                            class="material-symbols-outlined text-2xl mb-1 text-slate-600 peer-checked:text-primary">call</span>
+                                        <span class="text-sm font-medium text-slate-900 peer-checked:text-primary">Phone
+                                            Call</span>
+                                    </label>
+                                    <label
+                                        class="relative flex flex-col items-center p-4 border rounded-xl cursor-pointer hover:bg-slate-50">
+                                        <input type="radio" name="type" value="person" class="peer sr-only">
+                                        <div
+                                            class="absolute inset-0 rounded-xl border-2 border-transparent peer-checked:border-primary transition-colors pointer-events-none">
+                                        </div>
+                                        <span
+                                            class="material-symbols-outlined text-2xl mb-1 text-slate-600 peer-checked:text-primary">apartment</span>
+                                        <span class="text-sm font-medium text-slate-900 peer-checked:text-primary">In
+                                            Person</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Duration -->
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Duration</label>
+                                <select
+                                    class="block w-full border-slate-300 rounded-lg focus:ring-primary focus:border-primary">
+                                    <option value="30">30 Minutes</option>
+                                    <option value="45" selected>45 Minutes</option>
+                                    <option value="60">1 Hour</option>
+                                    <option value="90">1.5 Hours</option>
+                                </select>
+                            </div>
+
+                            <!-- Interviewers -->
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Interviewers</label>
+                                <div
+                                    class="flex gap-2 mb-2 p-2 border border-slate-200 rounded-lg flex-wrap min-h-[42px]">
+                                    <span
+                                        class="inline-flex items-center gap-1 px-2 py-1 rounded bg-slate-100 text-xs font-medium text-slate-700">
+                                        <div
+                                            class="w-4 h-4 rounded-full bg-blue-500 text-white flex items-center justify-center text-[8px]">
+                                            Y</div>
+                                        You
+                                    </span>
+                                </div>
+                                <input type="text" placeholder="Add teammates..."
+                                    class="block w-full border-slate-300 rounded-lg focus:ring-primary focus:border-primary text-sm">
+                            </div>
+
+                            <!-- Notes -->
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Notes /
+                                    Instructions</label>
+                                <textarea rows="3"
+                                    class="block w-full border-slate-300 rounded-lg focus:ring-primary focus:border-primary"
+                                    placeholder="Add zoom link or office address here..."></textarea>
+                            </div>
+
+                            <div class="flex justify-end gap-3 pt-6 border-t border-slate-200">
+                                <button type="button" onclick="history.back()"
+                                    class="px-5 py-2.5 text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 font-medium transition-colors">Cancel</button>
+                                <button type="submit"
+                                    class="px-6 py-2.5 bg-primary text-white rounded-lg hover:bg-blue-700 font-bold transition-colors shadow-lg shadow-blue-500/20">Schedule
+                                    Interview</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="/src/js/state-manager.js" type="module"></script>
+    <script src="/src/js/components.js" type="module"></script>
+    <script type="module">
+        document.addEventListener('DOMContentLoaded', function () {
+            if (!window.StateManager.isAuthenticated() || window.StateManager.getUserRole() !== 'recruiter') {
+                window.location.href = '/login.html';
+                return;
+            }
+
+            document.getElementById('sidebar-container').innerHTML = window.Components.createSidebar('recruiter', 'schedule');
+            document.getElementById('header-container').innerHTML = window.Components.createHeader('Schedule', false);
+            window.Components.populateUserProfile();
+            window.Components.updateNotificationBadge();
+
+            document.getElementById('schedule-form').addEventListener('submit', function (e) {
+                e.preventDefault();
+                const btn = e.target.querySelector('button[type="submit"]');
+                btn.textContent = 'Scheduling...';
+                btn.disabled = true;
+
+                // Simulate API call
+                setTimeout(() => {
+                    window.Components.showToast('Interview scheduled successfully!', 'success');
+                    setTimeout(() => window.location.href = '/recruiter-dashboard.html', 1500);
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+
+</html>

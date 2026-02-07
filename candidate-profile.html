@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>My Profile - Zenith</title>
+    <link rel="icon" type="image/png" href="/logo_zeneith.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="stylesheet" href="/src/styles/main.css">
+</head>
+
+<body class="bg-background-light font-display h-screen flex overflow-hidden">
+    <div id="app-container" class="w-full h-full flex">
+        <div id="sidebar-container"></div>
+        <div class="flex-1 flex flex-col min-w-0">
+            <div id="header-container"></div>
+            <main class="flex-1 overflow-y-auto p-6 lg:p-8">
+                <div class="max-w-4xl mx-auto space-y-6">
+                    <!-- Profile Header -->
+                    <div class="bg-white rounded-xl border border-slate-200 p-6">
+                        <div class="flex items-start gap-6">
+                            <div class="relative">
+                                <div
+                                    class="w-24 h-24 rounded-full bg-gradient-to-br from-primary to-violet-600 flex items-center justify-center text-white text-3xl font-bold">
+                                    <span id="profile-initial">A</span>
+                                </div>
+                                <button
+                                    class="absolute bottom-0 right-0 bg-white rounded-full p-2 shadow-lg border border-slate-200 hover:bg-slate-50">
+                                    <span class="material-symbols-outlined text-[18px]">camera_alt</span>
+                                </button>
+                            </div>
+                            <div class="flex-1">
+                                <h1 class="text-2xl font-bold text-slate-900" id="profile-name">Alex Morgan</h1>
+                                <p class="text-slate-500" id="profile-email">alex.morgan@example.com</p>
+                                <div class="flex gap-2 mt-3">
+                                    <span
+                                        class="px-3 py-1 bg-blue-50 text-primary rounded-full text-sm font-medium">Product
+                                        Designer</span>
+                                    <span
+                                        class="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-sm font-medium">Available</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Platform Integrations -->
+                    <div class="bg-white rounded-xl border border-slate-200 p-6">
+                        <h2 class="text-lg font-bold text-slate-900 mb-4">Platform Integrations</h2>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-4 border border-slate-200 rounded-lg">
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="w-10 h-10 bg-blue-600 rounded flex items-center justify-center text-white">
+                                        <span class="material-symbols-outlined">link</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-slate-900">LinkedIn</p>
+                                        <p class="text-sm text-slate-500">Connected as @alexmorgan</p>
+                                    </div>
+                                </div>
+                                <button class="text-red-600 hover:text-red-700 text-sm font-medium">Disconnect</button>
+                            </div>
+                            <div
+                                class="flex items-center justify-between p-4 border border-dashed border-slate-300 rounded-lg">
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="w-10 h-10 bg-slate-900 rounded flex items-center justify-center text-white">
+                                        <span class="material-symbols-outlined">code</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-slate-900">GitHub</p>
+                                        <p class="text-sm text-slate-500">Not connected</p>
+                                    </div>
+                                </div>
+                                <button class="text-primary hover:text-blue-700 text-sm font-medium">Connect</button>
+                            </div>
+                            <div
+                                class="flex items-center justify-between p-4 border border-dashed border-slate-300 rounded-lg">
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="w-10 h-10 bg-orange-500 rounded flex items-center justify-center text-white">
+                                        <span class="material-symbols-outlined">terminal</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-slate-900">LeetCode</p>
+                                        <p class="text-sm text-slate-500">Not connected</p>
+                                    </div>
+                                </div>
+                                <button class="text-primary hover:text-blue-700 text-sm font-medium">Connect</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skills -->
+                    <div class="bg-white rounded-xl border border-slate-200 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-lg font-bold text-slate-900">Skills</h2>
+                            <button class="text-primary hover:text-blue-700 text-sm font-medium">+ Add Skill</button>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-2 bg-slate-100 text-slate-700 rounded-lg text-sm font-medium">UI/UX
+                                Design</span>
+                            <span
+                                class="px-3 py-2 bg-slate-100 text-slate-700 rounded-lg text-sm font-medium">Figma</span>
+                            <span class="px-3 py-2 bg-slate-100 text-slate-700 rounded-lg text-sm font-medium">Adobe
+                                XD</span>
+                            <span
+                                class="px-3 py-2 bg-slate-100 text-slate-700 rounded-lg text-sm font-medium">Prototyping</span>
+                            <span class="px-3 py-2 bg-slate-100 text-slate-700 rounded-lg text-sm font-medium">User
+                                Research</span>
+                        </div>
+                    </div>
+
+                    <!-- Experience -->
+                    <div class="bg-white rounded-xl border border-slate-200 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-lg font-bold text-slate-900">Experience</h2>
+                            <button class="text-primary hover:text-blue-700 text-sm font-medium">+ Add
+                                Experience</button>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex gap-4">
+                                <div
+                                    class="w-12 h-12 bg-indigo-100 rounded flex items-center justify-center text-indigo-600 font-bold shrink-0">
+                                    S</div>
+                                <div class="flex-1">
+                                    <h3 class="font-semibold text-slate-900">Senior Product Designer</h3>
+                                    <p class="text-sm text-slate-600">Stripe · Full-time</p>
+                                    <p class="text-xs text-slate-500 mt-1">Jan 2022 - Present · 2 yrs</p>
+                                    <p class="text-sm text-slate-700 mt-2">Leading design initiatives for payment
+                                        processing products...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resume -->
+                    <div class="bg-white rounded-xl border border-slate-200 p-6">
+                        <h2 class="text-lg font-bold text-slate-900 mb-4">Resume</h2>
+                        <div class="border-2 border-dashed border-slate-300 rounded-lg p-8 text-center">
+                            <span class="material-symbols-outlined text-slate-400 text-[48px]">upload_file</span>
+                            <p class="text-slate-600 mt-2">Drop your resume here or click to upload</p>
+                            <button class="mt-4 btn-primary">Upload Resume</button>
+                        </div>
+                    </div>
+
+                    <!-- Save Button -->
+                    <div class="flex justify-end gap-3">
+                        <button
+                            class="px-6 py-2.5 border border-slate-300 rounded-lg text-slate-700 hover:bg-slate-50">Cancel</button>
+                        <button class="btn-primary">Save Changes</button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="/src/js/state-manager.js" type="module"></script>
+    <script src="/src/js/components.js" type="module"></script>
+    <script>
+        if (!window.StateManager.isAuthenticated() || window.StateManager.getUserRole() !== 'candidate') {
+            window.location.href = '/login.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('sidebar-container').innerHTML = window.Components.createSidebar('candidate', 'profile');
+            document.getElementById('header-container').innerHTML = window.Components.createHeader('My Profile', false);
+            window.Components.populateUserProfile();
+
+            const user = window.StateManager.getUser();
+            if (user) {
+                document.getElementById('profile-name').textContent = user.name || 'User';
+                document.getElementById('profile-email').textContent = user.email || '';
+                document.getElementById('profile-initial').textContent = (user.name || 'U').charAt(0);
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Assessments - Zenith</title>
+    <link rel="icon" type="image/png" href="/logo_zeneith.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/src/styles/main.css">
+</head>
+
+<body class="bg-background-light font-display h-screen flex overflow-hidden">
+    <div id="app-container" class="w-full h-full flex">
+        <div id="sidebar-container"></div>
+        <div class="flex-1 flex flex-col min-w-0">
+            <div id="header-container"></div>
+            <main class="flex-1 overflow-y-auto p-6 md:p-8">
+                <div class="space-y-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="text-2xl font-bold text-slate-900">Assessments</h2>
+                            <p class="text-slate-500 mt-1">Manage and review candidate assessments.</p>
+                        </div>
+                        <button
+                            class="bg-primary hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-bold transition-colors flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[20px]">add</span>
+                            Create Assessment
+                        </button>
+                    </div>
+
+                    <!-- Metrics -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="bg-purple-50 text-purple-600 p-2 rounded-lg">
+                                    <span class="material-symbols-outlined">assignment</span>
+                                </div>
+                                <span class="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded">+5 this
+                                    week</span>
+                            </div>
+                            <p class="text-slate-500 text-sm font-medium">Active Assessments</p>
+                            <p class="text-2xl font-bold text-slate-900 mt-1">24</p>
+                        </div>
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="bg-blue-50 text-blue-600 p-2 rounded-lg">
+                                    <span class="material-symbols-outlined">pending_actions</span>
+                                </div>
+                            </div>
+                            <p class="text-slate-500 text-sm font-medium">Pending Review</p>
+                            <p class="text-2xl font-bold text-slate-900 mt-1">10</p>
+                        </div>
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="bg-emerald-50 text-emerald-600 p-2 rounded-lg">
+                                    <span class="material-symbols-outlined">check_circle</span>
+                                </div>
+                            </div>
+                            <p class="text-slate-500 text-sm font-medium">Completed</p>
+                            <p class="text-2xl font-bold text-slate-900 mt-1">156</p>
+                        </div>
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="bg-amber-50 text-amber-600 p-2 rounded-lg">
+                                    <span class="material-symbols-outlined">star</span>
+                                </div>
+                            </div>
+                            <p class="text-slate-500 text-sm font-medium">Avg Score</p>
+                            <p class="text-2xl font-bold text-slate-900 mt-1">78%</p>
+                        </div>
+                    </div>
+
+                    <!-- Filter Bar -->
+                    <div
+                        class="flex flex-col sm:flex-row gap-4 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                        <div class="relative flex-1">
+                            <span
+                                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                                <span class="material-symbols-outlined text-[20px]">search</span>
+                            </span>
+                            <input type="text" placeholder="Search functionality..."
+                                class="block w-full pl-10 pr-3 py-2 border-slate-200 rounded-lg text-sm focus:ring-primary focus:border-primary">
+                        </div>
+                        <select
+                            class="border-slate-200 rounded-lg text-sm focus:ring-primary focus:border-primary text-slate-600">
+                            <option>All Types</option>
+                            <option>Technical</option>
+                            <option>Behavioral</option>
+                            <option>Cognitive</option>
+                        </select>
+                        <select
+                            class="border-slate-200 rounded-lg text-sm focus:ring-primary focus:border-primary text-slate-600">
+                            <option>All Status</option>
+                            <option>Active</option>
+                            <option>Draft</option>
+                            <option>Archived</option>
+                        </select>
+                    </div>
+
+                    <!-- Assessments List -->
+                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-slate-50 text-slate-500 font-semibold border-b border-slate-200">
+                                <tr>
+                                    <th class="px-6 py-4">Assessment Name</th>
+                                    <th class="px-6 py-4">Type</th>
+                                    <th class="px-6 py-4">Candidates</th>
+                                    <th class="px-6 py-4">Completion Rate</th>
+                                    <th class="px-6 py-4">Status</th>
+                                    <th class="px-6 py-4 text-right">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200">
+                                <tr class="hover:bg-slate-50 transition-colors">
+                                    <td class="px-6 py-4">
+                                        <div>
+                                            <p class="font-medium text-slate-900">Backend System Design</p>
+                                            <p class="text-xs text-slate-500">Created Oct 24, 2023</p>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4"><span
+                                            class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Technical</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-slate-600">45 Assigned</td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-24 h-2 bg-slate-100 rounded-full overflow-hidden">
+                                                <div class="h-full bg-emerald-500 w-[75%]"></div>
+                                            </div>
+                                            <span class="text-xs text-slate-500">75%</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4"><span
+                                            class="flex items-center gap-1.5 text-xs font-medium text-green-600"><span
+                                                class="w-1.5 h-1.5 rounded-full bg-current"></span>Active</span></td>
+                                    <td class="px-6 py-4 text-right">
+                                        <button class="text-slate-400 hover:text-primary"><span
+                                                class="material-symbols-outlined">more_horiz</span></button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 transition-colors">
+                                    <td class="px-6 py-4">
+                                        <div>
+                                            <p class="font-medium text-slate-900">React Frontend Challenge</p>
+                                            <p class="text-xs text-slate-500">Created Oct 20, 2023</p>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4"><span
+                                            class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Technical</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-slate-600">32 Assigned</td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-24 h-2 bg-slate-100 rounded-full overflow-hidden">
+                                                <div class="h-full bg-emerald-500 w-[60%]"></div>
+                                            </div>
+                                            <span class="text-xs text-slate-500">60%</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4"><span
+                                            class="flex items-center gap-1.5 text-xs font-medium text-green-600"><span
+                                                class="w-1.5 h-1.5 rounded-full bg-current"></span>Active</span></td>
+                                    <td class="px-6 py-4 text-right">
+                                        <button class="text-slate-400 hover:text-primary"><span
+                                                class="material-symbols-outlined">more_horiz</span></button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 transition-colors">
+                                    <td class="px-6 py-4">
+                                        <div>
+                                            <p class="font-medium text-slate-900">Cultural Fit Survey</p>
+                                            <p class="text-xs text-slate-500">Created Oct 15, 2023</p>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4"><span
+                                            class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">Behavioral</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-slate-600">120 Assigned</td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-24 h-2 bg-slate-100 rounded-full overflow-hidden">
+                                                <div class="h-full bg-emerald-500 w-[90%]"></div>
+                                            </div>
+                                            <span class="text-xs text-slate-500">90%</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4"><span
+                                            class="flex items-center gap-1.5 text-xs font-medium text-slate-500"><span
+                                                class="w-1.5 h-1.5 rounded-full bg-current"></span>Archived</span></td>
+                                    <td class="px-6 py-4 text-right">
+                                        <button class="text-slate-400 hover:text-primary"><span
+                                                class="material-symbols-outlined">more_horiz</span></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="/src/js/state-manager.js" type="module"></script>
+    <script src="/src/js/components.js" type="module"></script>
+    <script type="module">
+        document.addEventListener('DOMContentLoaded', function () {
+            if (!window.StateManager.isAuthenticated() || window.StateManager.getUserRole() !== 'recruiter') {
+                window.location.href = '/login.html';
+                return;
+            }
+
+            document.getElementById('sidebar-container').innerHTML = window.Components.createSidebar('recruiter', 'assessments');
+            document.getElementById('header-container').innerHTML = window.Components.createHeader('Assessments', true);
+            window.Components.populateUserProfile();
+            window.Components.updateNotificationBadge();
+        });
+    </script>
+</body>
+
+</html>

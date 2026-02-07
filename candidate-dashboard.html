@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Candidate Dashboard - Zenith</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/logo_zeneith.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/src/styles/main.css">
+
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2463eb",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111621",
+                        "sidebar-hover": "#1f2937",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+
+    <style>
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light font-display text-slate-900 antialiased h-screen flex overflow-hidden">
+    <div id="app-container" class="w-full h-full flex">
+        <!-- Sidebar will be inserted by JavaScript -->
+        <div id="sidebar-container"></div>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col min-w-0">
+            <!-- Header will be inserted by JavaScript -->
+            <div id="header-container"></div>
+
+            <!-- Main Content Area -->
+            <main class="flex-1 overflow-y-auto p-6 lg:p-8">
+                <div class="max-w-7xl mx-auto space-y-8">
+                    <!-- Welcome Section -->
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-900">Dashboard</h2>
+                        <p class="text-slate-500 mt-1">Welcome back, <span id="user-name">Candidate</span>! Here is an
+                            overview of your job search.</p>
+                    </div>
+
+                    <!-- Stats Cards -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div
+                            class="bg-white p-5 rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow group">
+                            <div class="flex items-start justify-between mb-4">
+                                <div
+                                    class="p-2 bg-blue-50 text-primary rounded-lg group-hover:bg-primary group-hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-[24px]">send</span>
+                                </div>
+                                <span
+                                    class="text-xs font-medium text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">+2
+                                    this week</span>
+                            </div>
+                            <p class="text-sm text-slate-500 font-medium">Total Applications</p>
+                            <p class="text-2xl font-bold text-slate-900 mt-1">12</p>
+                        </div>
+
+                        <div
+                            class="bg-white p-5 rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow group">
+                            <div class="flex items-start justify-between mb-4">
+                                <div
+                                    class="p-2 bg-amber-50 text-amber-600 rounded-lg group-hover:bg-amber-500 group-hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-[24px]">hourglass_top</span>
+                                </div>
+                            </div>
+                            <p class="text-sm text-slate-500 font-medium">In Progress</p>
+                            <p class="text-2xl font-bold text-slate-900 mt-1">5</p>
+                        </div>
+
+                        <div
+                            class="bg-white p-5 rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow group">
+                            <div class="flex items-start justify-between mb-4">
+                                <div
+                                    class="p-2 bg-purple-50 text-purple-600 rounded-lg group-hover:bg-purple-600 group-hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-[24px]">video_camera_front</span>
+                                </div>
+                                <span
+                                    class="text-xs font-medium text-slate-500 bg-slate-50 px-2 py-1 rounded-full">Tomorrow,
+                                    2pm</span>
+                            </div>
+                            <p class="text-sm text-slate-500 font-medium">Interviews</p>
+                            <p class="text-2xl font-bold text-slate-900 mt-1">2</p>
+                        </div>
+
+                        <div
+                            class="bg-white p-5 rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow group">
+                            <div class="flex items-start justify-between mb-4">
+                                <div
+                                    class="p-2 bg-emerald-50 text-emerald-600 rounded-lg group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-[24px]">celebration</span>
+                                </div>
+                            </div>
+                            <p class="text-sm text-slate-500 font-medium">Offers</p>
+                            <p class="text-2xl font-bold text-slate-900 mt-1">0</p>
+                        </div>
+                    </div>
+
+                    <!-- Recent Applications -->
+                    <div class="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+                        <div class="px-6 py-5 border-b border-slate-200 flex items-center justify-between">
+                            <h3 class="text-lg font-bold text-slate-900">Recent Applications</h3>
+                            <button class="text-slate-400 hover:text-slate-600">
+                                <span class="material-symbols-outlined text-[20px]">filter_list</span>
+                            </button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-slate-50 border-b border-slate-200">
+                                        <th
+                                            class="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider w-1/3">
+                                            Company & Role</th>
+                                        <th
+                                            class="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                                            Date Applied</th>
+                                        <th
+                                            class="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                                            Status</th>
+                                        <th
+                                            class="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider text-right">
+                                            Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-200" id="applications-table">
+                                    <!-- Will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="px-6 py-4 border-t border-slate-200 bg-slate-50 flex items-center justify-center">
+                            <button class="text-sm font-medium text-slate-600 hover:text-primary">View all
+                                applications</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/src/js/state-manager.js" type="module"></script>
+    <script src="/src/js/components.js" type="module"></script>
+    <script src="/src/js/api-client.js" type="module"></script>
+
+    <script>
+        // Initialize UI
+        document.addEventListener('DOMContentLoaded', function () {
+            // Check for authentication after StateManager is fully initialized
+            console.log('🔐 Checking authentication...');
+            console.log('✓ StateManager available:', !!window.StateManager);
+            console.log('✓ Authenticated:', window.StateManager.isAuthenticated());
+            console.log('✓ User role:', window.StateManager.getUserRole());
+
+            if (!window.StateManager.isAuthenticated()) {
+                console.log('❌ Not authenticated, redirecting to login...');
+                window.location.href = '/login.html';
+                return;
+            }
+
+            // Check role
+            const role = window.StateManager.getUserRole();
+            if (role !== 'candidate') {
+                console.log('❌ Not a candidate, redirecting to recruiter dashboard...');
+                window.location.href = '/recruiter-dashboard.html';
+                return;
+            }
+
+            console.log('🔧 DOM loaded, initializing candidate dashboard...');
+
+            // Insert sidebar
+            document.getElementById('sidebar-container').innerHTML = window.Components.createSidebar('candidate', 'dashboard');
+
+            // Insert header
+            document.getElementById('header-container').innerHTML = window.Components.createHeader('Dashboard', true);
+
+            // Populate user profile
+            window.Components.populateUserProfile();
+
+            // Update user name
+            const user = window.StateManager.getUser();
+            if (user && user.name) {
+                document.getElementById('user-name').textContent = user.name.split(' ')[0];
+            }
+
+            // Load applications
+            loadApplications();
+
+            // Update notification badge
+            window.Components.updateNotificationBadge();
+        });
+
+        // Mock applications data
+        function loadApplications() {
+            const applications = [
+                {
+                    id: 1,
+                    company: 'Stripe',
+                    role: 'Product Designer',
+                    logo: 'S',
+                    logoColor: 'bg-indigo-600',
+                    dateApplied: 'Oct 24, 2023',
+                    status: 'Interviewing',
+                    statusColor: 'bg-emerald-100 text-emerald-700 border-emerald-200'
+                },
+                {
+                    id: 2,
+                    company: 'Spotify',
+                    role: 'UX Researcher',
+                    logo: 'Sp',
+                    logoColor: 'bg-green-500',
+                    dateApplied: 'Oct 20, 2023',
+                    status: 'Under Review',
+                    statusColor: 'bg-amber-100 text-amber-700 border-amber-200'
+                },
+                {
+                    id: 3,
+                    company: 'Netflix',
+                    role: 'UI Developer',
+                    logo: 'N',
+                    logoColor: 'bg-red-600',
+                    dateApplied: 'Oct 15, 2023',
+                    status: 'Shortlisted',
+                    statusColor: 'bg-blue-100 text-blue-700 border-blue-200'
+                },
+                {
+                    id: 4,
+                    company: 'Uber',
+                    role: 'Frontend Engineer',
+                    logo: 'U',
+                    logoColor: 'bg-black',
+                    dateApplied: 'Oct 10, 2023',
+                    status: 'Closed',
+                    statusColor: 'bg-slate-100 text-slate-600 border-slate-200'
+                }
+            ];
+
+            const tableBody = document.getElementById('applications-table');
+            tableBody.innerHTML = applications.map(app => `
+                <tr class="group hover:bg-blue-50/30 transition-colors">
+                    <td class="px-6 py-4">
+                        <div class="flex items-center gap-3">
+                            <div class="size-10 rounded ${app.logoColor} flex items-center justify-center text-white font-bold text-sm shrink-0">${app.logo}</div>
+                            <div>
+                                <p class="text-sm font-bold text-slate-900">${app.company}</p>
+                                <p class="text-xs text-slate-500">${app.role}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 text-sm text-slate-600">${app.dateApplied}</td>
+                    <td class="px-6 py-4">
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${app.statusColor} border">
+                            <span class="size-1.5 rounded-full bg-current"></span>
+                            ${app.status}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                        <a href="/job-details.html?id=${app.id}" class="text-primary hover:text-blue-700 text-sm font-medium">View Details</a>
+                    </td>
+                </tr>
+            `).join('');
+        }
+    </script>
+</body>
+
+</html>
