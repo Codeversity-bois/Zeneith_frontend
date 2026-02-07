@@ -208,6 +208,132 @@ export function getMockData(type) {
     return dataMap[type] || [];
 }
 
+// Mock Assessments (Detailed)
+export const mockAssessments = [
+    {
+        id: 'asm-001',
+        title: 'Frontend Developer Assessment',
+        company: 'Stripe',
+        role: 'Frontend Engineer',
+        duration: 60, // minutes
+        totalQuestions: 25,
+        status: 'pending',
+        dueDate: new Date('2024-02-15'),
+        sections: [
+            {
+                id: 'sec-1',
+                title: 'Aptitude & Logic',
+                type: 'mcq',
+                questions: [
+                    {
+                        id: 'q-mcq-1',
+                        text: 'Which number completes the sequence: 2, 5, 10, 17, ...?',
+                        options: ['24', '26', '25', '27'],
+                        correct: 1 // Index
+                    },
+                    {
+                        id: 'q-mcq-2',
+                        text: 'If A is the brother of B; B is the sister of C; and C is the father of D, how is D related to A?',
+                        options: ['Nephew', 'Niece', 'Nephew or Niece', 'Cannot be determined'],
+                        correct: 2
+                    }
+                ]
+            },
+            {
+                id: 'sec-2',
+                title: 'Technical Knowledge',
+                type: 'subjective',
+                questions: [
+                    {
+                        id: 'q-sub-1',
+                        text: 'Explain the concept of "Hoisting" in JavaScript.',
+                        minLength: 50,
+                        maxLength: 300
+                    },
+                    {
+                        id: 'q-sub-2',
+                        text: 'Describe the difference between Local Storage, Session Storage, and Cookies.',
+                        minLength: 50,
+                        maxLength: 500
+                    }
+                ]
+            },
+            {
+                id: 'sec-3',
+                title: 'Coding Challenge',
+                type: 'coding',
+                questions: [
+                    {
+                        id: 'q-code-1',
+                        title: 'Two Sum',
+                        text: 'Given an array of integers `nums` and an integer `target`, return indices of the two numbers such that they add up to `target`.',
+                        language: 'javascript',
+                        starterCode: 'function twoSum(nums, target) {\n  // Your code here\n}',
+                        testCases: [
+                            { input: 'nums = [2,7,11,15], target = 9', output: '[0,1]' },
+                            { input: 'nums = [3,2,4], target = 6', output: '[1,2]' }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        id: 'asm-002',
+        title: 'Backend System Design',
+        company: 'Netflix',
+        role: 'Senior Backend Engineer',
+        duration: 90,
+        totalQuestions: 15,
+        status: 'completed',
+        score: 88,
+        completedDate: new Date('2024-01-25'),
+        dueDate: new Date('2024-02-01'),
+        sections: [] // Simplified for completed
+    },
+    {
+        id: 'asm-003',
+        title: 'React Core Assessment',
+        company: 'Meta',
+        role: 'UI Engineer',
+        duration: 45,
+        totalQuestions: 20,
+        status: 'pending',
+        dueDate: new Date('2024-02-10'),
+        sections: [
+            {
+                id: 'sec-1',
+                title: 'React Fundamentals',
+                type: 'mcq',
+                questions: [
+                    {
+                        id: 'q-mcq-1',
+                        text: 'What is the virtual DOM?',
+                        options: ['A direct copy of the real DOM', 'A lightweight representation of the real DOM', 'A plugin for browser', 'None of the above'],
+                        correct: 1
+                    }
+                ]
+            }
+        ]
+    }
+];
+
+export const mockSessions = [
+    {
+        id: 'sess-001',
+        assessmentId: 'asm-001',
+        candidateId: 'user-001',
+        status: 'in-progress',
+        currentPhase: 'aptitude', // aptitude, coding, interview
+        currentSectionIndex: 0,
+        startTime: new Date('2024-02-07T10:00:00'),
+        answers: {
+            'sec-1': { 'q-mcq-1': 0 } // Partial answer
+        },
+        codingSessionId: null
+    }
+];
+
 export default {
     mockJobs,
     mockApplications,
@@ -217,5 +343,7 @@ export default {
     mockNotifications,
     mockAssessmentQuestions,
     pipelineStages,
+    mockAssessments,
+    mockSessions, // Added
     getMockData,
 };

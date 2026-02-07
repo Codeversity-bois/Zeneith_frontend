@@ -1,245 +1,352 @@
-# Zenith API Endpoints
+API Gateway Layer
+Authentication & Authorization
+POST   /api/v1/auth/register
+POST   /api/v1/auth/login
+POST   /api/v1/auth/logout
+POST   /api/v1/auth/refresh-token
+GET    /api/v1/auth/verify-email/:token
+POST   /api/v1/auth/forgot-password
+POST   /api/v1/auth/reset-password/:token
 
-## Authentication & User Management
 
-### POST /api/v1/auth/register
-Create new user account
-**Parameters:**
-- `email` (string, required)
-- `password` (string, required)
-- `name` (string, required)
-- `role` (string, required) - "candidate" or "recruiter"
-- `company` (string, optional)
+Application Services Layer
+1. Profile Management Service
+# Candidate Profiles
+POST   /api/v1/profiles/candidate/create
+GET    /api/v1/profiles/candidate/:id
+PUT    /api/v1/profiles/candidate/:id
+DELETE /api/v1/profiles/candidate/:id
+GET    /api/v1/profiles/candidate/search
 
-### POST /api/v1/auth/login
-User login
-**Parameters:**
-- `email` (string, required)
-- `password` (string, required)
+# Multi-platform Integration
+POST   /api/v1/profiles/candidate/:id/integrate/linkedin
+POST   /api/v1/profiles/candidate/:id/integrate/github
+POST   /api/v1/profiles/candidate/:id/integrate/leetcode
+POST   /api/v1/profiles/candidate/:id/integrate/stackoverflow
+GET    /api/v1/profiles/candidate/:id/integrations
+DELETE /api/v1/profiles/candidate/:id/integrations/:platform
 
-**Returns:**
-- `user` (object) - User profile data
-- `token` (string) - JWT authentication token
-- `role` (string) - User role
+# Profile Embeddings & FAISS
+POST   /api/v1/profiles/candidate/:id/generate-embedding
+GET    /api/v1/profiles/candidate/:id/embedding
+POST   /api/v1/profiles/rebuild-faiss-index
 
-### GET /api/v1/profiles/candidate/:id
-Get candidate profile
-**Returns:**
-- `id` (string)
-- `name` (string)
-- `email` (string)
-- `phone` (string)
-- `location` (string)
-- `skills` (array of strings)
-- `experience` (array of objects)
-- `education` (array of objects)
-- `resume_url` (string)
-- `linkedin_url` (string)
-- `github_url` (string)
+# Recruiter Profiles
+POST   /api/v1/profiles/recruiter/create
+GET    /api/v1/profiles/recruiter/:id
+PUT    /api/v1/profiles/recruiter/:id
 
-### GET /api/v1/profiles/recruiter/:id
-Get recruiter profile
-**Returns:**
-- `id` (string)
-- `name` (string)
-- `email` (string)
-- `company` (string)
-- `position` (string)
-- `department` (string)
+2. Hiring Management Service
+# Job Postings
+POST   /api/v1/hiring/jobs/create
+GET    /api/v1/hiring/jobs
+GET    /api/v1/hiring/jobs/:jobId
+PUT    /api/v1/hiring/jobs/:jobId
+DELETE /api/v1/hiring/jobs/:jobId
+PATCH  /api/v1/hiring/jobs/:jobId/status
 
-## Job Management
+# JD Parsing (AI-powered)
+POST   /api/v1/hiring/jobs/:jobId/parse-jd
+GET    /api/v1/hiring/jobs/:jobId/extracted-requirements
 
-### GET /api/v1/jobs
-List all jobs
-**Query Parameters:**
-- `status` (string, optional) - "active", "closed", "draft"
-- `department` (string, optional)
-- `location` (string, optional)
-- `limit` (number, optional)
-- `offset` (number, optional)
+# Candidate Shortlisting
+POST   /api/v1/hiring/jobs/:jobId/shortlist/semantic-search
+POST   /api/v1/hiring/jobs/:jobId/shortlist/llm-analysis
+GET    /api/v1/hiring/jobs/:jobId/shortlisted-candidates
+POST   /api/v1/hiring/jobs/:jobId/shortlist/:candidateId/fraud-score
 
-**Returns:**
-- `jobs` (array)
-  - `id` (string)
-  - `title` (string)
-  - `company` (string)
-  - `department` (string)
-  - `location` (string)
-  - `type` (string) - "full-time", "part-time", "contract"
-  - `salary_min` (number)
-  - `salary_max` (number)
-  - `description` (string)
-  - `requirements` (array of strings)
-  - `posted_date` (string, ISO 8601)
-  - `status` (string)
-  - `applicants_count` (number)
+# Pipeline Management
+GET    /api/v1/hiring/jobs/:jobId/pipeline
+PATCH  /api/v1/hiring/jobs/:jobId/candidates/:candidateId/stage
+GET    /api/v1/hiring/jobs/:jobId/analytics
 
-### GET /api/v1/jobs/:id
-Get specific job details
+3. Application Service
+# Applications
+POST   /api/v1/applications/submit
+GET    /api/v1/applications/:applicationId
+GET    /api/v1/applications/candidate/:candidateId
+GET    /api/v1/applications/job/:jobId
+PATCH  /api/v1/applications/:applicationId/status
+DELETE /api/v1/applications/:applicationId/withdraw
 
-### POST /api/v1/jobs
-Create new job posting (Recruiter only)
-**Parameters:**
-- `title` (string, required)
-- `department` (string, required)
-- `location` (string, required)
-- `type` (string, required)
-- `salary_min` (number, optional)
-- `salary_max` (number, optional)
-- `description` (string, required)
-- `requirements` (array of strings, required)
+# Application Documents
+POST   /api/v1/applications/:applicationId/documents/upload
+GET    /api/v1/applications/:applicationId/documents
+DELETE /api/v1/applications/:applicationId/documents/:documentId
 
-## Applications
+4. Scheduling Service
+# Interview Scheduling
+POST   /api/v1/scheduling/interviews/create
+GET    /api/v1/scheduling/interviews/:interviewId
+PUT    /api/v1/scheduling/interviews/:interviewId
+DELETE /api/v1/scheduling/interviews/:interviewId
+GET    /api/v1/scheduling/interviews/candidate/:candidateId
+GET    /api/v1/scheduling/interviews/recruiter/:recruiterId
 
-### GET /api/v1/applications/candidate/:candidateId
-Get all applications for a candidate
-**Returns:**
-- `applications` (array)
-  - `id` (string)
-  - `job_id` (string)
-  - `job_title` (string)
-  - `company` (string)
-  - `status` (string) - "Applied", "Screening", "Interviewing", "Shortlisted", "Offered", "Rejected", "Closed"
-  - `applied_date` (string, ISO 8601)
-  - `last_updated` (string, ISO 8601)
-  - `current_stage` (string)
+# Availability Management
+POST   /api/v1/scheduling/availability/set
+GET    /api/v1/scheduling/availability/:userId
+GET    /api/v1/scheduling/slots/available
 
-### GET /api/v1/applications/job/:jobId
-Get all applications for a job (Recruiter only)
+# Calendar Integration
+POST   /api/v1/scheduling/calendar/sync
+GET    /api/v1/scheduling/calendar/events
 
-### POST /api/v1/applications
-Submit job application
-**Parameters:**
-- `job_id` (string, required)
-- `candidate_id` (string, required)
-- `cover_letter` (string, optional)
+5. Notification Service
+# Notifications
+GET    /api/v1/notifications
+GET    /api/v1/notifications/:notificationId
+PATCH  /api/v1/notifications/:notificationId/read
+PATCH  /api/v1/notifications/mark-all-read
+DELETE /api/v1/notifications/:notificationId
 
-## Assessments
+# Notification Preferences
+GET    /api/v1/notifications/preferences
+PUT    /api/v1/notifications/preferences
 
-### GET /api/v1/assessments/candidate/:candidateId
-Get all assessments for a candidate
-**Returns:**
-- `assessments` (array)
-  - `id` (string)
-  - `title` (string)
-  - `description` (string)
-  - `job_id` (string)
-  - `job_title` (string)
-  - `company` (string)
-  - `type` (string) - "technical", "behavioral", "cognitive"
-  - `duration_minutes` (number)
-  - `total_questions` (number)
-  - `status` (string) - "pending", "in-progress", "completed", "expired"
-  - `due_date` (string, ISO 8601)
-  - `score` (number, optional) - Only for completed
-  - `max_score` (number, optional)
-  - `completed_date` (string, ISO 8601, optional)
+# Real-time (WebSocket)
+WS     /api/v1/notifications/stream
 
-### GET /api/v1/assessments/:id
-Get specific assessment details
+6. Orchestration Service
+# Workflow Orchestration
+POST   /api/v1/orchestration/workflows/start
+GET    /api/v1/orchestration/workflows/:workflowId/status
+POST   /api/v1/orchestration/workflows/:workflowId/cancel
+GET    /api/v1/orchestration/workflows/:workflowId/logs
 
-### POST /api/v1/assessments/:id/start
-Start an assessment session
+# Batch Operations
+POST   /api/v1/orchestration/batch/shortlist-candidates
+POST   /api/v1/orchestration/batch/generate-assessments
+POST   /api/v1/orchestration/batch/send-invitations
+GET    /api/v1/orchestration/batch/:batchId/status
 
-### POST /api/v1/assessments/:id/submit
-Submit assessment answers
-**Parameters:**
-- `answers` (array of objects)
-  - `question_id` (string)
-  - `answer` (any)
+7. Leaderboard Service
+# Leaderboards
+GET    /api/v1/leaderboard/job/:jobId
+GET    /api/v1/leaderboard/job/:jobId/candidate/:candidateId/rank
+POST   /api/v1/leaderboard/job/:jobId/recalculate
+GET    /api/v1/leaderboard/global/top-performers
 
-## Pipeline & Candidates
+# Scoring
+GET    /api/v1/leaderboard/candidate/:candidateId/scores
+GET    /api/v1/leaderboard/job/:jobId/score-distribution
 
-### GET /api/v1/hiring/jobs/:jobId/pipeline
-Get candidate pipeline for a job
-**Returns:**
-- `pipeline` (object)
-  - `applied` (number)
-  - `screening` (number)
-  - `assessment` (number)
-  - `interview` (number)
-  - `offer` (number)
-- `candidates` (array by stage)
 
-### GET /api/v1/hiring/candidates
-Get all candidates (Recruiter only)
-**Query Parameters:**
-- `job_id` (string, optional)
-- `stage` (string, optional)
-- `limit` (number, optional)
-- `offset` (number, optional)
+AI/ML Engines Layer
+8. JD Parser Engine
+POST   /api/v1/ai/jd-parser/parse
+GET    /api/v1/ai/jd-parser/extraction/:jobId
+POST   /api/v1/ai/jd-parser/validate
+POST   /api/v1/ai/jd-parser/enrich
 
-**Returns:**
-- `candidates` (array)
-  - `id` (string)
-  - `name` (string)
-  - `email` (string)
-  - `phone` (string)
-  - `current_stage` (string)
-  - `application_date` (string, ISO 8601)
-  - `score` (number, optional)
-  - `notes` (string, optional)
+9. FAISS + LLM Engine
+# Semantic Search
+POST   /api/v1/ai/faiss/search
+POST   /api/v1/ai/faiss/search/batch
+GET    /api/v1/ai/faiss/index/stats
+POST   /api/v1/ai/faiss/index/rebuild
 
-### GET /api/v1/hiring/candidates/:id
-Get specific candidate details
+# LLM Deep Analysis
+POST   /api/v1/ai/llm/analyze-candidates
+POST   /api/v1/ai/llm/generate-fraud-score
+POST   /api/v1/ai/llm/credibility-check
 
-## Analytics & Metrics
+10. Assessment Generation Engines
+# MCQ Generation
+POST   /api/v1/ai/assessment/mcq/generate
+POST   /api/v1/ai/assessment/mcq/validate
+GET    /api/v1/ai/assessment/mcq/:assessmentId
 
-### GET /api/v1/analytics/dashboard/recruiter
-Get recruiter dashboard metrics
-**Returns:**
-- `active_jobs_count` (number)
-- `total_applications_count` (number)
-- `shortlisted_count` (number)
-- `interviews_this_week` (number)
-- `offers_extended_count` (number)
-- `pipeline_metrics` (object)
-  - `applied` (number)
-  - `screening` (number)
-  - `assessment` (number)
-  - `interview` (number)
-  - `offer` (number)
+# SPICE Question Generation (Short answer, numerical)
+POST   /api/v1/ai/assessment/spice/generate
+POST   /api/v1/ai/assessment/spice/validate
+GET    /api/v1/ai/assessment/spice/:assessmentId
 
-### GET /api/v1/analytics/dashboard/candidate
-Get candidate dashboard metrics
-**Returns:**
-- `total_applications_count` (number)
-- `in_progress_count` (number)
-- `upcoming_interviews_count` (number)
-- `offers_count` (number)
-- `recent_activity` (array)
+# Coding Challenges
+POST   /api/v1/ai/assessment/coding/generate
+POST   /api/v1/ai/assessment/coding/validate
+GET    /api/v1/ai/assessment/coding/:assessmentId
 
-## Interviews & Scheduling
+# Combined Assessment Creation
+POST   /api/v1/ai/assessment/create-comprehensive
+GET    /api/v1/ai/assessment/:assessmentId
 
-### GET /api/v1/interviews/candidate/:candidateId
-Get candidate's interviews
+11. Code Check Evaluation Engine
+# Code Evaluation
+POST   /api/v1/ai/code-eval/submit
+GET    /api/v1/ai/code-eval/results/:submissionId
+POST   /api/v1/ai/code-eval/test-cases/run
 
-### GET /api/v1/interviews/recruiter
-Get recruiter's scheduled interviews
+# Real-time Code Analysis
+POST   /api/v1/ai/code-eval/analyze-snippet
+POST   /api/v1/ai/code-eval/suggest-improvements
 
-### POST /api/v1/interviews
-Schedule new interview
-**Parameters:**
-- `application_id` (string, required)
-- `date_time` (string, ISO 8601, required)
-- `duration_minutes` (number, required)
-- `type` (string, required) - "phone", "video", "in-person"
-- `interviewer_ids` (array of strings, required)
-- `notes` (string, optional)
+12. Plagiarism Check Engine
+# Code Plagiarism
+POST   /api/v1/ai/plagiarism/code/check
+GET    /api/v1/ai/plagiarism/code/report/:checkId
+POST   /api/v1/ai/plagiarism/code/compare
 
-## Notifications
+# Content Plagiarism
+POST   /api/v1/ai/plagiarism/text/check
+GET    /api/v1/ai/plagiarism/text/report/:checkId
 
-### GET /api/v1/notifications/:userId
-Get user notifications
-**Returns:**
-- `notifications` (array)
-  - `id` (string)
-  - `type` (string)
-  - `title` (string)
-  - `message` (string)
-  - `read` (boolean)
-  - `created_at` (string, ISO 8601)
-  - `action_url` (string, optional)
+# AI-Generated Content Detection
+POST   /api/v1/ai/plagiarism/ai-detection
+GET    /api/v1/ai/plagiarism/ai-detection/report/:checkId
 
-### PUT /api/v1/notifications/:id/read
-Mark notification as read
+13. LLM Interviewer Engine
+# AI Interview Generation
+POST   /api/v1/ai/interview/generate-questions
+GET    /api/v1/ai/interview/:interviewId/questions
+POST   /api/v1/ai/interview/project-based-questions
+
+# Interview Simulation
+POST   /api/v1/ai/interview/simulate/start
+POST   /api/v1/ai/interview/simulate/:sessionId/respond
+GET    /api/v1/ai/interview/simulate/:sessionId/transcript
+POST   /api/v1/ai/interview/simulate/:sessionId/evaluate
+
+14. X Council + Evaluation Engine (LLM Council)
+# Council Evaluation
+POST   /api/v1/ai/council/evaluate-candidate
+GET    /api/v1/ai/council/evaluation/:evaluationId
+GET    /api/v1/ai/council/evaluation/:evaluationId/agent-votes
+
+# Agent Perspectives
+GET    /api/v1/ai/council/evaluation/:evaluationId/technical-agent
+GET    /api/v1/ai/council/evaluation/:evaluationId/communication-agent
+GET    /api/v1/ai/council/evaluation/:evaluationId/culture-agent
+GET    /api/v1/ai/council/evaluation/:evaluationId/growth-agent
+GET    /api/v1/ai/council/evaluation/:evaluationId/risk-agent
+
+# Final Ranking
+POST   /api/v1/ai/council/generate-rankings
+GET    /api/v1/ai/council/job/:jobId/rankings
+GET    /api/v1/ai/council/candidate/:candidateId/explanation
+
+15. GNN HR TeamFit Engine
+# Team Fit Analysis
+POST   /api/v1/ai/teamfit/analyze
+GET    /api/v1/ai/teamfit/visualization/:analysisId
+GET    /api/v1/ai/teamfit/visualization/:analysisId/3d-graph
+
+# Gap Analysis
+POST   /api/v1/ai/teamfit/gap-analysis
+GET    /api/v1/ai/teamfit/gap-analysis/:analysisId/recommendations
+
+# Redundancy Detection
+POST   /api/v1/ai/teamfit/redundancy-check
+GET    /api/v1/ai/teamfit/team/:teamId/skill-distribution
+
+
+Assessment & Proctoring APIs
+16. Online Assessment (OA) APIs
+# Assessment Management
+POST   /api/v1/assessment/create
+GET    /api/v1/assessment/:assessmentId
+PUT    /api/v1/assessment/:assessmentId
+DELETE /api/v1/assessment/:assessmentId
+
+# Assessment Sessions
+POST   /api/v1/assessment/:assessmentId/start-session
+GET    /api/v1/assessment/session/:sessionId
+POST   /api/v1/assessment/session/:sessionId/submit
+PATCH  /api/v1/assessment/session/:sessionId/save-progress
+
+# Proctoring
+POST   /api/v1/assessment/session/:sessionId/proctoring/start
+POST   /api/v1/assessment/session/:sessionId/proctoring/facial-recognition
+POST   /api/v1/assessment/session/:sessionId/proctoring/browser-activity
+POST   /api/v1/assessment/session/:sessionId/proctoring/keystroke-dynamics
+GET    /api/v1/assessment/session/:sessionId/proctoring/violations
+POST   /api/v1/assessment/session/:sessionId/proctoring/flag-incident
+
+17. Coding Round APIs
+# Coding Sessions
+POST   /api/v1/coding/session/create
+GET    /api/v1/coding/session/:sessionId
+POST   /api/v1/coding/session/:sessionId/start
+POST   /api/v1/coding/session/:sessionId/submit-solution
+
+# Real-time Code Monitoring
+WS     /api/v1/coding/session/:sessionId/stream
+POST   /api/v1/coding/session/:sessionId/code-snapshot
+GET    /api/v1/coding/session/:sessionId/replay
+
+# Live Plagiarism Detection
+POST   /api/v1/coding/session/:sessionId/plagiarism/live-check
+GET    /api/v1/coding/session/:sessionId/plagiarism/alerts
+
+
+Forensic & Verification APIs
+18. Profile Verification
+# GitHub Analysis
+POST   /api/v1/verification/github/:username/analyze
+GET    /api/v1/verification/github/:username/commit-history
+GET    /api/v1/verification/github/:username/project-authenticity
+
+# Cross-platform Consistency
+POST   /api/v1/verification/cross-platform/:candidateId/check
+GET    /api/v1/verification/cross-platform/:candidateId/report
+GET    /api/v1/verification/cross-platform/:candidateId/inconsistencies
+
+# Digital Footprint Analysis
+POST   /api/v1/verification/digital-footprint/:candidateId/analyze
+GET    /api/v1/verification/digital-footprint/:candidateId/score
+
+
+Advanced Features APIs
+19. Smart Comparison Matrix
+# Candidate Comparison
+POST   /api/v1/comparison/create
+POST   /api/v1/comparison/:comparisonId/add-candidate
+DELETE /api/v1/comparison/:comparisonId/remove-candidate
+GET    /api/v1/comparison/:comparisonId
+
+# AI Analysis
+POST   /api/v1/comparison/:comparisonId/generate-tradeoff-analysis
+GET    /api/v1/comparison/:comparisonId/recommendations
+GET    /api/v1/comparison/:comparisonId/matrix
+
+20. Analytics & Reporting
+# Job Analytics
+GET    /api/v1/analytics/job/:jobId/overview
+GET    /api/v1/analytics/job/:jobId/funnel
+GET    /api/v1/analytics/job/:jobId/time-to-hire
+GET    /api/v1/analytics/job/:jobId/candidate-sources
+
+# Platform Analytics
+GET    /api/v1/analytics/platform/overview
+GET    /api/v1/analytics/platform/fraud-detection-stats
+GET    /api/v1/analytics/platform/ai-accuracy-metrics
+GET    /api/v1/analytics/platform/user-engagement
+
+# Audit Trails
+GET    /api/v1/analytics/audit/:jobId/decision-trail
+GET    /api/v1/analytics/audit/:candidateId/actions
+
+
+Webhook & Integration APIs
+21. Webhooks
+POST   /api/v1/webhooks/register
+GET    /api/v1/webhooks
+PUT    /api/v1/webhooks/:webhookId
+DELETE /api/v1/webhooks/:webhookId
+GET    /api/v1/webhooks/:webhookId/logs
+POST   /api/v1/webhooks/:webhookId/test
+
+
+Priority for Hackathon Prototype
+For a working demo, I'd recommend implementing these core flows first:
+Phase 1 (MVP):
+Auth APIs
+Profile Management (basic CRUD + LinkedIn integration)
+Job Posting + JD Parser
+FAISS Semantic Search (simplified)
+Assessment Generation (MCQ + 1 coding problem)
+Basic Leaderboard
+Phase 2 (Demo-ready): 7. LLM Council Evaluation 8. Basic Proctoring (browser activity tracking) 9. GitHub Verification 10. Smart Comparison Matrix
+Phase 3 (Polish): 11. GNN TeamFit Visualization 12. Complete Plagiarism Detection 13. Analytics Dashboard 14. Webhooks
+Would you like me to create detailed request/response schemas for any specific service, or help you set up the project structure with these APIs?
+

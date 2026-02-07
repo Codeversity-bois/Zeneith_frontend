@@ -10,7 +10,7 @@ const Components = {
         const candidateNav = [
             { icon: 'dashboard', label: 'Dashboard', href: '/candidate-dashboard.html' },
             { icon: 'work', label: 'My Jobs', href: '/candidate-jobs.html' },
-            { icon: 'assignment', label: 'Assessments', href: '/assessment-taking.html' },
+            { icon: 'assignment', label: 'Assessments', href: '/candidate-assessments.html' },
             { icon: 'person', label: 'Profile', href: '/candidate-profile.html' }
         ];
 
@@ -66,7 +66,15 @@ const Components = {
                         </div>
                     </div>
                     <nav class="flex-1 overflow-y-auto py-6 px-3 space-y-1">
-                        ${navHTML}
+                        ${navItems.map(item => `
+                            <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg ${activeItem === item.label.toLowerCase() || (item.label === 'Assessments' && activeItem === 'assessments') || (item.label === 'My Jobs' && activeItem === 'jobs')
+                ? 'bg-blue-50 text-primary font-semibold'
+                : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+            } transition-colors" href="${item.href}">
+                                <span class="material-symbols-outlined text-[20px]">${item.icon}</span>
+                                <span>${item.label}</span>
+                            </a>
+                        `).join('')}
                         ${bottomSection}
                     </nav>
                     <div class="p-4 border-t border-slate-200">

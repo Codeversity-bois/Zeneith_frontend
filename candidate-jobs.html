@@ -46,90 +46,11 @@
                 </div>
 
                 <!-- Applications List -->
-                <div class="space-y-4">
-                    <!-- Item 1 -->
-                    <div
-                        class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition-shadow">
-                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                            <div class="flex gap-4">
-                                <div
-                                    class="w-12 h-12 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold shrink-0">
-                                    S</div>
-                                <div>
-                                    <h3 class="font-bold text-slate-900">Product Designer</h3>
-                                    <p class="text-sm text-slate-500">Stripe • Remote</p>
-                                </div>
-                            </div>
-
-                            <div class="flex items-center gap-6">
-                                <div class="flex flex-col items-end">
-                                    <span
-                                        class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700 border border-emerald-200">
-                                        <span class="size-1.5 rounded-full bg-current"></span>
-                                        Interviewing
-                                    </span>
-                                    <span class="text-xs text-slate-400 mt-1">Applied Oct 24, 2023</span>
-                                </div>
-                                <a href="/job-details.html?id=1"
-                                    class="text-slate-400 hover:text-primary transition-colors">
-                                    <span class="material-symbols-outlined">chevron_right</span>
-                                </a>
-                            </div>
-                        </div>
-                        <!-- Progress Bar -->
-                        <div class="mt-4 pt-4 border-t border-slate-100">
-                            <div class="flex justify-between text-xs font-medium text-slate-500 mb-2">
-                                <span class="text-emerald-600">Applied</span>
-                                <span class="text-emerald-600">Screening</span>
-                                <span class="text-emerald-600">Interview</span>
-                                <span>Offer</span>
-                            </div>
-                            <div class="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
-                                <div class="h-full bg-emerald-500 w-[65%] rounded-full"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Item 2 -->
-                    <div
-                        class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition-shadow">
-                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                            <div class="flex gap-4">
-                                <div
-                                    class="w-12 h-12 rounded-lg bg-green-500 flex items-center justify-center text-white font-bold shrink-0">
-                                    Sp</div>
-                                <div>
-                                    <h3 class="font-bold text-slate-900">UX Researcher</h3>
-                                    <p class="text-sm text-slate-500">Spotify • New York</p>
-                                </div>
-                            </div>
-
-                            <div class="flex items-center gap-6">
-                                <div class="flex flex-col items-end">
-                                    <span
-                                        class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-700 border border-amber-200">
-                                        <span class="size-1.5 rounded-full bg-current"></span>
-                                        Under Review
-                                    </span>
-                                    <span class="text-xs text-slate-400 mt-1">Applied Oct 20, 2023</span>
-                                </div>
-                                <a href="/job-details.html?id=2"
-                                    class="text-slate-400 hover:text-primary transition-colors">
-                                    <span class="material-symbols-outlined">chevron_right</span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="mt-4 pt-4 border-t border-slate-100">
-                            <div class="flex justify-between text-xs font-medium text-slate-500 mb-2">
-                                <span class="text-emerald-600">Applied</span>
-                                <span>Screening</span>
-                                <span>Interview</span>
-                                <span>Offer</span>
-                            </div>
-                            <div class="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
-                                <div class="h-full bg-amber-400 w-[15%] rounded-full"></div>
-                            </div>
-                        </div>
+                <div class="space-y-4" id="applications-list">
+                    <!-- Loading State -->
+                    <div class="flex items-center justify-center py-12">
+                        <span
+                            class="material-symbols-outlined text-4xl animate-spin text-primary">progress_activity</span>
                     </div>
                 </div>
             </main>
@@ -139,17 +60,106 @@
     <script src="/src/js/state-manager.js" type="module"></script>
     <script src="/src/js/components.js" type="module"></script>
     <script type="module">
+        import { mockApplications, mockJobs } from '/src/js/mock-data.js';
+
         document.addEventListener('DOMContentLoaded', function () {
             if (!window.StateManager.isAuthenticated() || window.StateManager.getUserRole() !== 'candidate') {
                 window.location.href = '/login.html';
                 return;
             }
 
-            document.getElementById('sidebar-container').innerHTML = window.Components.createSidebar('candidate', 'my jobs');
+            document.getElementById('sidebar-container').innerHTML = window.Components.createSidebar('candidate', 'jobs');
             document.getElementById('header-container').innerHTML = window.Components.createHeader('My Jobs', true);
             window.Components.populateUserProfile();
             window.Components.updateNotificationBadge();
+
+            renderApplications();
         });
+
+        function renderApplications() {
+            const container = document.getElementById('applications-list');
+
+            // Map applications to include job details
+            const applications = mockApplications.map(app => {
+                const job = mockJobs.find(j => j.id === app.jobId) || { title: 'Unknown Role', company: 'Unknown Company', location: 'Unknown' };
+                return { ...app, ...job };
+            });
+
+            if (applications.length === 0) {
+                container.innerHTML = window.Components.createEmptyState('work_off', 'No Applications Yet', 'You haven\'t applied to any jobs yet.', 'Browse Jobs', '/candidate-dashboard.html');
+                return;
+            }
+
+            container.innerHTML = applications.map(app => createApplicationCard(app)).join('');
+        }
+
+        function createApplicationCard(app) {
+            const logoColor = ['bg-indigo-600', 'bg-green-500', 'bg-red-600', 'bg-amber-500', 'bg-blue-500'][Math.floor(Math.random() * 5)];
+            const statusColor = getStatusColor(app.status);
+            const progress = getProgress(app.status);
+
+            return `
+                    <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                            <div class="flex gap-4">
+                                <div class="w-12 h-12 rounded-lg ${logoColor} flex items-center justify-center text-white font-bold shrink-0">
+                                    ${app.company?.charAt(0) || 'C'}
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-slate-900">${app.title}</h3>
+                                    <p class="text-sm text-slate-500">${app.company} • ${app.location}</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-6">
+                                <div class="flex flex-col items-end">
+                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${statusColor}">
+                                        <span class="size-1.5 rounded-full bg-current"></span>
+                                        ${app.status.charAt(0).toUpperCase() + app.status.slice(1)}
+                                    </span>
+                                    <span class="text-xs text-slate-400 mt-1">Applied ${new Date(app.dateApplied).toLocaleDateString()}</span>
+                                </div>
+                                <a href="/job-details.html?id=${app.id}" class="text-slate-400 hover:text-primary transition-colors">
+                                    <span class="material-symbols-outlined">chevron_right</span>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Progress Bar -->
+                        <div class="mt-4 pt-4 border-t border-slate-100">
+                             <div class="flex justify-between text-xs font-medium text-slate-500 mb-2">
+                                <span class="${progress >= 25 ? 'text-emerald-600' : ''}">Applied</span>
+                                <span class="${progress >= 50 ? 'text-emerald-600' : ''}">Screening</span>
+                                <span class="${progress >= 75 ? 'text-emerald-600' : ''}">Interview</span>
+                                <span class="${progress >= 100 ? 'text-emerald-600' : ''}">Offer</span>
+                            </div>
+                            <div class="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-emerald-500 rounded-full transition-all duration-500" style="width: ${progress}%"></div>
+                            </div>
+                        </div>
+                    </div>
+             `;
+        }
+
+        function getStatusColor(status) {
+            switch (status) {
+                case 'interviewing': return 'bg-emerald-100 text-emerald-700 border border-emerald-200';
+                case 'screening': return 'bg-blue-100 text-blue-700 border border-blue-200';
+                case 'rejected': return 'bg-red-50 text-red-600 border border-red-100';
+                case 'offer': return 'bg-purple-100 text-purple-700 border border-purple-200';
+                default: return 'bg-slate-100 text-slate-600 border border-slate-200';
+            }
+        }
+
+        function getProgress(status) {
+            switch (status) {
+                case 'applied': return 25;
+                case 'screening': return 50;
+                case 'interviewing': return 75;
+                case 'offer': return 100;
+                case 'rejected': return 10;
+                default: return 0;
+            }
+        }
     </script>
 </body>
 

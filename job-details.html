@@ -36,13 +36,19 @@
                                     </div>
                                     <div class="text-white">
                                         <h1 class="text-2xl font-bold" id="job-title">Job Title</h1>
-                                        <p class="text-slate-200 text-lg" id="job-company">Company Name</p>
+                                        <div class="flex gap-3">
+                                            <button
+                                                class="flex-1 bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 font-bold py-3 px-6 rounded-lg transition-colors">
+                                                Save Job
+                                            </button>
+                                            <button onclick="applyForJob()"
+                                                class="flex-[2] bg-primary hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors shadow-lg shadow-blue-500/30 flex items-center justify-center gap-2">
+                                                <span>Apply Now</span>
+                                                <span class="material-symbols-outlined text-sm">send</span>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                                <button id="apply-btn"
-                                    class="bg-primary hover:bg-blue-600 text-white px-8 py-3 rounded-lg font-bold shadow-lg shadow-blue-500/30 transition-all transform hover:-translate-y-1">
-                                    Apply Now
-                                </button>
                             </div>
                         </div>
 
@@ -144,6 +150,18 @@
                 };
             }
         });
+    </script>
+    <script>
+        function applyForJob() {
+            // Mock Application Flow
+            // In real app, POST /api/v1/application/apply
+
+            // For demo: verify with user then redirect to assessment
+            if (confirm("Application submitted successfully! Proceed to Assessment?")) {
+                // Redirect to assessment page with a demo ID
+                window.location.href = "/candidate-assessments.html";
+            }
+        }
     </script>
 </body>
 
