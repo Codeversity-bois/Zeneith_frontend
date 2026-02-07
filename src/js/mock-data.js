@@ -192,22 +192,6 @@ export const pipelineStages = [
     { id: 'rejected', name: 'Rejected', color: 'red', count: 284 },
 ];
 
-// Export helper function to get mock data
-export function getMockData(type) {
-    const dataMap = {
-        jobs: mockJobs,
-        applications: mockApplications,
-        candidates: mockCandidates,
-        users: mockUsers,
-        stats: mockStats,
-        notifications: mockNotifications,
-        assessmentQuestions: mockAssessmentQuestions,
-        pipelineStages,
-    };
-
-    return dataMap[type] || [];
-}
-
 // Mock Assessments (Detailed)
 export const mockAssessments = [
     {
@@ -318,6 +302,68 @@ export const mockAssessments = [
     }
 ];
 
+// Migrated Dashboard Data
+
+// Mock Jobs for Recruiter Dashboard
+export const mockRecruiterJobs = [
+    { id: 'job-101', title: 'Senior Product Designer', dept: 'Design', applicants: '15', stage: 'Interviewing', status: 'Active', statusClass: 'text-green-600' },
+    { id: 'job-102', title: 'Backend Engineer (Go)', dept: 'Engineering', applicants: '28', stage: 'Screening', status: 'Active', statusClass: 'text-green-600' },
+    { id: 'job-103', title: 'Marketing Lead', dept: 'Marketing', applicants: '12', stage: 'Offer', status: 'Active', statusClass: 'text-green-600' }
+];
+
+// Mock Applications for Candidate Dashboard
+export const mockCandidateApps = [
+    {
+        id: 1,
+        company: 'Stripe',
+        role: 'Product Designer',
+        logo: 'S',
+        logoColor: 'bg-indigo-600',
+        dateApplied: 'Oct 24, 2023',
+        status: 'Interviewing',
+        statusColor: 'bg-emerald-100 text-emerald-700 border-emerald-200'
+    },
+    {
+        id: 2,
+        company: 'Spotify',
+        role: 'UX Researcher',
+        logo: 'Sp',
+        logoColor: 'bg-green-500',
+        dateApplied: 'Oct 20, 2023',
+        status: 'Under Review',
+        statusColor: 'bg-amber-100 text-amber-700 border-amber-200'
+    },
+    {
+        id: 3,
+        company: 'Netflix',
+        role: 'UI Developer',
+        logo: 'N',
+        logoColor: 'bg-red-600',
+        dateApplied: 'Oct 15, 2023',
+        status: 'Shortlisted',
+        statusColor: 'bg-blue-100 text-blue-700 border-blue-200'
+    },
+    {
+        id: 4,
+        company: 'Uber',
+        role: 'Frontend Engineer',
+        logo: 'U',
+        logoColor: 'bg-black',
+        dateApplied: 'Oct 10, 2023',
+        status: 'Closed',
+        statusColor: 'bg-slate-100 text-slate-600 border-slate-200'
+    }
+];
+
+// Mock Candidates for Pipeline
+export const mockPipelineCandidates = [
+    { id: 1, name: 'Alice Smith', role: 'Frontend Dev', stage: 'Applied', score: 85 },
+    { id: 2, name: 'Bob Jones', role: 'Backend Dev', stage: 'Screening', score: 92 },
+    { id: 3, name: 'Charlie Day', role: 'Product Manager', stage: 'Interview', score: 78 },
+    { id: 4, name: 'Diana Prince', role: 'Security Engineer', stage: 'Offer', score: 98 },
+    { id: 5, name: 'Evan Wright', role: 'Frontend Dev', stage: 'Assessment', score: 88 },
+];
+
 export const mockSessions = [
     {
         id: 'sess-001',
@@ -326,13 +372,50 @@ export const mockSessions = [
         status: 'in-progress',
         currentPhase: 'aptitude', // aptitude, coding, interview
         currentSectionIndex: 0,
-        startTime: new Date('2024-02-07T10:00:00'),
+        // Start time is 5 minutes ago from NOW, ensuring timer is always active for demo
+        startTime: new Date(Date.now() - 5 * 60 * 1000),
         answers: {
             'sec-1': { 'q-mcq-1': 0 } // Partial answer
         },
         codingSessionId: null
     }
 ];
+
+// Export helper function to get mock data
+export function getMockData(type) {
+    const dataMap = {
+        jobs: mockJobs,
+        applications: mockApplications,
+        recruiterJobs: mockRecruiterJobs,
+        candidateApps: mockCandidateApps,
+        pipelineCandidates: mockPipelineCandidates,
+        candidates: mockCandidates,
+        users: mockUsers,
+        stats: mockStats,
+        notifications: mockNotifications,
+        assessmentQuestions: mockAssessmentQuestions,
+        pipelineStages,
+        mockAssessments,
+    };
+
+    return dataMap[type] || [];
+}
+
+export const mockData = {
+    jobs: mockJobs,
+    applications: mockApplications,
+    recruiterJobs: mockRecruiterJobs,
+    candidateApps: mockCandidateApps,
+    pipelineCandidates: mockPipelineCandidates,
+    candidates: mockCandidates,
+    users: mockUsers,
+    stats: mockStats,
+    notifications: mockNotifications,
+    assessmentQuestions: mockAssessmentQuestions,
+    pipelineStages,
+    mockAssessments,
+    sessions: mockSessions
+};
 
 export default {
     mockJobs,
@@ -344,6 +427,6 @@ export default {
     mockAssessmentQuestions,
     pipelineStages,
     mockAssessments,
-    mockSessions, // Added
+    mockSessions,
     getMockData,
 };

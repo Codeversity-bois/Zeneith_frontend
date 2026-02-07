@@ -11,6 +11,26 @@ class AssessmentService {
         const storedSessions = localStorage.getItem('mockSessions');
         if (storedSessions) {
             this.sessions = JSON.parse(storedSessions);
+
+            // CRITICAL FIX: Only reconcile if the stored session is "stale" (older than 24 hours)
+            // This preserves the timer progress on page reload (user sees 53:00, not resets to 55:00)
+            // while still fixing the original "00:00:00" bug caused by hardcoded 2024 dates.
+            this.sessions.forEach(session => {
+                const sessionTime = new Date(session.startTime).getTime();
+                const oneDay = 24 * 60 * 60 * 1000;
+
+                // If session is older than 24 hours, it's considered "broken/old demo data" -> Reset it
+                if (Date.now() - sessionTime > oneDay) {
+                    const freshMock = mockSessions.find(ms => ms.id === session.id);
+                    if (freshMock) {
+                        console.log(`♻️ Resetting stale session ${session.id} to new start time`);
+                        // Use the dynamic Date.now() from mock-data, or just Date.now() directly
+                        session.startTime = new Date();
+                        session.status = freshMock.status;
+                    }
+                }
+            });
+            this._persistSessions();
         } else {
             this.sessions = [...mockSessions];
             this._persistSessions();

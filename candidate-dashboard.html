@@ -183,40 +183,29 @@
     <script src="/src/js/components.js" type="module"></script>
     <script src="/src/js/api-client.js" type="module"></script>
 
-    <script>
-        // Initialize UI
-        document.addEventListener('DOMContentLoaded', function () {
-            // Check for authentication after StateManager is fully initialized
-            console.log('🔐 Checking authentication...');
-            console.log('✓ StateManager available:', !!window.StateManager);
-            console.log('✓ Authenticated:', window.StateManager.isAuthenticated());
-            console.log('✓ User role:', window.StateManager.getUserRole());
+    <script type="module">
+        import { getMockData } from '/src/js/mock-data.js';
 
+        // Initialize UI
+        document.addEventListener('DOMContentLoaded', async function () {
+            // Check for authentication
             if (!window.StateManager.isAuthenticated()) {
-                console.log('❌ Not authenticated, redirecting to login...');
                 window.location.href = '/login.html';
                 return;
             }
 
-            // Check role
             const role = window.StateManager.getUserRole();
             if (role !== 'candidate') {
-                console.log('❌ Not a candidate, redirecting to recruiter dashboard...');
                 window.location.href = '/recruiter-dashboard.html';
                 return;
             }
 
-            console.log('🔧 DOM loaded, initializing candidate dashboard...');
-
             // Insert sidebar
             document.getElementById('sidebar-container').innerHTML = window.Components.createSidebar('candidate', 'dashboard');
-
             // Insert header
             document.getElementById('header-container').innerHTML = window.Components.createHeader('Dashboard', true);
-
             // Populate user profile
             window.Components.populateUserProfile();
-
             // Update user name
             const user = window.StateManager.getUser();
             if (user && user.name) {
@@ -224,81 +213,50 @@
             }
 
             // Load applications
-            loadApplications();
+            await loadApplications();
 
             // Update notification badge
             window.Components.updateNotificationBadge();
         });
 
-        // Mock applications data
-        function loadApplications() {
-            const applications = [
-                {
-                    id: 1,
-                    company: 'Stripe',
-                    role: 'Product Designer',
-                    logo: 'S',
-                    logoColor: 'bg-indigo-600',
-                    dateApplied: 'Oct 24, 2023',
-                    status: 'Interviewing',
-                    statusColor: 'bg-emerald-100 text-emerald-700 border-emerald-200'
-                },
-                {
-                    id: 2,
-                    company: 'Spotify',
-                    role: 'UX Researcher',
-                    logo: 'Sp',
-                    logoColor: 'bg-green-500',
-                    dateApplied: 'Oct 20, 2023',
-                    status: 'Under Review',
-                    statusColor: 'bg-amber-100 text-amber-700 border-amber-200'
-                },
-                {
-                    id: 3,
-                    company: 'Netflix',
-                    role: 'UI Developer',
-                    logo: 'N',
-                    logoColor: 'bg-red-600',
-                    dateApplied: 'Oct 15, 2023',
-                    status: 'Shortlisted',
-                    statusColor: 'bg-blue-100 text-blue-700 border-blue-200'
-                },
-                {
-                    id: 4,
-                    company: 'Uber',
-                    role: 'Frontend Engineer',
-                    logo: 'U',
-                    logoColor: 'bg-black',
-                    dateApplied: 'Oct 10, 2023',
-                    status: 'Closed',
-                    statusColor: 'bg-slate-100 text-slate-600 border-slate-200'
-                }
-            ];
+        async function loadApplications() {
+            try {
+                // Fetch centralized data
+                const applications = getMockData('candidateApps');
 
-            const tableBody = document.getElementById('applications-table');
-            tableBody.innerHTML = applications.map(app => `
-                <tr class="group hover:bg-blue-50/30 transition-colors">
-                    <td class="px-6 py-4">
-                        <div class="flex items-center gap-3">
-                            <div class="size-10 rounded ${app.logoColor} flex items-center justify-center text-white font-bold text-sm shrink-0">${app.logo}</div>
-                            <div>
-                                <p class="text-sm font-bold text-slate-900">${app.company}</p>
-                                <p class="text-xs text-slate-500">${app.role}</p>
+                const tableBody = document.getElementById('applications-table');
+                if (!tableBody) return;
+
+                if (applications.length === 0) {
+                    tableBody.innerHTML = '<tr><td colspan="4" class="px-6 py-4 text-center text-slate-500">No applications found.</td></tr>';
+                    return;
+                }
+                tableBody.innerHTML = applications.map(app => `
+                    <tr class="group hover:bg-blue-50/30 transition-colors">
+                        <td class="px-6 py-4">
+                            <div class="flex items-center gap-3">
+                                <div class="size-10 rounded ${app.logoColor} flex items-center justify-center text-white font-bold text-sm shrink-0">${app.logo}</div>
+                                <div>
+                                    <p class="text-sm font-bold text-slate-900">${app.company}</p>
+                                    <p class="text-xs text-slate-500">${app.role}</p>
+                                </div>
                             </div>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 text-sm text-slate-600">${app.dateApplied}</td>
-                    <td class="px-6 py-4">
-                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${app.statusColor} border">
-                            <span class="size-1.5 rounded-full bg-current"></span>
-                            ${app.status}
-                        </span>
-                    </td>
-                    <td class="px-6 py-4 text-right">
-                        <a href="/job-details.html?id=${app.id}" class="text-primary hover:text-blue-700 text-sm font-medium">View Details</a>
-                    </td>
-                </tr>
-            `).join('');
+                        </td>
+                        <td class="px-6 py-4 text-sm text-slate-600">${app.dateApplied}</td>
+                        <td class="px-6 py-4">
+                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${app.statusColor} border">
+                                <span class="size-1.5 rounded-full bg-current"></span>
+                                ${app.status}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            <a href="/job-details.html?id=${app.id}" class="text-primary hover:text-blue-700 text-sm font-medium">View Details</a>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (error) {
+                console.error('Failed to load applications', error);
+            }
         }
     </script>
 </body>

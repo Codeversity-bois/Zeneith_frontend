@@ -205,54 +205,54 @@
 
     <script src="/src/js/state-manager.js" type="module"></script>
     <script src="/src/js/components.js" type="module"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Check for authentication after StateManager is fully initialized
-            console.log('🔐 Checking authentication...');
-            console.log('✓ StateManager available:', !!window.StateManager);
-            console.log('✓ Authenticated:', window.StateManager.isAuthenticated());
-            console.log('✓ User role:', window.StateManager.getUserRole());
+    <script type="module">
+        import { getMockData } from '/src/js/mock-data.js';
 
+        document.addEventListener('DOMContentLoaded', function () {
+            // Check for authentication
             if (!window.StateManager.isAuthenticated() || window.StateManager.getUserRole() !== 'recruiter') {
-                console.log('❌ Not authenticated as recruiter, redirecting to login...');
                 window.location.href = '/login.html';
                 return;
             }
 
-            console.log('🔧 DOM loaded, initializing recruiter dashboard...');
-            console.log('✓ Components available:', !!window.Components);
-
+            // Initialize Components
             const sidebarContainer = document.getElementById('sidebar-container');
-            console.log('✓ Sidebar container found:', !!sidebarContainer);
-
             if (sidebarContainer && window.Components) {
-                const sidebarHTML = window.Components.createSidebar('recruiter', 'dashboard');
-                sidebarContainer.innerHTML = sidebarHTML;
-                console.log('✅ Sidebar injected successfully');
+                sidebarContainer.innerHTML = window.Components.createSidebar('recruiter', 'dashboard');
             }
+
+            // Populate header and profile
+            // Header usually static or inserted components? The viewed code didn't show header insertion but sidebar insertion.
+            // Let's keep existing logic but ensure it's robust.
 
             window.Components.populateUserProfile();
             window.Components.updateNotificationBadge();
 
             // Load mock jobs data
-            const jobs = [
-                { title: 'Senior Product Designer', dept: 'Design', applicants: '15', stage: 'Interviewing', status: 'Active', statusClass: 'text-green-600' },
-                { title: 'Backend Engineer (Go)', dept: 'Engineering', applicants: '28', stage: 'Screening', status: 'Active', statusClass: 'text-green-600' },
-                { title: 'Marketing Lead', dept: 'Marketing', applicants: '12', stage: 'Offer', status: 'Active', statusClass: 'text-green-600' }
-            ];
+            const jobs = getMockData('recruiterJobs');
 
-            document.getElementById('jobs-table').innerHTML = jobs.map(job => `
-                <tr class="hover:bg-slate-50 transition-colors">
-                    <td class="px-6 py-4 font-medium text-slate-900">${job.title}</td>
-                    <td class="px-6 py-4 text-slate-500">${job.dept}</td>
-                    <td class="px-6 py-4 text-slate-500">${job.applicants}</td>
-                    <td class="px-6 py-4"><span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">${job.stage}</span></td>
-                    <td class="px-6 py-4"><span class="flex items-center gap-1.5 text-xs font-medium ${job.statusClass}"><span class="w-1.5 h-1.5 rounded-full bg-current"></span>${job.status}</span></td>
-                    <td class="px-6 py-4 text-right"><button class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined">more_horiz</span></button></td>
-                </tr>
-            `).join('');
+            // Update Stats (Client-Side Aggregation)
+            // If there were ID'd stats cards, we'd update them here. 
+            // The HTML structure viewed shows stats hardcoded (45, 6 etc).
+            // For MVP per plan, we just render the table.
 
-            console.log('✅ Recruiter dashboard fully initialized');
+            const tableBody = document.getElementById('jobs-table');
+            if (tableBody) {
+                if (jobs.length === 0) {
+                    tableBody.innerHTML = '<tr><td colspan="6" class="px-6 py-4 text-center text-slate-500">No active jobs found.</td></tr>';
+                } else {
+                    tableBody.innerHTML = jobs.map(job => `
+                        <tr class="hover:bg-slate-50 transition-colors">
+                            <td class="px-6 py-4 font-medium text-slate-900">${job.title}</td>
+                            <td class="px-6 py-4 text-slate-500">${job.dept}</td>
+                            <td class="px-6 py-4 text-slate-500">${job.applicants}</td>
+                            <td class="px-6 py-4"><span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">${job.stage}</span></td>
+                            <td class="px-6 py-4"><span class="flex items-center gap-1.5 text-xs font-medium ${job.statusClass}"><span class="w-1.5 h-1.5 rounded-full bg-current"></span>${job.status}</span></td>
+                            <td class="px-6 py-4 text-right"><button class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined">more_horiz</span></button></td>
+                        </tr>
+                    `).join('');
+                }
+            }
         });
     </script>
 </body>

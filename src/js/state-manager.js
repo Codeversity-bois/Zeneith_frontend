@@ -40,7 +40,24 @@ class StateManager {
                     this.state.user = user;
                     this.state.isAuthenticated = true;
                     this.state.role = user.role;
+                    this.state.role = user.role;
                     console.log('✓ StateManager synced with auth_token and current_user');
+
+                    // Validate token with backend
+                    try {
+                        // Dynamic import to avoid circular dependency issues during init
+                        import('./api-client.js').then(({ apiClient }) => {
+                            apiClient.post('/auth/refresh-token', {}).then(() => {
+                                console.log('✓ Token validated with backend');
+                            }).catch(err => {
+                                console.warn('❌ Token invalid, logging out...', err);
+                                this.logout();
+                            });
+                        });
+                    } catch (err) {
+                        console.error('Validation check failed', err);
+                    }
+
                     this.saveToStorage();
                 } catch (error) {
                     console.error('Failed to parse current_user:', error);

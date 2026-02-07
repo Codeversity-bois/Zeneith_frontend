@@ -85,6 +85,8 @@
     <script src="/src/js/state-manager.js" type="module"></script>
     <script src="/src/js/components.js" type="module"></script>
     <script type="module">
+        import { getMockData } from '/src/js/mock-data.js';
+
         document.addEventListener('DOMContentLoaded', function () {
             if (!window.StateManager.isAuthenticated() || window.StateManager.getUserRole() !== 'recruiter') {
                 window.location.href = '/login.html';
@@ -97,13 +99,7 @@
             window.Components.updateNotificationBadge();
 
             // Mock Data - In real app, fetch from /api/v1/hiring/candidates
-            const candidates = [
-                { id: 1, name: 'Alice Smith', role: 'Frontend Dev', stage: 'Applied', score: 85 },
-                { id: 2, name: 'Bob Jones', role: 'Backend Dev', stage: 'Screening', score: 92 },
-                { id: 3, name: 'Charlie Day', role: 'Product Manager', stage: 'Interview', score: 78 },
-                { id: 4, name: 'Diana Prince', role: 'Security Engineer', stage: 'Offer', score: 98 },
-                { id: 5, name: 'Evan Wright', role: 'Frontend Dev', stage: 'Assessment', score: 88 },
-            ];
+            const candidates = getMockData('pipelineCandidates');
 
             function renderCandidateCard(candidate) {
                 return `
@@ -128,9 +124,10 @@
 
             candidates.forEach(c => {
                 const col = document.getElementById(`col-${c.stage}`);
+                // Simple stage normalization if needed. Mock data uses exact case 'Applied', 'Screening' etc.
                 if (col) {
                     col.innerHTML += renderCandidateCard(c);
-                    counts[c.stage]++;
+                    if (counts[c.stage] !== undefined) counts[c.stage]++;
                 }
             });
 

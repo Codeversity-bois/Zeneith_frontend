@@ -392,21 +392,19 @@ export class AssessmentEngine {
     startTimer() {
         const timerEl = document.getElementById(this.containers.timer);
         const durationSeconds = (this.assessment.duration || 60) * 60; // Default to 60 mins if missing
-
-        // Calculate remaining based on start time
         const startTime = new Date(this.session.startTime).getTime();
-        const now = Date.now();
-        const elapsedSeconds = Math.floor((now - startTime) / 1000);
-        let remaining = durationSeconds - elapsedSeconds;
-
-        if (remaining < 0) remaining = 0;
 
         // Visual update function
         const updateDisplay = () => {
+            const now = Date.now();
+            const elapsed = Math.floor((now - startTime) / 1000);
+            const remaining = durationSeconds - elapsed;
+
             if (remaining <= 0) {
                 clearInterval(this.timerInterval);
                 if (timerEl) timerEl.textContent = "00:00:00";
-                // Auto-submit or lock if time runs out (optional requirement)
+                // Auto-submit or lock if time runs out
+                // this.submitAssessment(); // Optional: Auto-submit
                 return;
             }
 
@@ -415,7 +413,6 @@ export class AssessmentEngine {
             const s = remaining % 60;
 
             if (timerEl) timerEl.textContent = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-            remaining--;
         };
 
         updateDisplay(); // Initial call
